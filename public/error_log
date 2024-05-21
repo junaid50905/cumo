@@ -1,0 +1,5 @@
+[08-Feb-2024 04:00:49 UTC] PHP Warning:  require(/skl/home/devail/public_html/cumo/../cumo/vendor/autoload.php): Failed to open stream: No such file or directory in /skl/home/devail/public_html/cumo/index.php on line 34
+[08-Feb-2024 04:00:49 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/skl/home/devail/public_html/cumo/../cumo/vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php81/root/usr/share/pear') in /skl/home/devail/public_html/cumo/index.php:34
+Stack trace:
+#0 {main}
+  thrown in /skl/home/devail/public_html/cumo/index.php on line 34

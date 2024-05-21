@@ -1,0 +1,10 @@
+.apply-view-only input,
+.apply-view-only select,
+ .apply-view-only textarea{
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.removeRow:first-child .removeBtn {
+    display: none;
+}

@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Repositories;
+use App\Models\___ModelName____;
+
+class {{class}} extends BaseRepository
+{
+    protected string $model = ___ModelName____::class;
+
+    public function create(array $data): string
+    {
+        try {
+            // Your create logic here
+            return 'Repository method create() executed successfully.';
+        } catch (\Throwable $th) {
+            return 'Failed to execute repository method create(): ' . $th->getMessage();
+        }
+    }
+
+    // Add more repository methods here as needed
+}

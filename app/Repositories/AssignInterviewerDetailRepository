@@ -1,0 +1,10 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Models\AssignInterviewerDetail;
+
+class AssignInterviewerDetailRepository extends BaseRepository
+{
+    protected string $model = AssignInterviewerDetail::class;
+}

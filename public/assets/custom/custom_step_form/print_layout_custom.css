@@ -1,0 +1,66 @@
+.page{
+    background: var(--red);
+    display: block;
+    margin: 0 auto;
+    position: relative !important;
+    box-shadow: var(--pageShadow);
+    position: relative;
+    z-index: 1;
+}
+.full_section{
+    display: block;
+    margin: 0 auto;
+}
+.full_section[size="A4"] {
+	width: 25cm;
+	min-height: 29.7cm;
+	overflow: hidden;
+}
+.text h1 {
+	font-size: 60px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 7px;
+}
+.logo img {
+	width: 30%;
+	height: 100%;
+}
+.invoice_to {
+	padding-top: 36px;
+}
+.header_section{
+    
+}
+.page::after {
+	content: "";
+	top: 78px;
+	left: -20px;
+	width: 581px;
+	height: 10px;
+	background: #767779;
+	position: absolute;
+	z-index: 2;
+}
+.footer_section {
+	margin-top: 654px;
+	/* bottom: 0 !important; */
+}
+
+.signature {
+	position: relative;
+	padding-top: 100px;
+}
+.signature h5{
+    
+}
+.signature::after {
+	position: absolute;
+	content: "";
+	bottom: 23px;
+	right: 154px;
+	width: 202px;
+	height: 2px;
+	background: #767779;
+}
+

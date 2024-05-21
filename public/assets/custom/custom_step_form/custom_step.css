@@ -1,0 +1,40 @@
+.card_stap {
+    background-color: #ffffff;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 6px;
+    color: rgba(0, 0, 0, 0.87);
+    background: #fff;
+}
+
+.wizard-card .tab-content {
+    min-height: 340px;
+    padding: 20px 15px;
+}
+
+#horizontal_nev {
+}
+.wizard-navigation {
+    list-style-type: symbols;
+    display: block;
+    color: #495057;
+    font-weight: 500;
+    background-color: rgba(85, 110, 230, 0.1);
+}
+.wizard-navigation > li {
+    /* list-style: none; */
+}
+.wizard-navigation .first {
+    background-color: rgba(85, 110, 230, 0.2) !important;
+}
+
+.wizard-navigation > li > a {
+    display: block;
+    padding: 1rem 1rem;
+    color: #495057;
+    font-weight: 500;
+    background-color: rgba(85, 110, 230, 0.1);
+}
+.wizard-navigation > li.active > a {
+    background-color: rgba(85, 110, 230, 0.2) !important;
+}

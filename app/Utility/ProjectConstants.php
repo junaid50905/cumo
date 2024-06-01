@@ -343,7 +343,7 @@ public static array $department = [
     ];
 
 
-    const DONTKNOW  = "Don't know";
+    const DONTKNOW  = "don't know";
 
     public static array $yesNoDontknow = [
         self::YES => 'Yes',
@@ -351,7 +351,7 @@ public static array $department = [
         self::DONTKNOW  => "Don't know",
     ];
 
-    const WANTTODO  = 'Want to do';
+    const WANTTODO  = 'want to do';
 
     public static array $yesNoWantdo = [
         self::YES => 'Yes',

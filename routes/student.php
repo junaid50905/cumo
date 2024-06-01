@@ -42,6 +42,7 @@ use App\Http\Controllers\StaffAndWorkplaceInspectionController;
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PdfController;
+use App\Http\Livewire\CareNeeds\CareNeedPartOne;
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth']], function () {
     Route::resources([
@@ -88,6 +89,7 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth']], function () {
 
     // Care Need part one start
     Route::get('/generate-pdf', [PdfController::class, 'generatePdf'])->name('generate.pdf');
+    // Route::get('/tab-form', CareNeedPartOne::class)->name('tab-form');
     // Care Need part one end
 
     //Assessment Start

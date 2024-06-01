@@ -46,6 +46,20 @@ class AssessmentPIDChildController extends Controller
         $userData = $this->userRepository->getAllUser();
         $questions = $this->assPIDChildRepository->getQuestionCollectionAccordingSubCategory($categoryId);
 
+        // $collection = $this->assPIDChildRepository->getQuestionCollectionAccordingSubCategory($categoryId);
+        // $formData = [];
+        // foreach ($collection as $key => $questions) {
+        //     if ($questions->isNotEmpty()) {
+        //         $lowerKey = strtolower(str_replace(' ', '_', $key));
+        //         $formData[$lowerKey] = [];
+        //         foreach ($questions as $index => $question) {
+        //             $formData[$lowerKey][$lowerKey . '_option_' . $index] = $question->value ?? '';
+        //         }
+        //     }
+        // }
+
+        // dd($formData);
+        
         // dd($questions);
 
         $data = [

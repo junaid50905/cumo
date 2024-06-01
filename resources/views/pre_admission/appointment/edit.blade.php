@@ -640,10 +640,7 @@ input#selectedEndTime {
 @section('script-bottom')
 
 <script>
-//let events = {!! json_encode($events) !!};
-let events = {
-    !!json_encode($events) !!
-};
+let events = {!! json_encode($events) !!};
 
 // console.log(events);
 

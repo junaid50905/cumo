@@ -55,23 +55,26 @@ class CareNeedPartOneController extends Controller
      */
     public function create(): View|Factory|Application
     {
-        $incomeType = 1;
-        $paymentStatus = 5;
-        $intervieweeData = $this->appointmentRepository->getLastAppointmentForPaymentStatusIncomeType($paymentStatus, $incomeType);
+        // $incomeType = 1;
+        // $paymentStatus = 5;
+        // $intervieweeData = $this->appointmentRepository->getLastAppointmentForPaymentStatusIncomeType($paymentStatus, $incomeType);
 
-        // dd($intervieweeData);
-        $data = [
-            'gender' => ProjectConstants::$genders,
-            'designation' => ProjectConstants::$designation,
-            'learnAbout' => ProjectConstants::$learnAbout,
-            'eduClass' => ProjectConstants::$class,
-            'department' => ProjectConstants::$department,
-            'assessorName' => $this->userRepo->getSpecificTypeUser('teacher'),
-            'teachers' => $this->userRepo->getSpecificTypeUser('teacher'),
-            'students' => $this->studentRepo->getData(),
-            'intervieweeData' => $intervieweeData,
-        ];
-        return view('pre_admission.care-need-part-one.create', $data);
+        // // dd($intervieweeData);
+        // $data = [
+        //     'gender' => ProjectConstants::$genders,
+        //     'designation' => ProjectConstants::$designation,
+        //     'learnAbout' => ProjectConstants::$learnAbout,
+        //     'eduClass' => ProjectConstants::$class,
+        //     'department' => ProjectConstants::$department,
+        //     'assessorName' => $this->userRepo->getSpecificTypeUser('teacher'),
+        //     'teachers' => $this->userRepo->getSpecificTypeUser('teacher'),
+        //     'students' => $this->studentRepo->getData(),
+        //     'intervieweeData' => $intervieweeData,
+        // ];
+        // return view('pre_admission.care-need-part-one.create', $data);
+
+        //This is for livewire calling blade
+        return view('pre_admission.care-need-part-one.create');
     }
 
     /**

@@ -220,7 +220,7 @@ class AppointmentController extends Controller
         $appointmentId = $studentData->id;
         $events = json_decode($this->eventCalendarRepository->getAllEventCalendarList($eventType), true);
         $specificUserEvents = $this->eventCalendarRepository->getSpecificUserEventCalendarList($eventType, $appointmentId);
-        // dd($specificUserEvents);
+        // dd($events, $specificUserEvents);
 
         // $events = '{
         //     "2024-02-28": [

@@ -70,4 +70,97 @@ class User extends Authenticatable
     {
         return $this->hasMany(EventCalendar::class, 'assistant_teacher_id');
     }
+
+    //Care Need Part One Start
+    public function mainTeacherCNPOIntroduction()
+    {
+        return $this->hasMany(CareNeedPartOneIntroduction::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOIntroduction()
+    {
+        return $this->hasMany(CareNeedPartOneIntroduction::class, 'assistant_teacher_id');
+    }
+    
+    public function mainTeacherCNPOGeneralInfo()
+    {
+        return $this->hasMany(CareNeedPartOneGeneralInfo::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOGeneralInfo()
+    {
+        return $this->hasMany(CareNeedPartOneGeneralInfo::class, 'assistant_teacher_id');
+    }
+
+    public function mainTeacherCNPOSpeciality()
+    {
+        return $this->hasMany(CareNeedPartOneSpeciality::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOSpeciality()
+    {
+        return $this->hasMany(CareNeedPartOneSpeciality::class, 'assistant_teacher_id');
+    }
+
+    public function mainTeacherCNPOAssessmentInfo()
+    {
+        return $this->hasMany(CareNeedPartOneAssessmentInfo::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOAssessmentInfo()
+    {
+        return $this->hasMany(CareNeedPartOneAssessmentInfo::class, 'assistant_teacher_id');
+    }
+
+    public function mainTeacherCNPOHomeInfo()
+    {
+        return $this->hasMany(CareNeedPartOneHomeInfo::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOHomeInfo()
+    {
+        return $this->hasMany(CareNeedPartOneHomeInfo::class, 'assistant_teacher_id');
+    }
+
+    public function mainTeacherCNPOEducationalInfo()
+    {
+        return $this->hasMany(CareNeedPartOneEducationalInfo::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOEducationalInfo()
+    {
+        return $this->hasMany(CareNeedPartOneEducationalInfo::class, 'assistant_teacher_id');
+    }
+
+    public function mainTeacherCNPOChildCondition()
+    {
+        return $this->hasMany(CareNeedPartOneChildCondition::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOChildCondition()
+    {
+        return $this->hasMany(CareNeedPartOneChildCondition::class, 'assistant_teacher_id');
+    }
+
+    public function mainTeacherCNPOChildNumber()
+    {
+        return $this->hasMany(CareNeedPartOneChildNumber::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOChildNumber()
+    {
+        return $this->hasMany(CareNeedPartOneChildNumber::class, 'assistant_teacher_id');
+    }
+
+    public function mainTeacherCNPOSchooling()
+    {
+        return $this->hasMany(CareNeedPartOneSchooling::class, 'main_teacher_id');
+    }
+
+    public function assistantTeacherCNPOSchooling()
+    {
+        return $this->hasMany(CareNeedPartOneSchooling::class, 'assistant_teacher_id');
+    }
+
+    //Care Need Part One End
 }

@@ -19,14 +19,14 @@
 @slot('title') Dashboard @endslot
 @endcomponent
 <div class="row">
-    <div class="col-xl-4">
+    <!-- <div class="col-xl-4">
         <div class="card overflow-hidden">
             <div class="bg-primary bg-soft">
                 <div class="row">
                     <div class="col-7">
                         <div class="text-primary p-3">
                             <h5 class="text-primary">Welcome Back !</h5>
-                            <p>WID Dashboard</p>
+                            <p>Admin Dashboard</p>
                         </div>
                     </div>
                     <div class="col-5 align-self-end">
@@ -91,8 +91,8 @@
                 <p class="text-muted mb-0">We craft digital, graphic and dimensional thinking.</p>
             </div>
         </div>
-    </div>
-    <div class="col-xl-8">
+    </div> -->
+    <div class="col-xl-12">
         <div class="row">
             <div class="col-md-4">
                 <div class="card mini-stats-wid">
@@ -100,7 +100,7 @@
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-muted fw-medium">Income</p>
-                                <h4 class="mb-0">&#2547;1,235</h4>
+                                Index<h4 class="mb-0">&#2547;1,235</h4>
                             </div>
 
                             <div class="flex-shrink-0 align-self-center">
@@ -157,7 +157,7 @@
         </div>
         <!-- end row -->
 
-        <div class="card">
+        <!-- <div class="card">
             <div class="card-body">
                 <div class="d-sm-flex flex-wrap">
                     <h4 class="card-title mb-4">Vocational Trade Production/ Sales And Stock Status</h4>
@@ -177,11 +177,11 @@
                 </div>
                 <div id="stacked-column-chart" class="apex-charts" dir="ltr"></div>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 <!-- end row -->
-
+<!-- 
 <div class="row">
     <div class="col-xl-4">
         <div class="card">
@@ -353,9 +353,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- end row -->
-
+<!-- 
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
@@ -403,7 +403,6 @@
                                     <i class="fab fa-cc-mastercard me-1"></i> Mastercard
                                 </td>
                                 <td>
-                                    <!-- Button trigger modal -->
                                     <button type="button"
                                         class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
                                         data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
@@ -434,7 +433,6 @@
                                     <i class="fab fa-cc-visa me-1"></i> Visa
                                 </td>
                                 <td>
-                                    <!-- Button trigger modal -->
                                     <button type="button"
                                         class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
                                         data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
@@ -465,7 +463,6 @@
                                     <i class="fab fa-cc-paypal me-1"></i> Paypal
                                 </td>
                                 <td>
-                                    <!-- Button trigger modal -->
                                     <button type="button"
                                         class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
                                         data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
@@ -495,7 +492,6 @@
                                     <i class="fab fa-cc-mastercard me-1"></i> Mastercard
                                 </td>
                                 <td>
-                                    <!-- Button trigger modal -->
                                     <button type="button"
                                         class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
                                         data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
@@ -525,7 +521,6 @@
                                     <i class="fab fa-cc-visa me-1"></i> Visa
                                 </td>
                                 <td>
-                                    <!-- Button trigger modal -->
                                     <button type="button"
                                         class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
                                         data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
@@ -555,7 +550,6 @@
                                     <i class="fab fa-cc-paypal me-1"></i> Paypal
                                 </td>
                                 <td>
-                                    <!-- Button trigger modal -->
                                     <button type="button"
                                         class="btn btn-primary btn-sm btn-rounded waves-effect waves-light"
                                         data-bs-toggle="modal" data-bs-target=".transaction-detailModal">
@@ -566,11 +560,10 @@
                         </tbody>
                     </table>
                 </div>
-                <!-- end table-responsive -->
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- end row -->
 
 <!-- Transaction Modal -->

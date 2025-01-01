@@ -9,13 +9,11 @@
             <div class="card-body">
                 <div class="card__search__box">
                     <div class="row">
-                        <form action="{{ route('pre-admission-income-search.search') }}" method="POST">
-                            @csrf
+                        <form action="">
                             <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="search_id" placeholder="Search by ID (000001)" required>
-                                <div class="input-group-append">
-                                    <button class="btn btn-success" type="submit">Search</button>
-                                </div>
+                                <input type="text" class="form-control" placeholder="Search by ID (000001)"
+                                    aria-label="Search by ID (000001)" aria-describedby="button-addon2">
+                                <button class="btn btn-success" type="button" id="button-addon2">Button</button>
                             </div>
                         </form>
                     </div>
@@ -25,53 +23,52 @@
                         <table class="table table-hover">
                             <thead>
                                 <tr class="table-primary">
-                                    <th class="text-center">Category
+                                    <th>Date
                                         <span>
                                             <i class="dripicons-arrow-thin-down"></i>
                                             <i class="dripicons-arrow-thin-up"></i>
                                         </span>
                                     </th>
-                                    <th class="text-center">Sub_Category</th>
-                                    <th class="text-center">Question</th>
-                                    <th class="text-center">Action</th>
+                                    <th>St_Name</th>
+                                    <th>MT_Name</th>
+                                    <th>AST_Name</th>
+                                    <th>Start_Time</th>
+                                    <th>End_Time</th>
+                                    <th>Medium_Type</th>
+                                    <th>Status</th>
+                                    <th class="text-end">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($questions as $question)
-                                <tr>
-                                    <td>{{ $question->category->name }}</td>
-                                    <td>{{ $question->sub_category->name }}</td>
-                                    <td>{{ $question->name }}</td>
-                                    <td class="d-flex align-items-center justify-content-end">
-                                        <a href="{{ route('pre-admission-income.edit', $student->id) }}" wire:navigate
-                                            rel="noopener noreferrer"
-                                            class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1">
-                                            <i class="fas fa-credit-card"></i>
-                                        </a>
-                                        <a href="{{ route('pre-admission-income-invoice.invoice', $student->id) }}" wire:navigate
-                                            rel="noopener noreferrer"
-                                            class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1">
-                                            <i class="fas fa-file-invoice"></i>
-                                        </a>
-                                        <a href="{{ route('appointment.edit', $student->id) }}" target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1"
-                                            title="Setup">
-                                            <i class="mdi mdi-cog"></i>
-                                        </a>
-                                        <a href="{{ route('appointment.edit', $student->id) }}" target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 me-1"
-                                            title="Edit">
-                                            <i class="mdi mdi-pencil"></i>
-                                        </a>
-                                        <button type="button" wire:click="confirmDelete({{1}})"
-                                            class="btn btn-sm btn-danger btn-rounded waves-effect waves-light mb-2 me-1"
-                                            title="delete">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                            @foreach ($events as $date => $eventList)
+                                    @foreach ($eventList as $event)
+                                        <tr>
+                                            <td>{{ $date }}</td>
+                                            <td>{{ $event['appointmentName'] }}</td>
+                                            <td>{{ $event['mainTeacherName'] }}</td>
+                                            <td>{{ $event['assistantTeacherName'] }}</td>
+                                            <td>{{ $event['startTime'] }}</td>
+                                            <td>{{ $event['endTime'] }}</td>
+                                            <td>{{ $event['mediumType'] }}</td>
+                                            <td>{{ $event['status'] }}</td>
+                                            <td class="d-flex align-items-center justify-content-end">
+                                                <a href="{{ route('setup-assessment-schedule.edit', $event['id']) }}"
+                                                class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1">
+                                                    <i class="mdi mdi-pencil"></i> Edit
+                                                </a>
+                                                <a href="{{ route('setup-assessment-schedule.show', $event['id']) }}"
+                                                class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 me-1"
+                                                title="View">
+                                                    <i class="mdi mdi-eye"></i> View
+                                                </a>
+                                                <button type="button" onclick="confirmDelete({{ $event['id'] }})"
+                                                class="btn btn-sm btn-danger btn-rounded waves-effect waves-light mb-2 me-1"
+                                                title="Delete">
+                                                    <i class="fas fa-trash-alt"></i> Delete
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>
@@ -102,4 +99,11 @@
         </div>
     </div>
 </div>
+<script>
+    function confirmDelete(id) {
+        if (confirm('Are you sure you want to delete this event?')) {
+            window.location.href = "{{ route('setup-assessment-schedule.destroy', ['id' => ':id']) }}".replace(':id', id);
+        }
+    }
+</script>
 @endsection

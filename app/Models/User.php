@@ -101,7 +101,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(CareNeedPartOneSpeciality::class, 'assistant_teacher_id');
     }
-
+    
     public function mainTeacherCNPOAssessmentInfo()
     {
         return $this->hasMany(CareNeedPartOneAssessmentInfo::class, 'main_teacher_id');
@@ -163,4 +163,14 @@ class User extends Authenticatable
     }
 
     //Care Need Part One End
+
+    public function main_teacher_question_answer()
+    {
+        return $this->hasMany(AssessmentToolQuesAns::class, 'main_teacher_id');
+    }
+
+    public function assisstant_teacher_question_answer()
+    {
+        return $this->hasMany(AssessmentToolQuesAns::class, 'assistant_teacher_id');
+    }
 }

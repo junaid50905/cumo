@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('fundamental_evaluation')->nullable();
             $table->string('psychological_assessment')->nullable();
             $table->string('academic_assessment')->nullable();
+            $table->string('assessment_infos_report')->nullable();
 
             $table->unsignedBigInteger('appointment_id')->nullable();
             $table->unsignedBigInteger('main_teacher_id')->nullable();

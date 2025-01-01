@@ -25,6 +25,6 @@ Route::get('user-type/{type}', [UserController::class, 'specificUserType'])->nam
 
 Route::get('get-products/{category}', [\App\Http\Controllers\ProductController::class, 'getProductsAccordingCategory'])->name('getProductsAccordingCategory');
 Route::get('get-stock-details-accordingly', [\App\Http\Controllers\StockController::class, 'getDetailAccordingly'])->name('getDetailAccordingly');
-Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard'); 
 Route::get('task-activity-edit/{id}', [App\Http\Controllers\TaskController::class, 'edit'])->name('task-activity-edit');
 Route::post('task-activity-update/{id}', [App\Http\Controllers\TaskController::class, 'update'])->name('task-activity-update');

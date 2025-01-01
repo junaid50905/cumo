@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    {{-- <title> @yield('title') | Skote - Admin & Dashboard Template</title> --}}
+    {{-- <title> @yield('title') | CUMO - Admin & Dashboard Panel</title> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
     <meta content="Themesbrand" name="author" />
@@ -68,16 +68,6 @@
     referrerpolicy="no-referrer"
   ></script>
     @stack('bottomJsStack')
-</body>
-<script>
-
-// $(".addmore").on('click',function(){
-//     for(let select of $('.ch')){
-
-//         $(select).css("background-color", "yellow");
-//     }
-// });
-</script>
 
 <script>
 $(".ch").chosen();
@@ -100,4 +90,24 @@ observer.observe(document.body, {
   characterData: true
 });
 </script>
+
+<!-- This is for session alert function -->
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        let countdownElement = document.getElementById('countdown');
+        let alertMessageElement = document.getElementById('alert-message');
+        let timeLeft = 15; // 15 seconds countdown
+       
+        let countdownInterval = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(countdownInterval); 
+                alertMessageElement.style.display = 'none'; 
+            } else {
+                timeLeft -= 1; 
+                countdownElement.textContent = timeLeft;
+            }
+        }, 1000);
+    });
+</script>
+</body>
 </html>

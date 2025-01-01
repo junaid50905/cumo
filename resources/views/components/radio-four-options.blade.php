@@ -1,3 +1,14 @@
+@props([
+    'name' => 'input',
+    'type' => 'radio',
+    'label',
+    'options',
+    'isVertical' => '',
+    'id',
+    'questionSerialNo',
+    'wireModel',
+])
+
 <div class="row border-bottom py-2">
     <div class="col-xl-12 col-sm-12">
         <div class="mb-2">
@@ -7,7 +18,7 @@
                     @foreach($options as $key => $option)
                     <div class="col-md-6 mb-2">
                         <div class="form-check">
-                            <input id="{{ $id }}_{{ $key }}" class="form-check-input" name="{{ $name }}['answer']" type="radio"
+                            <input id="{{ $id }}_{{ $key }}" class="form-check-input" wire:model.lazy="{{ $wireModel }}" name="{{ $name }}['answer']" type="radio"
                                 value="{{ $key }}" {{ in_array($key, $checked) ? 'checked' : '' }}>
                             <label for="{{ $id }}_{{ $key }}" class="form-check-label">
                                 {{ $option }}

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('provide_other_info')->nullable();
             $table->string('any_exam_or_degree_achieved')->nullable();
             $table->string('any_degree_achieved_if_yes_name')->nullable();
+            $table->string('schoolings_report')->nullable();
 
             $table->unsignedBigInteger('appointment_id')->nullable();
             $table->unsignedBigInteger('main_teacher_id')->nullable();

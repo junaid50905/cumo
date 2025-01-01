@@ -1,5 +1,4 @@
 <?php
-
 namespace App\View\Components;
 
 use Exception;
@@ -30,12 +29,12 @@ class InputSelectCustom extends Component
      * @return void
      * @throws Exception
      */
-    public function __construct($records, $firstLabel = null, $onChange = null, $disabled = '', $name = '', $targetColumn = '', $selected = null, $multiple = false, $required = '', $wireModel = '', $additional = false)
+    public function __construct($records = [], $firstLabel = null, $onChange = null, $disabled = '', $name = '', $targetColumn = '', $selected = null, $multiple = false, $required = '', $wireModel = '', $additional = false)
     {
-        // dd($onChange);
-        if (!$name and !$wireModel) {
+        if (!$name && !$wireModel) {
             throw new Exception("Either name or wire model is needed");
         }
+
         $name = $wireModel ?: $name;
         $this->name = $name . ($multiple ? '[]' : '');
         $this->disabled = $disabled ? 'disabled' : '';
@@ -49,14 +48,13 @@ class InputSelectCustom extends Component
         $this->id = preg_replace('/[\[\]]/', '', $name);
         $this->additional = $additional ?: '';
         $this->onChange = $onChange ?? '';
-
-        // dd($this->onChange);
     }
 
     public function isSelected($option): bool
     {
         return $this->selected instanceof Collection ? $this->selected->contains($option) : $option == $this->selected;
     }
+
     /**
      * Get the view / contents that represent the component.
      *

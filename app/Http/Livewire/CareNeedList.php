@@ -4,7 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use Livewire\WithPagination;
-use App\Repositories\CareNeedRepository;
+use App\Repositories\CareNeeds\CareNeedRepository;
 use App\Http\Livewire\Traits\CommonListElements;
 
 class CareNeedList extends Component

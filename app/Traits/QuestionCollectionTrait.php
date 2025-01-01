@@ -3,7 +3,7 @@
 namespace App\Traits;
 
 use Illuminate\Support\Collection;
-use App\Models\AssessmentQuestion;
+use App\Models\Assessments\AssessmentQuestion;
 
 trait QuestionCollectionTrait
 {
@@ -35,6 +35,10 @@ trait QuestionCollectionTrait
         // Sort subcategories alphabetically by name
         $subcategoriesCollection = $subcategoriesCollection->sortKeys();
     
-        return $subcategoriesCollection;
-    }
+        // Convert the collection to array format
+        $subcategoriesArray = $subcategoriesCollection->toArray();
+    
+        // dd($subcategoriesArray);
+        return $subcategoriesArray;
+    }    
 }

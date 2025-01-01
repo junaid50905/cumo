@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Repositories\AppointmentRepository;
+use App\Repositories\Appointments\AppointmentRepository;
 use App\Traits\CommonServiceElements;
 
 class AppointmentService

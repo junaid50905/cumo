@@ -29,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->text('avatar')->nullable();
             $table->string('signature')->nullable();
             $table->string('role_id')->nullable();
+            $table->tinyInteger('status')->default(1)->comment('1=Active,0=Inactive');
             $table->rememberToken();
             $table->timestamps();
         });        

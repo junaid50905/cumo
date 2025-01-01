@@ -109,7 +109,7 @@
                         </div>
                         <div class="col-xl-2 d-flex align-items-center justify-content-end gap-2">
                             <button type="button" class="btn btn-primary text-capitalize"
-                                style="background-color:#60bdf3 ;">Back</button>
+                            style="background-color:#60bdf3;" onclick="window.location.href = '{{ url()->previous() }}';">Back</button>
                         </div>
                     </div>
                 </div>

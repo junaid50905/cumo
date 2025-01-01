@@ -51,6 +51,9 @@
                                 <div class="row">
                                     <div class="col-md-12 d-flex align-items-center">
                                         <div class="btn bold">
+                                            <x-input-text name="question_no" placeholder="Question No"></x-input-text>
+                                        </div>
+                                        <div class="btn bold">
                                             <x-check-box name="is_reverse" placeholder="Is reverse?"></x-check-box>
                                         </div>
                                         <button type="submit" class="btn btn-success w-100">Save</button>

@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('own_equipment_other')->nullable();
             $table->string('anything_else')->nullable();
             $table->string('please_specify')->nullable();
+            $table->string('home_infos_report')->nullable();
 
             $table->unsignedBigInteger('appointment_id')->nullable();
             $table->unsignedBigInteger('main_teacher_id')->nullable();

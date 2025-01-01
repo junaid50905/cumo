@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('event_end_time');
             $table->unsignedTinyInteger('event_type')->comment('1:Interview,2:Assessment,3:Observation');
             $table->unsignedTinyInteger('event_status')->default(1)->comment('1:Pending,2:Processing,3:Cancel,4:Completed');
+            $table->string('category_id')->nullable();
+            $table->string('sub_category_id')->nullable();
 
             $table->unsignedBigInteger('appointment_id')->nullable();
             $table->unsignedBigInteger('main_teacher_id')->nullable();

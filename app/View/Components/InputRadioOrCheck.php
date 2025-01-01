@@ -14,14 +14,16 @@ class InputRadioOrCheck extends Component
     public string $type;
     public string $label;
     public string $isVertical;
-    public string $secondaryInputLabel;
     public $records;
-    public string $secondaryInputName;
     public array $checked;
-    public $secondaryInputValue;
-    public string $selectedValue;
+    public array $selectedValue;
     public string $wireModel;
     public string $secondaryInputWireModel;
+    public string $secondaryInputLabel;
+    public string $secondaryInputName;
+    public $secondaryInputValue;
+    public string $secondaryInputPlaceholder;
+    public string $multipleCheckBoxName;
 
     public function __construct(
         $records,
@@ -30,28 +32,32 @@ class InputRadioOrCheck extends Component
         $checked = false,
         $isVertical = true,
         $multiple = false,
-        $secondaryInputLabel = '',
-        $secondaryInputValue = '',
         $type = 'radio',
-        $selectedValue = '', 
-        $wireModel = false,
-        $secondaryInputWireModel = false
-    )
-    {
-        $name                      = $wireModel ?: ($name ?: convertLevelIntoName($label));
-        $this->multiple            = $multiple;
-        $this->name                = $multiple ? $name . '[]' : $name;
-        $this->type                = $multiple ? 'checkbox' : $type;
-        $this->label               = $label;
-        $this->records             = $records;
-        $this->isVertical          = $isVertical ? 'd-flex' : '';
+        $selectedValue = [],
+        $wireModel = null,  // Ensure these are nullable
+        $secondaryInputWireModel = null,  // Ensure these are nullable
+        $secondaryInputLabel = '',
+        $secondaryInputName = '',
+        $secondaryInputValue = '',
+        $secondaryInputPlaceholder = '',
+        $multipleCheckBoxName = ''
+    ) {
+        $name = $wireModel ?: ($name ?: convertLevelIntoName($label));
+        $this->multiple = $multiple;
+        $this->name = $multiple ? $name . '[]' : $name;
+        $this->type = $multiple ? 'checkbox' : $type;
+        $this->label = $label;
+        $this->records = $records;
+        $this->isVertical = $isVertical ? 'd-flex' : '';
+        $this->checked = $checked ? (is_array($checked) ? $checked : [$checked]) : [];
+        $this->selectedValue = is_array($selectedValue) ? $selectedValue : explode(',', $selectedValue);
+        $this->wireModel = $wireModel ?? '';  // Default to empty string if not provided
+        $this->secondaryInputWireModel = $secondaryInputWireModel ?? '';  // Default to empty string if not provided
         $this->secondaryInputLabel = $secondaryInputLabel;
-        $this->secondaryInputName  = $secondaryInputLabel ? "{$name}_secondary" : '';
-        $this->checked             = $checked ? (is_array($checked) ? $checked : [$checked]) : [];
+        $this->secondaryInputName = $secondaryInputName;
         $this->secondaryInputValue = $secondaryInputValue;
-        $this->selectedValue       = $selectedValue ?? '';
-        $this->wireModel           = $wireModel ? $wireModel : '';
-        $this->secondaryInputWireModel = $secondaryInputWireModel ? $secondaryInputWireModel : '';
+        $this->secondaryInputPlaceholder = $secondaryInputPlaceholder ?? '';
+        $this->multipleCheckBoxName = $multipleCheckBoxName ?? 'checkboxValues';
     }
 
     public function render(): View|Factory|Application

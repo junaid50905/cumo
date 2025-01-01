@@ -68,35 +68,31 @@ button.btn.btn-success.w-100 {
             <!-- Left Menu Start -->
             <ul class="metismenu list-unstyled" id="side-menu">
                 <li class="menu-title">Menu</li>
-                {{-- <li>
-                    <a href="index" class="waves-effect active">
-                        <i class="bx bx-home-circle"></i>
-                        <span>Starter Page</span>
-                    </a>
-                </li> --}}
                 <li>
-                    <a href="/dashboard" class="waves-effect active">
+                    <a href="{{ env('APP_URL') }}/dashboard" class="waves-effect active">
                         <i class="bx bx-home-circle"></i>
-                        <span>DashBoard</span>
+                        <span>Dashboard</span>
                     </a>
                 </li>
 
                 <li class="menu-title">Accounting</li>
 
-
-                <li>
+                <li class="{{ request()->routeIs('pre-admission-income.*') ? 'mm-active' : '' }}">
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-share-alt"></i>
                         <span>Income Receive</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="true">
-                        <li>
+                        <li class="{{ request()->routeIs('pre-admission-income.*') ? 'mm-active' : '' }}">
                             <a href="javascript: void(0);" class="has-arrow">Basic Income</a>
                             <ul class="sub-menu">
-                                <li>
+                                <li class="{{ request()->routeIs('pre-admission-income.create') ? 'mm-active' : '' }}">
                                     <a href="{{ route('pre-admission-income.create') }}">Add Income</a>
                                 </li>
-                                <li>
+                                <li class="{{ request()->routeIs('pre-admission-income-pending.pending') || request()->routeIs('pre-admission-income.payment') ? 'mm-active' : '' }}">
+                                    <a href="{{ route('pre-admission-income-pending.pending') }}">Pending List</a>
+                                </li>
+                                <li class="{{ request()->routeIs('pre-admission-income.index') || request()->routeIs('pre-admission-income.edit') || request()->routeIs('pre-admission-income.payment') || request()->routeIs('pre-admission-income-invoice.invoice') || request()->routeIs('pre-admission-income-search.search') ? 'mm-active' : '' }}">
                                     <a href="{{ route('pre-admission-income.index') }}">Income List</a>
                                 </li>
                             </ul>
@@ -171,40 +167,34 @@ button.btn.btn-success.w-100 {
             </li>
 
             <li class="menu-title">Program Modules</li>
-            <li>
+            <li class="{{ request()->routeIs('appointment.*') ? 'mm-active' : '' }}">
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-share-alt"></i>
                     <span>Pre Admission</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="true">
-                    <li>
+                    <li class="{{ request()->routeIs('appointment.*') ? 'mm-active' : '' }}">
                         <a href="javascript: void(0);" class="has-arrow">Appointment</a>
                         <ul class="sub-menu">
-                            <li><a href="{{ route('appointment.create') }}">New Appointment</a></li>
-                            <li>
+                            <li class="{{ request()->routeIs('appointment.create') ? 'mm-active' : '' }}">
+                                <a href="{{ route('appointment.create') }}">New Appointment</a>
+                            </li>
+                            <li class="{{ request()->routeIs('appointment.index') || request()->routeIs('appointment.edit') || request()->routeIs('pre-appointment-interview-setup.search') ? 'mm-active' : '' }}">
                                 <a href="{{ route('appointment.index') }}">Appointment List</a>
                             </li>
                         </ul>
                     </li>
-                    <!-- <li>
-                        <a href="javascript: void(0);" class="has-arrow">Interview</a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a href="{{ route('interview.create') }}">Add Interview</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('interview.index') }}">Interview List</a>
-                            </li>
-                        </ul>
-                    </li> -->
-                    <li>
+                    <li class="{{ request()->routeIs('care-need-part-one.*') ? 'mm-active' : '' }}">
                         <a href="javascript: void(0);" class="has-arrow">CARE Needs Part 1</a>
                         <ul class="sub-menu">
-                            <li>
+                            <li class="{{ request()->routeIs('care-need-part-one.create') || request()->routeIs('care-need-part-one-search.search') ? 'mm-active' : '' }}">
                                 <a href="{{ route('care-need-part-one.create') }}">Add (PA1OT)</a>
                             </li>
-                            <li>
+                            <li class="{{ request()->routeIs('care-need-part-one.index') || request()->routeIs('care-need-part-one.show') ? 'mm-active' : '' }}">
                                 <a href="{{ route('care-need-part-one.index') }}">List (PA1OT)</a>
+                            </li>
+                            <li class="{{ request()->routeIs('care-need-part-one-summary.summary') || request()->routeIs('care-need-part-one-report.report') ? 'mm-active' : '' }}">
+                                <a href="{{ route('care-need-part-one-summary.summary') }}">Summary List (PA1OT)</a>
                             </li>
                         </ul>
                     </li>
@@ -215,43 +205,21 @@ button.btn.btn-success.w-100 {
 
                 </ul>
             </li>
-            <li>
-                <a href="{{ route('admission.addStudent') }}" class="waves-effect">
-                    <i class="bx bx-share-alt"></i>
-                    <span>Admission</span>
-                </a>
-            </li>
-            <li>
+            <li class="{{ request()->routeIs('assessment-pid-child.*') ? 'mm-active' : '' }}">
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-share-alt"></i>
                     <span>Assessment</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="true">
                     <li>
-                        <a href="javascript: void(0);" class="has-arrow">Setup Question</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ route('setup-question.create') }}">Add Question</a></li>
-                            <li>
-                                <a href="{{ route('setup-question.index') }}">All Question</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="javascript: void(0);" class="has-arrow">Setup Schedule</a>
-                        <ul class="sub-menu">
-                            <li><a href="{{ route('setup-assessment-schedule.create') }}">Add Schedule</a></li>
-                            <li>
-                                <a href="{{ route('setup-assessment-schedule.index') }}">All Schedule</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
                         <a href="javascript: void(0);" class="has-arrow">(PID-5)Age_11-17</a>
                         <ul class="sub-menu">
-                            <li><a href="{{ route('assessment-pid-child.create') }}">Add PID-5 Child</a>
+                            <li class="{{ request()->routeIs('assessment-pid-child.create') || request()->routeIs('assessment-pid-child-search.search') ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pid-child.create') }}">Add PID-5 Child</a>
                             </li>
-                            <li><a href="{{ route('assessment-pid-child.index') }}">List PID-5 Child</a></li>
-                            <li><a href="{{ route('assessment-pid-child.index') }}">Summary</a></li>
+                            <li class="{{ request()->routeIs('assessment-pid-child.index') || request()->routeIs('assessment-pid-child.show') ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pid-child.index') }}">List PID-5 Child</a>
+                            </li>
                         </ul>
                     </li>
                     <li>
@@ -299,6 +267,12 @@ button.btn.btn-success.w-100 {
                         </ul>
                     </li>
                 </ul>
+            </li>
+            <li>
+                <a href="{{ route('admission.addStudent') }}" class="waves-effect">
+                    <i class="bx bx-share-alt"></i>
+                    <span>Admission</span>
+                </a>
             </li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -419,6 +393,67 @@ button.btn.btn-success.w-100 {
                     </ul>
                 </li> --}}
             <li class="menu-title">Setup</li>
+
+            <li class="{{ request()->routeIs(['event_schedule_create', 'event_schedule_list', 'event_schedule_pending_list', 'edit_event_schedule', 'setup_event_schedule', 'search_event_schedule']) ? 'mm-active' : '' }}">
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-share-alt"></i>
+                    <span>Schedule Setup</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="true">
+                    <!-- Interview Schedule -->
+                    <li class="{{ request()->routeIs(['event_schedule_create', 'event_schedule_list', 'edit_event_schedule', 'setup_event_schedule']) && request()->route('event_type') == 1 ? 'mm-active' : '' }}">
+                        <a href="javascript: void(0);" class="has-arrow">Interview Schedule</a>
+                        <ul class="sub-menu">
+                            <li><a href="{{ route('event_schedule_create', ['event_type' => 1]) }}">Add Schedule</a></li>
+                            <li><a href="{{ route('event_schedule_list', ['event_type' => 1]) }}">All Schedule</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Assessment Schedule -->
+                    <li class="{{ request()->routeIs(['event_schedule_create', 'event_schedule_list', 'event_schedule_pending_list', 'edit_event_schedule', 'setup_event_schedule', 'search_event_schedule']) && request()->route('event_type') == 2 ? 'mm-active' : '' }}">
+                        <a href="javascript: void(0);" class="has-arrow">Assessment Schedule</a>
+                        <ul class="sub-menu">
+                            <li><a href="{{ route('event_schedule_create', ['event_type' => 2]) }}">Add Schedule</a></li>
+                            <li><a href="{{ route('event_schedule_pending_list', ['event_type' => 2]) }}">Pending List</a></li>
+                            <li><a href="{{ route('event_schedule_list', ['event_type' => 2]) }}">All Schedule</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- Observation Schedule -->
+                    <li class="{{ request()->routeIs(['event_schedule_create', 'event_schedule_list', 'edit_event_schedule', 'setup_event_schedule']) && request()->route('event_type') == 3 ? 'mm-active' : '' }}">
+                        <a href="javascript: void(0);" class="has-arrow">Observation Schedule</a>
+                        <ul class="sub-menu">
+                            <li><a href="{{ route('event_schedule_create', ['event_type' => 3]) }}">Add Schedule</a></li>
+                            <li><a href="{{ route('event_schedule_list', ['event_type' => 3]) }}">All Schedule</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-share-alt"></i>
+                    <span>Table of Content</span>
+                </a>
+                <ul class="sub-menu" aria-expanded="true">
+                    <li><a href="{{ route('setup-table-of-content.create') }}" class="waves-effect"><span>Add Data</span></a></li>
+                    <li><a href="{{ route('setup-table-of-content.index') }}">Table of Content List</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
+                    <i class="bx bx-share-alt"></i>
+                    <span>Question Setup</span>
+                </a>
+                <ul class="sub-menu">
+                    <li><a href="{{ route('setup-question.create') }}">Add Question</a></li>
+                    <li>
+                        <a href="{{ route('setup-question.index') }}">All Question</a>
+                    </li>
+                </ul>
+            </li>
+
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-share-alt"></i>

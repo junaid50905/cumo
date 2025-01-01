@@ -1,17 +1,19 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Controller;
+
 use App\Http\Livewire\AppointmentList;
 
-use App\Http\Controllers\AppointmentController;
+use App\Http\Controllers\Appointments\AppointmentController;
+use App\Http\Controllers\CareNeeds\CareNeedPartOneController;
+use App\Http\Controllers\Assessments\AssessmentPIDChildController;
+
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\CaseHistoryController;
-use App\Http\Controllers\CareNeedPartOneController;
-use App\Http\Controllers\CareNeedController;
+use App\Http\Controllers\CareNeeds\CareNeedController;
 use App\Http\Controllers\ReferralController;
 
-use App\Http\Controllers\AssessmentPIDChildController;
-use App\Http\Controllers\SetupAssessmentScheduleController;
 
 use App\Http\Controllers\TripController;
 use App\Http\Controllers\SocialController;
@@ -40,9 +42,9 @@ use App\Http\Controllers\FunctionalCommunicationController;
 use App\Http\Controllers\FunctionalMovementskillController;
 use App\Http\Controllers\StaffAndWorkplaceInspectionController;
 
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\PdfController;
+use App\Http\Controllers\Events\EventController;
 use App\Http\Livewire\CareNeeds\CareNeedPartOne;
+use App\Http\Controllers\PdfController;
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth']], function () {
     Route::resources([
@@ -59,7 +61,6 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth']], function () {
         'case-history' => CaseHistoryController::class,
         'referral' => ReferralController::class,
         'assessment-pid-child' => AssessmentPIDChildController::class,
-        'setup-assessment-schedule' => SetupAssessmentScheduleController::class,
         'autisum-behaviour' => AutisumBhehaviourController::class,
         'executive-function' => ExecutiveFunctionController::class,
         'sensory-checklist-adult' => SensoryAdultController::class,
@@ -84,16 +85,19 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth']], function () {
 
     // Appointment Start
     Route::match(['get', 'post'], 'pre-appointment-interview-setup', [AppointmentController::class, 'search'])->name('pre-appointment-interview-setup.search');
-    Route::post('interviewer-time-setup', [AppointmentController::class, 'interviewerTimeSetup'])->name('interviewer-time-setup.interviewer');
     // Appointment End
 
     // Care Need part one start
     Route::get('/generate-pdf', [PdfController::class, 'generatePdf'])->name('generate.pdf');
-    // Route::get('/tab-form', CareNeedPartOne::class)->name('tab-form');
+    Route::match(['get', 'post'], 'care-need-part-one-search', [CareNeedPartOneController::class, 'search'])->name('care-need-part-one-search.search');
+    Route::get('/care-need-part-one-report/{appointment_id}', [CareNeedPartOneController::class, 'reportCareNeedPartOne'])->name('care-need-part-one-report.report');
+    Route::get('/care-need-part-one-summary/summary', [CareNeedPartOneController::class, 'summaryCareNeedPartOne'])->name('care-need-part-one-summary.summary');
+    Route::post('/care_need_part_one_suggestion', [CareNeedPartOneController::class, 'suggestionCareNeedPartOne'])->name('care_need_part_one_suggestion');
     // Care Need part one end
 
     //Assessment Start
     Route::match(['get', 'post'], 'assessment-pid-child-search', [AssessmentPIDChildController::class, 'search'])->name('assessment-pid-child-search.search');
+    Route::match(['get', 'post'], 'assessment-pid-child-report-search', [AssessmentPIDChildController::class, 'searchReport'])->name('assessment-pid-child-report-search.search');
     //Assessment End
 
     // Student Profile Route Start

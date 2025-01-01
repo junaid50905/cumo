@@ -40,6 +40,7 @@ return new class extends Migration
             $table->string('is_attachment_disorder')->nullable();
             $table->string('is_separation_anxiety')->nullable();
             $table->string('is_sleep_disorder')->nullable();
+            $table->string('specialities_report')->nullable();
 
 
             $table->unsignedBigInteger('appointment_id')->nullable();

@@ -12,7 +12,7 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StockOutController;
 use App\Http\Controllers\BankAccountController;
-use App\Http\Controllers\PreAdmissionPaymentController;
+use App\Http\Controllers\Payments\AppointmentPaymentController;
 use App\Http\Controllers\RequisitionController;
 use App\Http\Controllers\SaleVoucherController;
 use App\Http\Controllers\StockAssignController;
@@ -30,7 +30,7 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     Route::resources([
         'journal' => JournalController::class,
 
-        'pre-admission-income' => PreAdmissionPaymentController::class,
+        'pre-admission-income' => AppointmentPaymentController::class,
         'student-income' => StudentIncomeController::class,
         'sale-voucher' => SaleVoucherController::class,
         'donation-and-other' => DonationController::class,
@@ -55,8 +55,10 @@ Route::group(['prefix' => 'account', 'middleware' => ['auth']], function () {
     ]);
 
     // Pre-Admission Payment Start
-    Route::match(['get', 'post'], 'pre-admission-income-search', [PreAdmissionPaymentController::class, 'search'])->name('pre-admission-income-search.search');
-    Route::get('pre-admission-income-invoice', [PreAdmissionPaymentController::class, 'preAdmissionIncomeInvoice'])->name('pre-admission-income-invoice.invoice');
+    Route::get('pre-admission-income-pending/pending-list', [AppointmentPaymentController::class, 'pending'])->name('pre-admission-income-pending.pending');
+    Route::get('pre-admission-income-payment/{id}', [AppointmentPaymentController::class, 'payment'])->name('pre-admission-income.payment');
+    Route::match(['get', 'post'], 'pre-admission-income-search', [AppointmentPaymentController::class, 'search'])->name('pre-admission-income-search.search');
+    Route::get('pre-admission-income-invoice', [AppointmentPaymentController::class, 'preAdmissionIncomeInvoice'])->name('pre-admission-income-invoice.invoice');
     // Pre-Admission Payment End
 
     Route::get('purchase-order/requisition/{requisition?}', [PurchaseController::class, 'create'])->name('purchase-order.create');

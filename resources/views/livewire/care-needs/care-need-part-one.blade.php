@@ -31,40 +31,41 @@
                                 </ul>
                             </div>
                             <div class="content">
-                                <div class="card__search__box custom__search__box">
-                                    <div class="flex-1">
-                                        <div class="button__group d-flex gap-2 justify-content-end aligns-items-center">
-                                            <div class="d-flex gap-2 justify-content-end align-items-center">
+                                <div class="card__search__box custom__search__box d-flex gap-2">
+                                    <div class="flex-1" style="margin-top: -15px;">
+                                        <div class="button__group d-flex gap-4 justify-content-end align-items-center">
+                                            <!-- Payment Section -->
+                                            <div class="d-flex gap-2 align-items-center">
                                                 <span class="font-weight-bold">Payment: </span>
-                                                <p
-                                                    class="btn interview__status__{{ strtolower($formData['introduction']['payment_status_updated'] ?? 'pending') }} btn-sm">
+                                                <p class="btn interview__status__{{ strtolower($formData['introduction']['payment_status_updated'] ?? 'pending') }} btn-sm mb-0">
                                                     {{ $formData['introduction']['payment_status_updated'] !== null ? $formData['introduction']['payment_status_updated'] : 'Pending' }}
                                                 </p>
                                             </div>
-                                            <div class="d-flex gap-2 justify-content-end aligns-items-center">
+                                            <!-- Interview Section -->
+                                            <div class="d-flex gap-2 align-items-center">
                                                 <span class="font-weight-bold">Interview: </span>
-                                                <p
-                                                    class="btn interview__status__{{ strtolower($formData['introduction']['interview_status']) }} btn-sm">
+                                                <p class="btn interview__status__{{ strtolower($formData['introduction']['interview_status']) }} btn-sm mb-0">
                                                     {{ $formData['introduction']['interview_status'] !== null ? $formData['introduction']['interview_status'] : 'Pending' }}
                                                 </p>
                                             </div>
-                                            <div class="d-flex gap-2 justify-content-end aligns-items-center">
+                                            <!-- Assessment Section -->
+                                            <div class="d-flex gap-2 align-items-center">
                                                 <span class="font-weight-bold">Assessment: </span>
-                                                <p
-                                                    class="btn interview__status__{{ strtolower($formData['introduction']['assessment_status']) }} btn-sm">
+                                                <p class="btn interview__status__{{ strtolower($formData['introduction']['assessment_status']) }} btn-sm mb-0">
                                                     {{ $formData['introduction']['assessment_status'] !== null ? $formData['introduction']['assessment_status'] : 'Pending' }}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="flex-1">
-                                        <form action="">
+                                    <div class="flex-grow-1">
+                                        <form action="{{ route('care-need-part-one-search.search') }}" method="POST">
+                                            @csrf
                                             <div class="input-group mb-3">
-                                                <input type="text" class="form-control"
+                                                <input type="text" name="search_id" class="form-control"
                                                     placeholder="Search by ID (000001)"
                                                     aria-label="Search by ID (000001)" aria-describedby="button-addon2">
-                                                <button class="btn btn-success" type="button"
-                                                    id="button-addon2">Button</button>
+                                                <button class="btn btn-success" type="submit"
+                                                    id="button-addon2">Search</button>
                                             </div>
                                         </form>
                                     </div>
@@ -79,11 +80,11 @@
                                                 <div class="input__field_data mt-2">
                                                     <form wire:submit.prevent="nextTab">
                                                         <section>
-                                                            <input type="text"
+                                                        appointment_id<input type="text"
                                                                 wire:model="formData.introduction.appointment_id">
-                                                            <input type="text"
+                                                        main_teacher_id<input type="text"
                                                                 wire:model="formData.introduction.main_teacher_id">
-                                                            <input type="text"
+                                                        assistant_teacher_id <input type="text"
                                                                 wire:model="formData.introduction.assistant_teacher_id">
                                                             <div class="row">
                                                                 <div class="col-sm-12 col-md-6 col-lg-6">
@@ -164,6 +165,16 @@
                                                                                 </x-input-text>
                                                                             </div>
                                                                         </div>
+                                                                        <div class="col-12">
+                                                                            <div class="mb-3">
+                                                                                <label>Mother's NID:</label>
+                                                                                <x-input-text
+                                                                                    wireModel="formData.introduction.mother_nid"
+                                                                                    placeholder="Mother's NID"
+                                                                                    required>
+                                                                                </x-input-text>
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-sm-12 col-md-6 col-lg-6">
@@ -197,6 +208,16 @@
                                                                                 <x-input-text
                                                                                     wireModel="formData.introduction.father_occupation"
                                                                                     placeholder="Father's Name"
+                                                                                    required>
+                                                                                </x-input-text>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-12">
+                                                                            <div class="mb-3">
+                                                                                <label>Father's NID:</label>
+                                                                                <x-input-text
+                                                                                    wireModel="formData.introduction.father_nid"
+                                                                                    placeholder="Father's NID"
                                                                                     required>
                                                                                 </x-input-text>
                                                                             </div>
@@ -244,6 +265,32 @@
                                                                                 firstLabel="Select Gender" required>
                                                                             </x-input-select>
                                                                         </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                                    <div class="mb-3 form-group">
+                                                                        <label>Emergency Contact 1 :</label>
+                                                                        <x-input-text
+                                                                            wireModel="formData.introduction.emergency_contact_one"
+                                                                            readOnly></x-input-text>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                                    <div class="mb-3 form-group">
+                                                                        <label>Emergency Contact 2 :</label>
+                                                                        <x-input-text
+                                                                            wireModel="formData.introduction.emergency_contact_two"
+                                                                            readOnly></x-input-text>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-12 col-md-4 col-lg-4">
+                                                                    <div class="mb-3 form-group">
+                                                                        <label>Emergency Contact 3 :</label>
+                                                                        <x-input-text
+                                                                            wireModel="formData.introduction.emergency_contact_three"
+                                                                            readOnly></x-input-text>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -319,12 +366,12 @@
                                                 <div class="input__field_data mt-2">
                                                     <form wire:submit.prevent="nextTab">
                                                         <section>
-                                                            <input type="text"
+                                                        <!-- appointment_id<input type="text"
                                                                 wire:model="formData.introduction.appointment_id">
-                                                            <input type="text"
+                                                        main_teacher_id<input type="text"
                                                                 wire:model="formData.introduction.main_teacher_id">
-                                                            <input type="text"
-                                                                wire:model="formData.introduction.assistant_teacher_id">
+                                                        assistant_teacher_id <input type="text"
+                                                                wire:model="formData.introduction.assistant_teacher_id"> -->
                                                             <div class="mb-3 form-group">
                                                                 <label>From where you learned about us?</label>
                                                                 <x-input-select
@@ -372,10 +419,25 @@
                                                                 wireModel="formData.general_infos.govt_disability_registration"
                                                                 label="Govt. Disability registration"
                                                                 :records="$projectConstants::$yesNoEn"
-                                                                :selectedValue="$formData['general_infos']['govt_disability_registration']"
-                                                                secondaryInputLabel="{{ $formData['general_infos']['govt_disability_registration'] == 'yes' ? 'If yes, enter registration number' : 'If not, why?' }}"
-                                                                secondaryInputWireModel="{{ $formData['general_infos']['govt_disability_registration'] == 'yes' ? 'formData.general_infos.govt_dis_if_yes_reg_number' : 'formData.general_infos.govt_dis_if_not_why' }}"
+                                                                :selectedValue="isset($formData['general_infos']['govt_disability_registration']) ? $formData['general_infos']['govt_disability_registration'] : ''"
+                                                                secondaryInputName="govt_dis_if_yes_reg_number" 
+                                                                secondaryInputLabel="If yes, enter registration number" 
+                                                                secondaryInputPlaceholder="Enter Number" 
+                                                                secondaryInputValue="{{ old('formData.general_infos.govt_dis_if_yes_reg_number', $formData['general_infos']['govt_dis_if_yes_reg_number'] ?? '') }}"
                                                             />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>If not, why?</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text 
+                                                                                wireModel="formData.general_infos.govt_dis_if_not_why" 
+                                                                                placeholder="Please, write here"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.general_infos.obtaining_registration"
                                                                 label="Suggestion on obtaining registration"
@@ -424,62 +486,72 @@
                                                 <div class="input__field_data mt-2">
                                                     <form wire:submit.prevent="nextTab">
                                                         <section>
-                                                            <input type="text"
+                                                        appointment_id<input type="text"
                                                                 wire:model="formData.introduction.appointment_id">
-                                                            <input type="text"
+                                                        main_teacher_id<input type="text"
                                                                 wire:model="formData.introduction.main_teacher_id">
-                                                            <input type="text"
+                                                        assistant_teacher_id <input type="text"
                                                                 wire:model="formData.introduction.assistant_teacher_id">
-
+                                                                
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.specialities.is_autism"
                                                                 label="Is S/he has Autism?"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow" 
+                                                                data-link-codes-yes="All" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.specialities.is_down_syndrome"
                                                                 label="Is S/he has Down Syndrome"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow" 
+                                                                data-link-codes-yes="All" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.specialities.is_cerebral_palsy"
                                                                 label="Is S/he has Cerebral Palsy"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow" 
+                                                                data-link-codes-yes="All" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.specialities.is_intellectual_disability"
                                                                 label="Is S/he has Intellectual Disability"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D2.b.2" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_dyslexia"
                                                                 label="Is S/he has Dyslexia "
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D2.b.2" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_learning_disability"
                                                                 label="Is S/he has Learning disability"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D2.b.2" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_anxiety_disorder"
                                                                 label="Is S/he has Anxiety disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D3.b,D4.b,D4.c" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_adhd"
                                                                 label="Is S/he has ADHD "
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D4.b,D4.c" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_bipolar_disorder"
                                                                 label="Is S/he has Bipolar Disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D3.b,D4.a,D4.c" />
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_speech_disorder"
                                                                 label="Is S/he has Speech disorder "
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"   
+                                                                data-link-codes-yes="D2.b.3,D4.a,D4.c"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_language_disorder"
@@ -566,28 +638,31 @@
                                                 <div class="input__field_data mt-2">
                                                     <form wire:submit.prevent="nextTab">
                                                         <section>
-                                                            <input type="text"
+                                                        appointment_id<input type="text"
                                                                 wire:model="formData.introduction.appointment_id">
-                                                            <input type="text"
+                                                        main_teacher_id<input type="text"
                                                                 wire:model="formData.introduction.main_teacher_id">
-                                                            <input type="text"
+                                                        assistant_teacher_id <input type="text"
                                                                 wire:model="formData.introduction.assistant_teacher_id">
                                                            
                                                             <!-- end row -->    
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.social_communication_checklist"
                                                                 label="Is Social Communication checklist has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo"    
+                                                                data-link-codes-yes="SCC,D1.a.3,D3.b,D3.c,D4.a,D4.b"/>
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.sensory_checklist"
                                                                 label="Is Sensory Checklist has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo" 
+                                                                data-link-codes-yes="Sens,D1.a.2,D1.a.3,D1.a.4,D2.a,D3.b,D3.c,D4.a" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.occupational_assessment"
                                                                 label="Is Occupational Assessment has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo" 
+                                                                data-link-codes-yes="OT.A,D1.a,D1.a.2,D1.a.2,D1.a.4,D3.b,D3.c,D4.a,D4.b" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.speech_language_assessment"
@@ -634,42 +709,48 @@
                                                 <div class="input__field_data mt-2">
                                                     <form wire:submit.prevent="nextTab">
                                                         <section>
-                                                            <input type="text"
+                                                        appointment_id<input type="text"
                                                                 wire:model="formData.introduction.appointment_id">
-                                                            <input type="text"
+                                                        main_teacher_id<input type="text"
                                                                 wire:model="formData.introduction.main_teacher_id">
-                                                            <input type="text"
+                                                        assistant_teacher_id <input type="text"
                                                                 wire:model="formData.introduction.assistant_teacher_id">
 
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.home_infos.separate_room"
                                                                 label="Separate room?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                                data-link-codes-no="D3.c" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.home_infos.separate_bed"
                                                                 label="Separate bed?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                                data-link-codes-no="D3.c" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.home_infos.sleep_alone"
                                                                 label="Sleep alone?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                                data-link-codes-no="D3.c" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.home_infos.separate_cupboard"
                                                                 label="Separate Cupboard?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                                data-link-codes-no="D3.c" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.home_infos.separate_toilet"
                                                                 label="Separate toilet?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                                data-link-codes-no="D3.c" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.home_infos.own_equipment"
                                                                 label="Own equipment?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"  
+                                                                data-link-codes-no="D3.c"/>
                                                             <div class="row border-top py-2">
                                                                 <div class="col-xl-12 col-sm-12">
                                                                     <div class="m-0">
@@ -712,51 +793,71 @@
                                                 <div class="input__field_data mt-2">
                                                     <form wire:submit.prevent="nextTab">
                                                         <section>
-                                                            <input type="text" name="appointment_id" value="{{ $formData['introduction']['appointment_id']}}">
-                                                            <input type="text" name="main_teacher_id" value="{{ $formData['introduction']['main_teacher_id'] }}">
-                                                            <input type="text" name="assistant_teacher_id" value="{{ $formData['introduction']['assistant_teacher_id'] }}">
-
-                                                            <x-input-radio-or-check 
-        wireModel="formData.educational_infos.schooling" 
-        type="checkbox"
-        label="Schooling" 
-        :records="$projectConstants::$learnAbout"
-        :isVertical="false" 
-        multiple="true"
-        secondaryInputLabel="Please provide other school name"
-        secondaryInputWireModel="formData.educational_infos.other_school_name"
-        selectedValue="{{ $formData['educational_infos']['schooling'] }}" 
-    />
+                                                        <x-input-radio-or-check 
+                                                                wireModel="formData.educational_infos.going_to_school"
+                                                                label="Going to school?"
+                                                                :records="$projectConstants::$goingSchool"
+                                                                secondaryInputLabel="Since when DD/mm/YYYY"
+                                                                :selectedValue="isset($formData['educational_infos']['going_to_school']) ? $formData['educational_infos']['going_to_school'] : ''"
+                                                                secondaryInputWireModel="formData.educational_infos.going_school_if_yes_when"
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>If other, enter name</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text wireModel="formData.educational_infos.going_school_if_other_name" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end row -->
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Name of the school</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text  wireModel="formData.educational_infos.going_school_name_of_school" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.educational_infos.speaking_capacity" 
                                                                 label="Is S/he has Speaking Capacity?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                data-link-codes-yes="D2.b.3.15" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.educational_infos.listening_capacity" 
                                                                 label="Is S/he has Listening Capacity?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                                data-link-codes-no="D2.b.3.09" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.educational_infos.reading_capacity" 
                                                                 label="Is S/he has Reading Capacity?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"  
+                                                                data-link-codes-no="D2.b.2.04" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.educational_infos.writing_capacity" 
                                                                 label="Is S/he has Writing capacity?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"  
+                                                                data-link-codes-no="D2.b.2.07" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.educational_infos.counting_capacity" 
                                                                 label="Is S/he has Counting capacity? "
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"  
+                                                                data-link-codes-no="D2.b.2.08" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.educational_infos.money_concept" 
                                                                 label="Is S/he has Money concept?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                                data-link-codes-no="D2.b.2.09"  />
                                                             <!-- end row -->
                                                         </section>
                                                     </form>
@@ -771,147 +872,260 @@
                                                     <span>Child’s condition at his family ({{ $currentTabLiveware }})</span>
                                                 </div>
                                                 <div class="input__field_data mt-2">
-                                                    <section>
-                                                        <x-input-radio-or-check name="is_she_happy_at_home"
-                                                            label="Is S/he Happy at home? "
-                                                            :records="$projectConstants::$yesMidNo" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_lonely"
-                                                            label="Is S/he Lonely?"
-                                                            :records="$projectConstants::$yesMidNo" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_protective"
-                                                            label="Is S/he Protective?"
-                                                            :records="$projectConstants::$yesMidNo" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_well_protective"
-                                                            label="Is S/he Well protective?"
-                                                            :records="$projectConstants::$yesMidNo" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_withdrawal"
-                                                            label="Is S/he Withdrawal?"
-                                                            :records="$projectConstants::$yesMidNo" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_confident"
-                                                            label="Is S/he Confident?"
-                                                            :records="$projectConstants::$yesMidNo" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_Communicate"
-                                                            label="Is S/he Communicate?"
-                                                            :records="$projectConstants::$communicate" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check
-                                                            name="knowledge_on_aily_life_requirement" type="checkbox"
-                                                            label="Knowledge on Daily life requirement. (Please select (tick) only those items s/he has knowledge)"
-                                                            :records="$projectConstants::$dailyLife" :isVertical="false"
-                                                            multiple="true" />
-                                                        <!-- row end -->
-                                                        <x-input-radio-or-check name="is_she_follow_instructions"
-                                                            label="Is S/he Follow instructions?"
-                                                            :records="$projectConstants::$followInstruction" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check
-                                                            name="is_she_has_sitting_habit_and_how_long"
-                                                            label="Is S/he has Sitting habit and how long?"
-                                                            :records="$projectConstants::$havit"
-                                                            secondaryInputLabel="If others, specify the duration" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_has_hyperness"
-                                                            label="Is S/he has Hyperness? how long it remain?"
-                                                            :records="$projectConstants::$havittime"
-                                                            secondaryInputLabel="Cooling time? How much time it take to cool down." />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Specify the cooling process</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1"
-                                                                            name="specify_the_cooling_process" />
+                                                    <form wire:submit.prevent="nextTab">
+                                                        <section>
+                                                            <input type="text" name="appointment_id" value="{{ $formData['introduction']['appointment_id']}}">
+                                                            <input type="text" name="main_teacher_id" value="{{ $formData['introduction']['main_teacher_id'] }}">
+                                                            <input type="text" name="assistant_teacher_id" value="{{ $formData['introduction']['assistant_teacher_id'] }}">
+
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_conditions.happy_at_home"
+                                                                label="Is S/he Happy at home? "
+                                                                :records="$projectConstants::$yesMidNo" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.lonely"
+                                                                label="Is S/he Lonely?"
+                                                                :records="$projectConstants::$yesMidNo" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.protective"
+                                                                label="Is S/he Protective?"
+                                                                :records="$projectConstants::$yesMidNo" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.well_protective"
+                                                                label="Is S/he Well protective?"
+                                                                :records="$projectConstants::$yesMidNo" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.withdrawal"
+                                                                label="Is S/he Withdrawal?"
+                                                                :records="$projectConstants::$yesMidNo" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.confident"
+                                                                label="Is S/he Confident?"
+                                                                :records="$projectConstants::$yesMidNo" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.communicate"
+                                                                label="Is S/he Communicate?"
+                                                                :records="$projectConstants::$communicate" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_conditions.knowledge_daily_life_requirement"
+                                                                type="checkbox"
+                                                                label="Knowledge on Daily life requirement. (Please select (tick) only those items s/he has knowledge)"
+                                                                :records="$projectConstants::$dailyLife"
+                                                                :isVertical="false"
+                                                                multiple="true"
+                                                                name="knowledge_daily_life_requirement"
+                                                                selectedValue="{{ $formData['child_conditions']['knowledge_daily_life_requirement'] }}"
+                                                                multipleCheckBoxName="checkboxChildCondition"
+                                                            />
+                                                            <!-- row end -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.follow_instructions"
+                                                                label="Is S/he Follow instructions?"
+                                                                :records="$projectConstants::$yesNoEn" />
+                                                               <!-- end row --> 
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_conditions.how_can_follow_instructions"
+                                                                label="How Can Follow instructions?"
+                                                                :records="$projectConstants::$followInstruction" />
+                                                                 <!-- row end -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.sitting_habit"
+                                                                label="Is S/he has Sitting habit?"
+                                                                :records="$projectConstants::$yesNoEn" />
+                                                            <!-- end row -->
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>If Yes, How long?</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-radio-or-check
+                                                                                wireModel="formData.child_conditions.sitting_habit_if_yes_how_long"
+                                                                                :records="$projectConstants::$havit"
+                                                                                secondaryInputLabel="If others, specify the duration" 
+                                                                                :selectedValue="isset($formData['child_conditions']['sitting_habit_if_yes_how_long']) ? $formData['child_conditions']['sitting_habit_if_yes_how_long'] : ''"
+                                                                                secondaryInputWireModel="formData.child_conditions.sh_if_others_specify_duration"
+                                                                            />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_do_tantrum"
-                                                            label="Is S/he do Tantrum ? how long it remain?"
-                                                            :records="$projectConstants::$havittime"
-                                                            secondaryInputLabel="Cooling time ( How long it takes to cool down?)" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Specify the cooling process</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1"
-                                                                            name="specify_the_cooling_process" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_conditions.hyperness"
+                                                                label="Is S/he has Hyperness?"
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>If Yes, how long it remain?</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-radio-or-check
+                                                                                wireModel="formData.child_conditions.hyperness_if_yes_how_long"
+                                                                                :records="$projectConstants::$havittime"
+                                                                                secondaryInputLabel="If others, Cooling time? (How much time it take to cool down)" 
+                                                                                :selectedValue="isset($formData['child_conditions']['hyperness_if_yes_how_long']) ? $formData['child_conditions']['hyperness_if_yes_how_long'] : ''"
+                                                                                secondaryInputWireModel="formData.child_conditions.hyperness_if_other_cooling_time"
+                                                                            />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_do_self_injury"
-                                                            label="Is S/he Do Self injury?"
-                                                            :records="$projectConstants::$havittime"
-                                                            secondaryInputLabel="Cooling time ( How long it takes to cool down?)" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Specify the cooling process</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1"
-                                                                            name="specify_the_cooling_process" />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Specify the cooling process</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-textarea rows="1" wireModel="formData.child_conditions.hyperness_specify_cooling_process" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="follow_any_specific_life_style"
-                                                            label="Follow any specific life style?"
-                                                            :records="$projectConstants::$yesNoEn" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="what_is_the_way_of_communication"
-                                                            type="checkbox" label="What is the way of Communication?"
-                                                            :records="$projectConstants::$communicate"
-                                                            :isVertical="false" multiple="true" />
-                                                        <!-- row end -->
-                                                        <x-input-radio-or-check
-                                                            name="how_he_she_can_follow_instructions"
-                                                            label="How he/she can Follow instructions?"
-                                                            :records="$projectConstants::$yesNoEn" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check
-                                                            name="is_she_do_temper_how_long_it_remain"
-                                                            label="Is s/he do Temper? how long it remain?"
-                                                            :records="$projectConstants::$yesNoEn"
-                                                            secondaryInputLabel="Cooling time ( How long it takes to cool down?)" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Specify the cooling process</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1"
-                                                                            name="specify_the_cooling_process" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_conditions.tantrum"
+                                                                label="Is S/he do Tantrum ?"
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>If Yes, how long it remain?</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-radio-or-check 
+                                                                                wireModel="formData.child_conditions.tantrum_if_yes_how_long"
+                                                                                :records="$projectConstants::$havittime"
+                                                                                secondaryInputLabel="Cooling time ( How long it takes to cool down?)" 
+                                                                                :selectedValue="isset($formData['child_conditions']['tantrum_if_yes_how_long']) ? $formData['child_conditions']['tantrum_if_yes_how_long'] : ''"
+                                                                                secondaryInputWireModel="formData.child_conditions.tantrum_if_other_cooling_time"
+                                                                            />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="is_she_hit_others"
-                                                            label="Is S/he Hit Others?"
-                                                            :records="$projectConstants::$yesNoEn"
-                                                            secondaryInputLabel="Cooling time ( How long it takes to cool down?)" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Specify the cooling process</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1"
-                                                                            name="specify_the_cooling_process" />
+                                                            
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Specify the cooling process</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-textarea rows="1" wireModel="formData.child_conditions.tantrum_specify_cooling_process" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                    </section>
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_conditions.self_injury"
+                                                                label="Is S/he Do Self injury?"
+                                                                :records="$projectConstants::$yesNoEn" 
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>If Yes, how long it remain?</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-radio-or-check 
+                                                                                wireModel="formData.child_conditions.self_injury_if_yes_how_long"
+                                                                                :records="$projectConstants::$havittime"
+                                                                                secondaryInputLabel="Cooling time ( How long it takes to cool down?)"
+                                                                                :selectedValue="isset($formData['child_conditions']['self_injury_if_yes_how_long']) ? $formData['child_conditions']['self_injury_if_yes_how_long'] : ''"
+                                                                                secondaryInputWireModel="formData.child_conditions.self_injury_if_other_cooling_time"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Specify the cooling process</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-textarea rows="1" wireModel="formData.child_conditions.self_injury_specify_cooling_process" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.specific_life_style"
+                                                                label="Follow any specific life style?"
+                                                                :records="$projectConstants::$yesNoEn" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_conditions.communication_way"
+                                                                type="checkbox" 
+                                                                label="What is the way of Communication?"
+                                                                :records="$projectConstants::$communicate"
+                                                                :isVertical="false" 
+                                                                multiple="true"
+                                                                name="communication_way"
+                                                                selectedValue="{{ $formData['child_conditions']['communication_way'] }}"
+                                                                multipleCheckBoxName="checkboxCommunicationWay"
+                                                            />
+                                                            <!-- row end -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_conditions.temper"
+                                                                label="Is s/he do Temper?"
+                                                                :records="$projectConstants::$yesNoEn" />
+                                                            <!-- end row -->
+
+
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>If Yes, how long it remain?</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-radio-or-check
+                                                                                wireModel="formData.child_conditions.temper_if_yes_how_long"
+                                                                                :records="$projectConstants::$yesNoEn"
+                                                                                secondaryInputLabel="Cooling time ( How long it takes to cool down?)"
+                                                                                :selectedValue="isset($formData['child_conditions']['temper_if_yes_how_long']) ? $formData['child_conditions']['temper_if_yes_how_long'] : ''"
+                                                                                secondaryInputWireModel="formData.child_conditions.temper_if_other_cooling_time"
+                                                                            />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Specify the cooling process</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-textarea rows="1" wireModel="formData.child_conditions.temper_cooling_process" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_conditions.hit_other"
+                                                                label="Is S/he Hit Others?"
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                secondaryInputLabel="Cooling time ( How long it takes to cool down?)" 
+                                                                :selectedValue="isset($formData['child_conditions']['hit_other']) ? $formData['child_conditions']['hit_other'] : ''"
+                                                                secondaryInputWireModel="formData.child_conditions.hit_other_if_other_cooling_time"
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Specify the cooling process</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-textarea rows="1" wireModel="formData.child_conditions.hit_other_cooling_process" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- end row -->
+                                                        </section>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -923,84 +1137,108 @@
                                                     <span>Number of children in the family ({{ $currentTabLiveware }})</span>
                                                 </div>
                                                 <div class="input__field_data mt-2">
-                                                    <section>
-                                                        <x-input-radio-or-check
-                                                            name="is_your_other_child_support_towards_sibling"
-                                                            label="1. Is your other child support towards sibling?"
-                                                            :records="$projectConstants::$yesNoEn"
-                                                            secondaryInputLabel="Child name and profession" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Age</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1" name="age" />
+                                                    <form wire:submit.prevent="nextTab">
+                                                        <section>
+                                                            <input type="text" name="appointment_id" value="{{ $formData['introduction']['appointment_id']}}">
+                                                            <input type="text" name="main_teacher_id" value="{{ $formData['introduction']['main_teacher_id'] }}">
+                                                            <input type="text" name="assistant_teacher_id" value="{{ $formData['introduction']['assistant_teacher_id'] }}">
+
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_numbers.support_towards_sibling_one"
+                                                                label="1. Is your other child support towards sibling?"
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                secondaryInputLabel="Child name and profession"
+                                                                :selectedValue="isset($formData['child_numbers']['support_towards_sibling_one']) ? $formData['child_numbers']['support_towards_sibling_one'] : ''"
+                                                                secondaryInputWireModel="formData.child_numbers.stsone_if_yes_name_and_profession"
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Age</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text wireModel="formData.child_numbers.stsone_if_yes_age" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check
-                                                            name="is_your_other_child_support_towards_sibling"
-                                                            label="2. Is your other child support towards sibling?"
-                                                            :records="$projectConstants::$yesNoEn"
-                                                            secondaryInputLabel="Name and profession" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Age</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1" name="age" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_numbers.support_towards_sibling_two"
+                                                                label="2. Is your other child support towards sibling?"
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                secondaryInputLabel="Child name and profession"
+                                                                :selectedValue="isset($formData['child_numbers']['support_towards_sibling_two']) ? $formData['child_numbers']['support_towards_sibling_two'] : ''"
+                                                                secondaryInputWireModel="formData.child_numbers.ststwo_if_yes_name_and_profession"
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Age</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text wireModel="formData.child_numbers.ststwo_if_yes_age" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check
-                                                            name="is_your_other_child_support_towards_sibling"
-                                                            label="3. Is your other child support towards sibling?"
-                                                            :records="$projectConstants::$yesNoEn"
-                                                            secondaryInputLabel="Name and profession" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Age</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1" name="age" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_numbers.support_towards_sibling_three"
+                                                                label="3. Is your other child support towards sibling?"
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                secondaryInputLabel="Child name and profession"
+                                                                :selectedValue="isset($formData['child_numbers']['support_towards_sibling_three']) ? $formData['child_numbers']['support_towards_sibling_three'] : ''"
+                                                                secondaryInputWireModel="formData.child_numbers.ststhree_if_yes_name_and_profession" 
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Age</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text wireModel="formData.child_numbers.ststhree_if_yes_age" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="marriage_within_family_relative"
-                                                            label="Marriage within family/ relative?"
-                                                            :records="$projectConstants::$yesNoEn"
-                                                            secondaryInputLabel="If yes, please share relation" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check
-                                                            name="is_any_other_relative_have_disabilities"
-                                                            label="Is any other relative have disabilities?"
-                                                            :records="$projectConstants::$yesNoEn"
-                                                            secondaryInputLabel="If yes, disability type" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="family_economical_condition"
-                                                            label="Family Economical condition"
-                                                            :records="$projectConstants::$famCon"
-                                                            secondaryInputLabel="Net earning of a year" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Any other Family information that may
-                                                                        relevant to share</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-text rows="1"
-                                                                            name="any_other_family_information_that_may_relevant_to_share" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_numbers.marriage_within_family_or_relative"
+                                                                label="Marriage within family/ relative?"
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                secondaryInputLabel="If yes, please share relation"
+                                                                :selectedValue="isset($formData['child_numbers']['marriage_within_family_or_relative']) ? $formData['child_numbers']['marriage_within_family_or_relative'] : ''"
+                                                                secondaryInputWireModel="formData.child_numbers.mw_family_or_relative_if_yes_share_relation"
+                                                            />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check
+                                                                wireModel="formData.child_numbers.other_relative_have_disabilities"
+                                                                label="Is any other relative have disabilities?"
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                secondaryInputLabel="If yes, disability type"
+                                                                :selectedValue="isset($formData['child_numbers']['other_relative_have_disabilities']) ? $formData['child_numbers']['other_relative_have_disabilities'] : ''"
+                                                                secondaryInputWireModel="formData.child_numbers.other_disabilities_if_yes_disability_type"
+                                                            />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.child_numbers.family_economical_condition"
+                                                                label="Family Economical condition"
+                                                                :records="$projectConstants::$famCon"
+                                                                secondaryInputLabel="Net earning of a year"
+                                                                :selectedValue="isset($formData['child_numbers']['family_economical_condition']) ? $formData['child_numbers']['family_economical_condition'] : ''"
+                                                                secondaryInputWireModel="formData.child_numbers.net_earning_of_year"
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Any other Family information that may relevant to share</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text wireModel="formData.child_numbers.other_relevant_family_info" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                    </section>
+                                                            <!-- end row -->
+                                                        </section>
+                                                    </from>
                                                 </div>
                                             </div>
                                         </div>
@@ -1012,50 +1250,80 @@
                                                     <span>Schooling information ({{ $currentTabLiveware }})</span>
                                                 </div>
                                                 <div class="input__field_data mt-2">
-                                                    <section>
-                                                        <x-input-radio-or-check name="going_to_school"
-                                                            label="Going to school?"
-                                                            :records="$projectConstants::$goingSchool"
-                                                            secondaryInputLabel="Since when DD/mm/YYYY" />
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>If other, enter name</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-textarea rows="1"
-                                                                            name="if_other_enter_name_des" />
+                                                    <form wire:submit.prevent="nextTab">
+                                                        <section>
+                                                            <input type="text" name="appointment_id" value="{{ $formData['introduction']['appointment_id']}}">
+                                                            <input type="text" name="main_teacher_id" value="{{ $formData['introduction']['main_teacher_id'] }}">
+                                                            <input type="text" name="assistant_teacher_id" value="{{ $formData['introduction']['assistant_teacher_id'] }}">
+
+                                                            <x-input-radio-or-check 
+                                                                wireModel="formData.schoolings.going_to_school"
+                                                                label="Going to school?"
+                                                                :records="$projectConstants::$goingSchool"
+                                                                secondaryInputLabel="Since when DD/mm/YYYY"
+                                                                :selectedValue="isset($formData['schoolings']['going_to_school']) ? $formData['schoolings']['going_to_school'] : ''"
+                                                                secondaryInputWireModel="formData.schoolings.going_school_if_yes_when"
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>If other, enter name</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text wireModel="formData.schoolings.going_school_if_other_name" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <div class="row border-top py-2">
-                                                            <div class="col-xl-12 col-sm-12">
-                                                                <div class="m-0">
-                                                                    <h6>Name of the school</h6>
-                                                                    <div class="mb-2">
-                                                                        <x-input-text name="name_of_the_school" />
+                                                            <!-- end row -->
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Name of the school</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text  wireModel="formData.schoolings.going_school_if_other_school_name" />
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="studied_till_which_class"
-                                                            label="Studied till which class?"
-                                                            :records="$projectConstants::$class" />
-                                                        <!-- end row -->
-                                                        <x-input-radio-or-check name="why_not_attending_school"
-                                                            type="checkbox" label="Why not attending school?"
-                                                            :records="$projectConstants::$attendSchool"
-                                                            :isVertical="false" multiple="true"
-                                                            secondaryInputLabel="Please provide other information" />
-                                                        <!-- row end -->
-                                                        <x-input-radio-or-check name="any_exam_degree_achieved"
-                                                            label="Any exam/ degree achieved?"
-                                                            :records="$projectConstants::$yesNoEn"
-                                                            secondaryInputLabel="Please provide degree name" />
-                                                        <!-- row end -->
-                                                    </section>
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check  
+                                                                wireModel="formData.schoolings.studied_till_which_class"
+                                                                label="Studied till which class?"
+                                                                :records="$projectConstants::$class" />
+                                                            <!-- end row -->
+                                                            <x-input-radio-or-check  
+                                                                wireModel="formData.schoolings.why_not_attending_school"
+                                                                type="checkbox" 
+                                                                label="Why not attending school?"
+                                                                :records="$projectConstants::$attendSchool"
+                                                                :isVertical="false" 
+                                                                multiple="true"
+                                                                name="notAttendingSchool"
+                                                                selectedValue="{{ $formData['schoolings']['why_not_attending_school'] }}"
+                                                                multipleCheckBoxName="checkboxAttendingSchool"
+                                                            />
+                                                            <div class="row border-top py-2">
+                                                                <div class="col-xl-12 col-sm-12">
+                                                                    <div class="m-0">
+                                                                        <h6>Please provide other information</h6>
+                                                                        <div class="mb-2">
+                                                                            <x-input-text  wireModel="formData.schoolings.provide_other_info" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <!-- row end -->
+                                                            <x-input-radio-or-check  
+                                                                wireModel="formData.schoolings.any_exam_or_degree_achieved"
+                                                                label="Any exam/ degree achieved?"
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                secondaryInputLabel="Please provide degree name" 
+                                                                :selectedValue="isset($formData['schoolings']['any_exam_or_degree_achieved']) ? $formData['schoolings']['any_exam_or_degree_achieved'] : ''"
+                                                                secondaryInputWireModel="formData.schoolings.any_degree_achieved_if_yes_name"
+                                                            />
+                                                            <!-- row end -->
+                                                        </section>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -1064,11 +1332,10 @@
                                 <!-- Footer -->
                                 <div class="footer-btns pt-2 d-flex justify-content-between align-items-center">
                                     <button type="button" class="btn btn-primary" wire:click="prevTab">Previous</button>
-                                    <button type="submit"
-                                        class="btn {{ $this->isLastTab() ? 'btn-success' : 'btn-primary' }}"
-                                        @if($this->isLastTab())
+                                    <button type="submit" class="btn {{ $currentTabLiveware === 8 ? 'btn-success' : 'btn-primary' }}"
+                                        @if($currentTabLiveware === 8)
                                         wire:click.prevent="submit" @else wire:click.prevent="nextTab" @endif>
-                                        {{ $this->isLastTab() ? 'Submit' : 'Next' }}
+                                        {{ $currentTabLiveware === 8 ? 'Submit' : 'Next' }}
                                     </button>
                                 </div>
                                 <!-- </form> -->

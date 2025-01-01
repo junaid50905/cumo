@@ -9,7 +9,8 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DonorController;
 use App\Http\Controllers\SetupController;
-use App\Http\Controllers\SetupQuestionController;
+use App\Http\Controllers\Setup\SetupQuestionController;
+use App\Http\Controllers\Setup\SetupTableOfContentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ResultController;
@@ -61,6 +62,8 @@ use App\Http\Controllers\BankReconcilationNewController;
 use App\Http\Controllers\VocationalCatagorySubController;
 use App\Http\Controllers\VocationalSubCategoryController;
 use App\Http\Controllers\VocationalMarkingCategoryController;
+
+use App\Http\Controllers\Events\EventCalendarController;
 
 Route::group(['prefix' => 'setup', 'middleware' => ['auth']], function () {
     Route::resources([
@@ -120,7 +123,30 @@ Route::group(['prefix' => 'setup', 'middleware' => ['auth']], function () {
 
         //Basic Setup
         'setup-question' => SetupQuestionController::class,
+        'setup-table-of-content' => SetupTableOfContentController::class,
     ]);
+
+    //table of content start
+    Route::match(['get', 'post'], 'edit-item-setup-table-of-content/{id}', [SetupTableOfContentController::class, 'edit'])->name('edit-item-setup-table-of-content');
+    Route::match(['get', 'post'], 'disable-item-in-table-of-content/{id}', [SetupTableOfContentController::class, 'disabledItem'])->name('disable-item-in-table-of-content');
+    //table of content end
+
+    // Event Calendar stat
+    Route::get('event-schedule/list/{event_type}', [EventCalendarController::class, 'scheduleList'])->name('event_schedule_list');
+    Route::get('event-schedule/pending-list/{event_type}', [EventCalendarController::class, 'schedulePendingList'])->name('event_schedule_pending_list');
+    Route::get('event-schedule/edit-schedule/{event_type}/{id}', [EventCalendarController::class, 'editSchedule'])->name('edit_event_schedule');
+    Route::get('event-schedule/setup-schedule/{appointment_id}/{event_type}', [EventCalendarController::class, 'setupSchedule'])->name('setup_event_schedule');
+    Route::match(['get', 'post'], 'event-schedule/search-schedule', [EventCalendarController::class, 'searchEventSchedule'])->name('search_event_schedule');
+    Route::get('event-schedule/create/{event_type}', [EventCalendarController::class, 'createSchedule'])->name('event_schedule_create');
+    Route::post('event-schedule/store', [EventCalendarController::class, 'storeEventSchedule'])->name('event_schedule_store');
+
+    //Assessment Start
+    Route::get('assessment-schedule/list/{event_type}', [EventCalendarController::class, 'scheduleList'])->name('assessment-schedule.list');
+    Route::get('setup-assessment-schedule/{id}/edit', [EventCalendarController::class, 'edit'])->name('setup-assessment-schedule.edit');
+    Route::get('setup-assessment-schedule/{id}', [EventCalendarController::class, 'show'])->name('setup-assessment-schedule.show');
+    Route::delete('setup-assessment-schedule/delete/{id}', [EventCalendarController::class, 'destroy'])->name('setup-assessment-schedule.destroy');
+    //Assessment Start
+    // Event Calendar end
 
     // Setup ->> Store Management Route
     // Route::get('warehouse-setup.create', [SetupController::class, 'warehouseSetup'])->name('warehouse.setup.create');

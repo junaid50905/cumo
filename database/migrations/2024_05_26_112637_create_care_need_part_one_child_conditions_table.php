@@ -50,6 +50,7 @@ return new class extends Migration
             $table->string('hit_other')->nullable();
             $table->string('hit_other_if_other_cooling_time')->nullable();
             $table->string('hit_other_cooling_process')->nullable();
+            $table->string('child_conditions_report')->nullable();
 
             $table->unsignedBigInteger('appointment_id')->nullable();
             $table->unsignedBigInteger('main_teacher_id')->nullable();

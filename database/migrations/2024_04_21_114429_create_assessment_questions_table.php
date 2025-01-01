@@ -17,6 +17,7 @@ return new class extends Migration
         Schema::create('assessment_questions', function (Blueprint $table) {
             $table->id();
             $table->text('name');
+            $table->tinyInteger('question_no');
             $table->tinyInteger('status')->default(1)->comment('active=1, inactive=0');
             $table->tinyInteger('is_reverse')->default(0)->comment('true=1, false=0');
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();

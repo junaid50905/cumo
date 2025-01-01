@@ -459,8 +459,8 @@ public static array $department = [
     const BOTHINS  = 'Follow both way instructions';
 
     public static array $followInstruction = [
-        self::YES => 'Yes',
-        self::NO  => 'No',
+        // self::YES => 'Yes',
+        // self::NO  => 'No',
         self::REGULAR  => 'Regular',
         self::SOMETIMES  => 'Sometimes',
         self::ONEINS  => 'Follow One way instructions',
@@ -474,8 +474,8 @@ public static array $department = [
     const TTIME  = 'Till targeted time';
 
     public static array $havit = [
-        self::YES => 'Yes',
-        self::NO  => 'No',
+        // self::YES => 'Yes',
+        // self::NO  => 'No',
         self::FIVEMIN  => '5 mins',
         self::FIFTINMIN  => '15 mins',
         self::MIN  => '30 mins',
@@ -485,8 +485,8 @@ public static array $department = [
 
     // Till targeted time
     public static array $havittime = [
-        self::YES => 'Yes',
-        self::NO  => 'No',
+        // self::YES => 'Yes',
+        // self::NO  => 'No',
         self::FIVEMIN  => '5 mins',
         self::MIN  => '30 mins',
         self::OTHERS  => 'Others',

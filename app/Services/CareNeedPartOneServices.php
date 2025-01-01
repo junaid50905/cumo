@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use App\Models\CareNeedPartOne;
-use App\Repositories\CareNeedPartOneRepository;
+use App\Repositories\CareNeeds\CareNeedPartOneRepository;
 use App\Utility\CareNeedsPartOneConstants;
 
 class CareNeedPartOneServices

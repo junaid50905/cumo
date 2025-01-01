@@ -183,6 +183,8 @@ input#selectedEndTime {
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="search_id"
                                     placeholder="Search by ID (000001)" required>
+                                <input type="hidden" class="form-control" name="event_type"
+                                    value="1" required>
                                 <div class="input-group-append">
                                     <button class="btn btn-success" type="submit">Search</button>
                                 </div>
@@ -191,10 +193,10 @@ input#selectedEndTime {
                     </div>
                 </div>
                 <div class="card__data__box">
-                    <form action="{{ route('appointment.update', ['appointment' => $studentData->id] ) }}"
-                        method="POST">
+                    <form action="{{ route('appointment.update', ['appointment' => $studentData->id] ) }}" method="POST">
                         @csrf
                         @method('PUT')
+                        <input type="hidden" value="{{ $studentData->id }}" name="appointment_id">
                         <div class="field__data mt-2">
                             <div class="field__label">
                                 <span>Appointment Data</span>
@@ -360,12 +362,55 @@ input#selectedEndTime {
                                     </div>
                                     <div class="col-sm-12 col-md-6 col-lg-6 pb-3">
                                         <div class="row">
+                                            <label for="nid_birth" class="col-md-4 col-form-label">Student NID or Birth No: </label>
+                                            <div class="col-md-8" id="nid_birth">
+                                                <x-input-text name="nid_birth" type="number" placeholder="Enter NID or Birth Number"
+                                                    value="{{ $studentData->nid_birth }}">
+                                                </x-input-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 pb-3">
+                                        <div class="row">
                                             <label for="phone_number" class="col-md-4 col-form-label">Parent's
                                                 Contact phone<span class="text-danger">*</span> :</label>
                                             <div class="col-md-8">
                                                 <x-input-text type="number" name="phone_number"
                                                     placeholder="Enter Parent's Contact Number" required
                                                     value="{{ $studentData->phone_number }}">
+                                                </x-input-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 pb-3">
+                                        <div class="row">
+                                            <label for="emergency_contact_one" class="col-md-4 col-form-label">Emergency Contact 1 :</label>
+                                            <div class="col-md-8">
+                                                <x-input-text type="number" name="emergency_contact_one"
+                                                    placeholder="Emergency Contact One Number"
+                                                    value="{{ $studentData->emergency_contact_one }}">
+                                                </x-input-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 pb-3">
+                                        <div class="row">
+                                            <label for="emergency_contact_two" class="col-md-4 col-form-label">Emergency Contact 2 :</label>
+                                            <div class="col-md-8">
+                                                <x-input-text type="number" name="emergency_contact_two"
+                                                    placeholder="Emergency Contact Two Number"
+                                                    value="{{ $studentData->emergency_contact_two }}">
+                                                </x-input-text>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 pb-3">
+                                        <div class="row">
+                                            <label for="emergency_contact_three" class="col-md-4 col-form-label">Emergency Contact 3 :</label>
+                                            <div class="col-md-8">
+                                                <x-input-text type="number" name="emergency_contact_three"
+                                                    placeholder="Emergency Contact Three Number"
+                                                    value="{{ $studentData->emergency_contact_three }}">
                                                 </x-input-text>
                                             </div>
                                         </div>
@@ -383,6 +428,20 @@ input#selectedEndTime {
                                         </div>
                                     </div>
                                 </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-12 pl-5">
+                                        <x-input-radio-or-check 
+                                            name="suborno_nagorik_card" 
+                                            label="Have Suborno Nagorik Card?"
+                                            :records="$projectConstants::$yesNoEn"
+                                            selectedValue="{{ old('suborno_nagorik_card', $studentData->suborno_nagorik_card) }}"
+                                            secondaryInputName="suborno_nagorik_card_number" 
+                                            secondaryInputLabel="If Yes, Enter Card Number" 
+                                            secondaryInputPlaceholder="Card Number" 
+                                            secondaryInputValue="{{ old('suborno_nagorik_card_number', $studentData->suborno_nagorik_card_number ?? '') }}"/>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-12 d-flex">
                                         <button type="submit" class="btn btn-success w-100">Update</button>
@@ -393,240 +452,224 @@ input#selectedEndTime {
                     </form>
                     <div class="field__data  mt-5">
                         <div class="field__label">
-                            <span>Interviewer Data</span>
+                            <span>Interviewer Schedule List</span>
+                        </div>
+                        <div class="input__field_data">
+                            <div class="row">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Interview Schedule of <strong>{{ $studentData->name }}</strong>
+                                    </div>
+                                    <div class="card-body p-0">
+                                        @if($specificUserEvents->isNotEmpty())
+                                        <ol class="list-group list-group-numbered">
+                                            @foreach($specificUserEvents as $event)
+                                            <li
+                                                class="list-group-item d-flex justify-content-between align-items-start">
+                                                <div class="ms-2 me-auto">
+                                                    <div class="fw-bold">{{ $event->event_title ?? 'N/A'}} <span
+                                                            class="text-primary">({{ $event->event_medium_type_updated ?? 'N/A'}})</span>
+                                                    </div>
+                                                    <span><strong>Main teacher:</strong>
+                                                        {{ $event->main_teacher_name ?? 'N/A'}}</span>
+                                                    <span><strong>Asst. Teacher:</strong>
+                                                        {{ $event->assistant_teacher_name ?? 'N/A'}}</span>
+                                                    <span><strong>Date:</strong>
+                                                        {{ $event->event_date ?? 'N/A'}}</span>
+                                                    <span><strong>Time:</strong>
+                                                        {{ $event->event_start_time ?? 'N/A'}} to
+                                                        {{ $event->event_end_time ?? 'N/A'}}</span>
+                                                </div>
+                                                <span
+                                                    class="badge interview__status__{{ strtolower($event->event_status_updated) }} rounded-pill p-2">{{ $event->event_status_updated ?? 'N/A'}}</span>
+                                            </li>
+                                            @endforeach
+                                        </ol>
+                                        @else
+                                        <div
+                                            class="list-group-item d-flex justify-content-center align-items-center mb-2">
+                                            <div class="ms-2 me-auto">
+                                                <div class="fw-bold">Schedule not setup.</div>
+                                            </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div id="calendar__div">
+                                        <div id="event__calendar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="field__data  mt-5">
+                        <div class="field__label">
+                            <span>Setup Interview Data</span>
                         </div>
                         <div class="input__field_data">
                             <!-- start calendar -->
-                            <form action="{{route('interviewer-time-setup.interviewer')}}" method="POST">
+                            <form action="{{route('event_schedule_store')}}" method="POST">
                                 @csrf
 
-                                <input type="hidden" value="{{ $studentData->id }}" name="appointment_id"
-                                    id="appointment_id">
+                                <input type="hidden" value="{{ $studentData->id }}" name="appointment_id" id="appointment_id">
+                                <input type="hidden" value="{{ $studentData->payment_status }}" name="payment_status" >
                                 <input type="hidden" value="1" name="event_type" id="event_type">
                                 <div class="row">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            Interview Schedule of <strong>{{ $studentData->name }}</strong>
-                                        </div>
-                                        <div class="card-body p-0">
-                                            @if($specificUserEvents->isNotEmpty())
-                                            <ol class="list-group list-group-numbered">
-                                                @foreach($specificUserEvents as $event)
-                                                <li
-                                                    class="list-group-item d-flex justify-content-between align-items-start">
-                                                    <div class="ms-2 me-auto">
-                                                        <div class="fw-bold">{{ $event->event_title ?? 'N/A'}} <span
-                                                                class="text-primary">({{ $event->event_medium_type_updated ?? 'N/A'}})</span>
-                                                        </div>
-                                                        <span><strong>Main teacher:</strong>
-                                                            {{ $event->main_teacher_name ?? 'N/A'}}</span>
-                                                        <span><strong>Asst. Teacher:</strong>
-                                                            {{ $event->assistant_teacher_name ?? 'N/A'}}</span>
-                                                        <span><strong>Date:</strong>
-                                                            {{ $event->event_date ?? 'N/A'}}</span>
-                                                        <span><strong>Time:</strong>
-                                                            {{ $event->event_start_time ?? 'N/A'}} to
-                                                            {{ $event->event_end_time ?? 'N/A'}}</span>
-                                                    </div>
-                                                    <span
-                                                        class="badge interview__status__{{ strtolower($event->event_status_updated) }} rounded-pill p-2">{{ $event->event_status_updated ?? 'N/A'}}</span>
-                                                </li>
-                                                @endforeach
-                                            </ol>
-                                            @else
-                                            <div
-                                                class="list-group-item d-flex justify-content-center align-items-center mb-2">
-                                                <div class="ms-2 me-auto">
-                                                    <div class="fw-bold">Schedule not setup.</div>
-                                                </div>
-                                                @endif
+                                    <div class="col-md-8">
+                                        <div id="eventDetails__Calendar">
+                                            <h5>Assign Teachers</h5>
+
+                                            <!-- Main Teacher Department Selection -->
+                                            <div class="form-group">
+                                                <label for="main_teacher_department">Main Teacher Department:</label>
+                                                <x-input-select name="main_teacher_department"
+                                                    :records="$departments"
+                                                    firstLabel="Select Department"
+                                                    :required="true"
+                                                    onChange="mainTeacherDepartment()">
+                                                </x-input-select>
                                             </div>
-                                        </div>
-                                        <div id="calendar__div">
-                                            <div id="event__calendar"></div>
-                                        </div>
-                                    </div>
-                                    <div class="row mt-5">
-                                        <div class="col-md-8">
-                                            <div id="eventDetails__Calendar">
-                                                <h5>Setup Interview Details</h5>
-                                                <div class="form-group">
-                                                    <label for="event_medium_type">Main Teacher Department:</label>
-                                                    <x-input-select name="main_teacher_department"
-                                                        :records="$departments" firstLabel="Select Department"
-                                                        :required='true'>
-                                                    </x-input-select>
+
+                                            <!-- Main Teacher Name Selection -->
+                                            <div class="form-group">
+                                                <label for="main_teacher_id">Main Teacher Name:</label>
+                                                <div id="dependencyMainTeacher">
+                                                    <!-- This content will be dynamically updated by JavaScript -->
+                                                    <x-input-select-custom 
+                                                        name="main_teacher_id" 
+                                                        :records="$usersByDepartment[$selectedDepartmentId] ?? []" 
+                                                        firstLabel="Select Main Teacher" 
+                                                        :required="true" 
+                                                        onChange="addEventTitle()"/>
                                                 </div>
-                                                <div class="form-group">
-                                                    <label for="event_medium_type">Main Teacher Name:</label>
-                                                    <x-input-select-custom name="main_teacher_id" :records="$all_user"
-                                                        firstLabel="Select Main Teacher" :required='true'
-                                                        onChange="addEventTitle()">
-                                                    </x-input-select-custom>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="event_medium_type">Assistant Teacher Department:</label>
-                                                    <x-input-select name="assistant_teacher_department"
-                                                        :records="$departments" firstLabel="Select Department"
-                                                        :required='true'>
-                                                    </x-input-select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="event_medium_type">Assistant Teacher Name:</label>
-                                                    <x-input-select-custom name="assistant_teacher_id"
-                                                        :records="$all_user" firstLabel="Select Assistant Teacher"
-                                                        :required='true'>
+                                            </div>
+
+                                            <!-- Assistant Teacher Department Selection -->
+                                            <div class="form-group">
+                                                <label for="assistant_teacher_department">Assistant Teacher Department:</label>
+                                                <x-input-select name="assistant_teacher_department"
+                                                    :records="$departments"
+                                                    firstLabel="Select Department"
+                                                    :required="true"
+                                                    onChange="assistantTeacherDepartment()">
+                                                </x-input-select>
+                                            </div>
+
+                                            <!-- Assistant Teacher Name Selection -->
+                                            <div class="form-group">
+                                                <label for="assistant_teacher_id">Assistant Teacher Name:</label>
+                                                <div id="dependencyAssistantTeacher">
+                                                    <!-- This content will be dynamically updated by JavaScript -->
+                                                    <x-input-select-custom 
+                                                        name="assistant_teacher_id"
+                                                        :records="$usersByDepartment[$selectedDepartmentId] ?? []" 
+                                                        firstLabel="Select Assistant Teacher" 
+                                                        :required="true">
                                                     </x-input-select-custom>
                                                 </div>
                                             </div>
-                                            <!-- <div class="row">
-                                            <div class="col-sm-12 col-md-6 col-lg-6 pb-3 ">
-                                                <div class="row">
-                                                    <label for="example-search-input" class="col-md-4 col-form-label">Main
-                                                        Teacher Dept:</label>
-                                                    <div class="col-md-8">
-                                                        <x-input-select name="main_teacher_department" :records="$departments"
-                                                            firstLabel="Select Department" :required='true'>
-                                                        </x-input-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 pb-3 ">
-                                                <div class="row">
-                                                    <label for="example-search-input" class="col-md-4 col-form-label">Main
-                                                        Teacher Name:</label>
-                                                    <div class="col-md-8">
-                                                        <x-input-select-custom name="main_teacher_id" :records="$all_user" firstLabel="Select Main Teacher"
-                                                            :required='true' onChange="addEventTitle()" >
-                                                        </x-input-select-custom>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 pb-3 ">
-                                                <div class="row">
-                                                    <label for="example-search-input" class="col-md-4 col-form-label">Assistant
-                                                        Teacher Dept:</label>
-                                                    <div class="col-md-8">
-                                                        <x-input-select name="assistant_teacher_department"
-                                                            :records="$departments" firstLabel="Select Department"
-                                                            :required='true'>
-                                                        </x-input-select>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-12 col-md-6 col-lg-6 pb-3 ">
-                                                <div class="row">
-                                                    <label for="example-search-input"
-                                                        class="col-md-4 col-form-label">Assistant Teacher Name:</label>
-                                                    <div class="col-md-8">
-                                                        <x-input-select-custom name="assistant_teacher_id" :records="$all_user" firstLabel="Select Assistant Teacher"
-                                                            :required='true'>
-                                                        </x-input-select-custom>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div id="eventDetails__Calendar">
-                                                <h5>Set Interview Time</h5>
-                                                <div class="form-group">
-                                                    <label for="eventTitle">Event Title:</label>
-                                                    <input type="text" class="form-control" id="eventTitle"
-                                                        name="event_title" required readOnly>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="event_medium_type">Interview Medium:</label>
-                                                    <x-input-select name="event_medium_type"
-                                                        :records="$event_medium_type" firstLabel="Select Medium">
-                                                    </x-input-select>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="event_date">Date:</label>
-                                                    <input type="date" class="form-control" id="event_date"
-                                                        name="event_date" min="{{ date('Y-m-d') }}" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="my_custom_time_options_label" for="startHour">Start
-                                                        Time:</label>
-                                                    <div class="my_custom_time_option_show row">
-                                                        <div class="my_custom_time_options_div col-sm-12 col-md-8">
-                                                            <select id="startHour" onchange="updateEndTime()">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                            </select>
-                                                            <select id="startMinute" onchange="updateEndTime()">
-                                                                <option value="00">00</option>
-                                                                <option value="15">15</option>
-                                                                <option value="30">30</option>
-                                                                <option value="45">45</option>
-                                                            </select>
-                                                            <select id="startAmpm" onchange="updateEndTime()">
-                                                                <option value="AM">AM</option>
-                                                                <option value="PM">PM</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="show__time__only col-sm-12 col-md-4">
-                                                            <input type="text" id="selectedStartTime"
-                                                                name="event_start_time" readonly>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="my_custom_time_options_label" for="startHour">End
-                                                        Time:</label>
-                                                    <div class="my_custom_time_option_show row">
-                                                        <div class="my_custom_time_options_div col-sm-12 col-md-8">
-                                                            <select id="endHour">
-                                                                <option value="1">1</option>
-                                                                <option value="2">2</option>
-                                                                <option value="3">3</option>
-                                                                <option value="4">4</option>
-                                                                <option value="5">5</option>
-                                                                <option value="6">6</option>
-                                                                <option value="7">7</option>
-                                                                <option value="8">8</option>
-                                                                <option value="9">9</option>
-                                                                <option value="10">10</option>
-                                                                <option value="11">11</option>
-                                                                <option value="12">12</option>
-                                                            </select>
-                                                            <select id="endMinute">
-                                                                <option value="00">00</option>
-                                                                <option value="15">15</option>
-                                                                <option value="30">30</option>
-                                                                <option value="45">45</option>
-                                                            </select>
-                                                            <select id="endAmpm">
-                                                                <option value="AM">AM</option>
-                                                                <option value="PM">PM</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="show__time__only col-sm-12 col-md-4">
-                                                            <input type="text" id="selectedEndTime"
-                                                                name="event_end_time" readonly>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="d-grid col-6 mx-auto">
-                                                <button type="submit" class="btn btn-success w-100">Save</button>
-                                            </div>
                                         </div>
                                     </div>
+
+                                    <div class="col-md-4">
+                                        <div id="eventDetails__Calendar">
+                                            <h5>Setup Time</h5>
+                                            <div class="form-group">
+                                                <label for="eventTitle">Event Title:</label>
+                                                <input type="text" class="form-control" id="eventTitle" name="event_title" 
+                                                    value="{{ old('event_title') ?? '' }}" required readonly>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="event_medium_type">Interview Medium:</label>
+                                                <x-input-select name="event_medium_type" :records="$event_medium_type" firstLabel="Select Medium">
+                                                </x-input-select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="event_date">Date:</label>
+                                                <input type="date" class="form-control" id="event_date" name="event_date" 
+                                                    min="{{ date('Y-m-d') }}" value="{{ old('event_date') }}" required>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="my_custom_time_options_label" for="startHour">Start
+                                                    Time:</label>
+                                                <div class="my_custom_time_option_show row">
+                                                    <div class="my_custom_time_options_div col-sm-12 col-md-8">
+                                                        <select id="startHour" onchange="updateEndTime()">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                        </select>
+                                                        <select id="startMinute" onchange="updateEndTime()">
+                                                            <option value="00">00</option>
+                                                            <option value="15">15</option>
+                                                            <option value="30">30</option>
+                                                            <option value="45">45</option>
+                                                        </select>
+                                                        <select id="startAmpm" onchange="updateEndTime()">
+                                                            <option value="AM">AM</option>
+                                                            <option value="PM">PM</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="show__time__only col-sm-12 col-md-4">
+                                                        <input type="text" id="selectedStartTime"
+                                                            name="event_start_time" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="my_custom_time_options_label" for="startHour">End
+                                                    Time:</label>
+                                                <div class="my_custom_time_option_show row">
+                                                    <div class="my_custom_time_options_div col-sm-12 col-md-8">
+                                                        <select id="endHour">
+                                                            <option value="1">1</option>
+                                                            <option value="2">2</option>
+                                                            <option value="3">3</option>
+                                                            <option value="4">4</option>
+                                                            <option value="5">5</option>
+                                                            <option value="6">6</option>
+                                                            <option value="7">7</option>
+                                                            <option value="8">8</option>
+                                                            <option value="9">9</option>
+                                                            <option value="10">10</option>
+                                                            <option value="11">11</option>
+                                                            <option value="12">12</option>
+                                                        </select>
+                                                        <select id="endMinute">
+                                                            <option value="00">00</option>
+                                                            <option value="15">15</option>
+                                                            <option value="30">30</option>
+                                                            <option value="45">45</option>
+                                                        </select>
+                                                        <select id="endAmpm">
+                                                            <option value="AM">AM</option>
+                                                            <option value="PM">PM</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="show__time__only col-sm-12 col-md-4">
+                                                        <input type="text" id="selectedEndTime"
+                                                            name="event_end_time" readonly>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex align-items-center justify-content-end">
+                                            <button type="submit" class="btn btn-success w-100">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -640,275 +683,307 @@ input#selectedEndTime {
 @section('script-bottom')
 
 <script>
-let events = {!! json_encode($events) !!};
+    let events = {!! json_encode($events) !!};
 
-// console.log(events);
+    // console.log(events);
 
-localStorage.setItem('events', JSON.stringify(events));
+    localStorage.setItem('events', JSON.stringify(events));
 
-const storedEvents = localStorage.getItem('events');
-if (storedEvents) {
-    events = JSON.parse(storedEvents);
-}
+    const storedEvents = localStorage.getItem('events');
+    if (storedEvents) {
+        events = JSON.parse(storedEvents);
+    }
 
-let currentMonth = new Date().getMonth();
-let currentYear = new Date().getFullYear();
-let currentDate = new Date().getDate();
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
+    let currentDate = new Date().getDate();
 
-// Function to render the event calendar
-function renderEventCalendar() {
-    const calendarDiv = document.getElementById("event__calendar");
-    const today = new Date(currentYear, currentMonth, 1);
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    const monthName = today.toLocaleString('default', {
-        month: 'long'
-    });
-    const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
+    // Function to render the event calendar
+    function renderEventCalendar() {
+        const calendarDiv = document.getElementById("event__calendar");
+        const today = new Date(currentYear, currentMonth, 1);
+        const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+        const monthName = today.toLocaleString('default', {
+            month: 'long'
+        });
+        const firstDayOfMonth = new Date(currentYear, currentMonth, 1).getDay();
 
-    calendarDiv.innerHTML = `
-            <div class="calendar-header-event">
-                <div class="d-flex align-items-center justify-content-between">
-                    <button onclick="prevMonth()" class="btn btn-primary">Previous</button>
-                    <h2 id="currentMonthYear">${monthName} ${currentYear}</h2>
-                    <button onclick="nextMonth()" class="btn btn-primary">Next</button>
+        calendarDiv.innerHTML = `
+                <div class="calendar-header-event">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <button onclick="prevMonth()" class="btn btn-primary">Previous</button>
+                        <h2 id="currentMonthYear">${monthName} ${currentYear}</h2>
+                        <button onclick="nextMonth()" class="btn btn-primary">Next</button>
+                    </div>
+                    <div class="row">
+                        <div class="col my-event-day-name">Sun</div>
+                        <div class="col my-event-day-name">Mon</div>
+                        <div class="col my-event-day-name">Tue</div>
+                        <div class="col my-event-day-name">Wed</div>
+                        <div class="col my-event-day-name">Thu</div>
+                        <div class="col my-event-day-name">Fri</div>
+                        <div class="col my-event-day-name">Sat</div>
+                    </div>
                 </div>
-                <div class="row">
-                    <div class="col my-event-day-name">Sun</div>
-                    <div class="col my-event-day-name">Mon</div>
-                    <div class="col my-event-day-name">Tue</div>
-                    <div class="col my-event-day-name">Wed</div>
-                    <div class="col my-event-day-name">Thu</div>
-                    <div class="col my-event-day-name">Fri</div>
-                    <div class="col my-event-day-name">Sat</div>
-                </div>
-            </div>
-        `;
+            `;
 
-    let date = 1;
-    let isCurrentMonth = true;
+        let date = 1;
+        let isCurrentMonth = true;
 
-    for (let i = 0; i < 6; i++) {
-        const row = document.createElement('div');
-        row.classList.add('row');
+        for (let i = 0; i < 6; i++) {
+            const row = document.createElement('div');
+            row.classList.add('row');
 
-        for (let j = 0; j < 7; j++) {
-            if (i === 0 && j < firstDayOfMonth) {
-                // Previous month's dates
-                const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
-                const cell = document.createElement('div');
-                cell.classList.add('col', 'my-event-day', 'inactive'); // Added 'inactive' class
-                cell.innerHTML = `
-                        <div class="my-event-day-number">${prevMonthDays - (firstDayOfMonth - 1 - j)}</div>
-                    `;
-                row.appendChild(cell);
-                isCurrentMonth = false;
-            } else if (date > daysInMonth) {
-                // Next month's dates
-                const cell = document.createElement('div');
-                cell.classList.add('col', 'my-event-day', 'inactive'); // Added 'inactive' class
-                cell.innerHTML = `
-                        <div class="my-event-day-number">${date - daysInMonth}</div>
-                    `;
-                row.appendChild(cell);
-                date++;
-            } else {
-                // Current month's dates
-                const cell = document.createElement('div');
-                cell.classList.add('col', 'my-event-day');
+            for (let j = 0; j < 7; j++) {
+                if (i === 0 && j < firstDayOfMonth) {
+                    // Previous month's dates
+                    const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
+                    const cell = document.createElement('div');
+                    cell.classList.add('col', 'my-event-day', 'inactive'); // Added 'inactive' class
+                    cell.innerHTML = `
+                            <div class="my-event-day-number">${prevMonthDays - (firstDayOfMonth - 1 - j)}</div>
+                        `;
+                    row.appendChild(cell);
+                    isCurrentMonth = false;
+                } else if (date > daysInMonth) {
+                    // Next month's dates
+                    const cell = document.createElement('div');
+                    cell.classList.add('col', 'my-event-day', 'inactive'); // Added 'inactive' class
+                    cell.innerHTML = `
+                            <div class="my-event-day-number">${date - daysInMonth}</div>
+                        `;
+                    row.appendChild(cell);
+                    date++;
+                } else {
+                    // Current month's dates
+                    const cell = document.createElement('div');
+                    cell.classList.add('col', 'my-event-day');
 
-                const currentDate = new Date();
-                const isCurrentDate = date === currentDate.getDate() && currentMonth === currentDate.getMonth() &&
-                    currentYear === currentDate.getFullYear();
-                cell.innerHTML +=
-                    `<div class="my-event-day-number ${isCurrentDate ? 'active-day current-date' : ''}">${date}</div>`;
+                    const currentDate = new Date();
+                    const isCurrentDate = date === currentDate.getDate() && currentMonth === currentDate.getMonth() &&
+                        currentYear === currentDate.getFullYear();
+                    cell.innerHTML +=
+                        `<div class="my-event-day-number ${isCurrentDate ? 'active-day current-date' : ''}">${date}</div>`;
 
-                const currentDay =
-                    `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
-                cell.dataset.date = currentDay;
+                    const currentDay =
+                        `${currentYear}-${(currentMonth + 1).toString().padStart(2, '0')}-${date.toString().padStart(2, '0')}`;
+                    cell.dataset.date = currentDay;
 
-                if (events[currentDay]) {
-                    events[currentDay].forEach(event => {
-                        const eventElement = document.createElement("div");
-                        eventElement.classList.add("my-event");
-                        eventElement.innerHTML = `
-                                <div class="interview__events__display">
-                                    <p class="interview__status__${(event.status).toLowerCase()}">${event.status}</p>
-                                    <p>${event.title}<span class="timeFromTo">(${event.mediumType})</span></p>
-                                    <p class="timeFromTo">${event.startTime} to ${event.endTime}</p>
-                                </div>
-                            `;
-                        cell.appendChild(eventElement);
-                    });
+                    if (events[currentDay]) {
+                        events[currentDay].forEach(event => {
+                            const eventElement = document.createElement("div");
+                            eventElement.classList.add("my-event");
+                            eventElement.innerHTML = `
+                                    <div class="interview__events__display">
+                                        <p class="interview__status__${(event.status).toLowerCase()}">${event.status}</p>
+                                        <p>${event.title}<span class="timeFromTo">(${event.mediumType})</span></p>
+                                        <p class="timeFromTo">${event.startTime} to ${event.endTime}</p>
+                                    </div>
+                                `;
+                            cell.appendChild(eventElement);
+                        });
+                    }
+
+                    row.appendChild(cell);
+                    date++;
+                    isCurrentMonth = true;
                 }
-
-                row.appendChild(cell);
-                date++;
-                isCurrentMonth = true;
             }
+
+            calendarDiv.appendChild(row);
         }
-
-        calendarDiv.appendChild(row);
     }
-}
 
-// Function to navigate to the next month
-function nextMonth() {
-    currentMonth++;
-    if (currentMonth > 11) {
-        currentMonth = 0;
-        currentYear++;
+    // Function to navigate to the next month
+    function nextMonth() {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        renderEventCalendar();
     }
-    renderEventCalendar();
-}
 
-// Function to navigate to the previous month
-function prevMonth() {
-    currentMonth--;
-    if (currentMonth < 0) {
-        currentMonth = 11;
-        currentYear--;
+    // Function to navigate to the previous month
+    function prevMonth() {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        renderEventCalendar();
     }
-    renderEventCalendar();
-}
 
-// Call renderEventCalendar on page load
-window.onload = function() {
-    renderEventCalendar();
-};
-</script>
-
-
-<script>
-function addEventTitle() {
-    const uniqueId = @json($studentData -> student_id);
-    let selectElement = document.getElementById('main_teacher_id');
-    let selectedOptionIndex = selectElement.selectedIndex;
-    let selectedOptionText = selectElement.options[selectedOptionIndex].innerText;
-
-    document.getElementById('eventTitle').value = 'SID#' + uniqueId.split("-")[0] + '(' + selectedOptionText.split(
-        " (")[0].replace(/\s/g, '') + ')';
-}
+    // Call renderEventCalendar on page load
+    window.onload = function() {
+        renderEventCalendar();
+    };
 </script>
 
 <script>
-// Function to update time
-function updateTime(hourId, minuteId, ampmId, outputId) {
-    var hour = document.getElementById(hourId).value;
-    var minute = document.getElementById(minuteId).value;
-    var ampm = document.getElementById(ampmId).value;
-    var time = hour.padStart(2, '0') + ":" + minute.padStart(2, '0') + " " + ampm;
-    document.getElementById(outputId).value = time;
-}
+    function updateTeacherDropdown(departmentId, targetElementId, teacherType) {
+        const targetElement = document.getElementById(targetElementId);
+        let usersByDepartment = @json($usersByDepartment);
+        let users = usersByDepartment[departmentId] || [];
+        let optionsHtml = users.map(user => `<option value="${user.id}">${user.name}</option>`).join('');
 
-// Function to update end time based on start time
-function updateEndTime() {
-    var startHour = parseInt(document.getElementById("startHour").value);
-    var startMinute = parseInt(document.getElementById("startMinute").value);
-    var startAmpm = document.getElementById("startAmpm").value;
-
-    var endHour = startHour;
-    var endMinute = startMinute + 45;
-    var endAmpm = startAmpm;
-
-    if (endMinute >= 60) {
-        endHour += 1;
-        endMinute -= 60;
+        // Replace the target element's inner HTML with the new component
+        targetElement.innerHTML = `
+            <select class="form-select" name="${teacherType}_teacher_id" id="${teacherType}_teacher_id" required onchange="addEventTitle()">
+                <option selected disabled>--Select ${teacherType.charAt(0).toUpperCase() + teacherType.slice(1)} Teacher--</option>
+                ${optionsHtml}
+            </select>
+        `;
     }
 
-    if (endHour > 12) {
-        endHour -= 12;
-        endAmpm = (startAmpm === "AM") ? "PM" : "AM";
+    // Function to handle changes for the main teacher department
+    function mainTeacherDepartment() {
+        const selectElement = document.querySelector('[name="main_teacher_department"]');
+        let selectedOptionValue = selectElement.options[selectElement.selectedIndex].value;
+        // console.log(`Main Teacher Department Selected: ${selectedOptionValue}`);
+        updateTeacherDropdown(selectedOptionValue, 'dependencyMainTeacher', 'main');
     }
 
-    // Ensure end time is greater than start time
-    if (endHour === startHour && endMinute <= startMinute) {
-        endMinute = startMinute + 45;
+    // Function to handle changes for the assistant teacher department
+    function assistantTeacherDepartment() {
+        const selectElement = document.querySelector('[name="assistant_teacher_department"]');
+        let selectedOptionValue = selectElement.options[selectElement.selectedIndex].value;
+        // console.log(`Assistant Teacher Department Selected: ${selectedOptionValue}`);
+        updateTeacherDropdown(selectedOptionValue, 'dependencyAssistantTeacher', 'assistant');
+    }
+</script>
+
+<script>
+    function addEventTitle() {
+        const uniqueId = @json($studentData -> student_id);
+        let selectElement = document.getElementById('main_teacher_id');
+        let selectedOptionIndex = selectElement.selectedIndex;
+        let selectedOptionText = selectElement.options[selectedOptionIndex].innerText;
+
+        document.getElementById('eventTitle').value = 'SID#' + uniqueId.split("-")[0] + '(' + selectedOptionText.split(
+            " (")[0].replace(/\s/g, '') + ')';
+    }
+</script>
+
+<script>
+    // Function to update time
+    function updateTime(hourId, minuteId, ampmId, outputId) {
+        var hour = document.getElementById(hourId).value;
+        var minute = document.getElementById(minuteId).value;
+        var ampm = document.getElementById(ampmId).value;
+        var time = hour.padStart(2, '0') + ":" + minute.padStart(2, '0') + " " + ampm;
+        document.getElementById(outputId).value = time;
+    }
+
+    // Function to update end time based on start time
+    function updateEndTime() {
+        var startHour = parseInt(document.getElementById("startHour").value);
+        var startMinute = parseInt(document.getElementById("startMinute").value);
+        var startAmpm = document.getElementById("startAmpm").value;
+
+        var endHour = startHour;
+        var endMinute = startMinute + 45;
+        var endAmpm = startAmpm;
+
         if (endMinute >= 60) {
             endHour += 1;
             endMinute -= 60;
         }
+
         if (endHour > 12) {
             endHour -= 12;
             endAmpm = (startAmpm === "AM") ? "PM" : "AM";
         }
+
+        // Ensure end time is greater than start time
+        if (endHour === startHour && endMinute <= startMinute) {
+            endMinute = startMinute + 45;
+            if (endMinute >= 60) {
+                endHour += 1;
+                endMinute -= 60;
+            }
+            if (endHour > 12) {
+                endHour -= 12;
+                endAmpm = (startAmpm === "AM") ? "PM" : "AM";
+            }
+        }
+
+        // Ensure end time is greater than start time
+        if (startHour === 12 && endHour === 1 && startAmpm === "PM") {
+            endAmpm = "PM";
+        }
+
+        document.getElementById("endHour").value = endHour;
+        document.getElementById("endMinute").value = endMinute.toString().padStart(2, '0');
+        document.getElementById("endAmpm").value = endAmpm;
+
+        updateTime("startHour", "startMinute", "startAmpm", "selectedStartTime");
+        updateTime("endHour", "endMinute", "endAmpm", "selectedEndTime");
     }
 
-    // Ensure end time is greater than start time
-    if (startHour === 12 && endHour === 1 && startAmpm === "PM") {
-        endAmpm = "PM";
+    // Function to get current time
+    function getCurrentTime() {
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var ampm = hour >= 12 ? "PM" : "AM";
+
+        // Convert to 12-hour format
+        hour = hour % 12 || 12;
+
+        // Get the nearest minute
+        if (minute >= 0 && minute < 15) {
+            minute = 0;
+        } else if (minute >= 15 && minute < 30) {
+            minute = 15;
+        } else if (minute >= 30 && minute < 45) {
+            minute = 30;
+        } else {
+            minute = 45;
+        }
+
+        // Set start time fields with current time
+        document.getElementById("startHour").value = hour.toString();
+        document.getElementById("startMinute").value = minute < 10 ? "0" + minute.toString() : minute.toString();
+        document.getElementById("startAmpm").value = ampm;
+
+        // Update end time accordingly
+        updateEndTime();
+
+        // Update start time field with current time
+        updateTime("startHour", "startMinute", "startAmpm", "selectedStartTime");
     }
 
-    document.getElementById("endHour").value = endHour;
-    document.getElementById("endMinute").value = endMinute.toString().padStart(2, '0');
-    document.getElementById("endAmpm").value = endAmpm;
+    // Call getCurrentTime function to set initial start time
+    getCurrentTime();
 
-    updateTime("startHour", "startMinute", "startAmpm", "selectedStartTime");
-    updateTime("endHour", "endMinute", "endAmpm", "selectedEndTime");
-}
+    // Update start time every minute
+    setInterval(getCurrentTime, 60000);
 
-// Function to get current time
-function getCurrentTime() {
-    var now = new Date();
-    var hour = now.getHours();
-    var minute = now.getMinutes();
-    var ampm = hour >= 12 ? "PM" : "AM";
+    // Add event listeners for start time
+    document.getElementById("startHour").addEventListener("change", function() {
+        updateEndTime();
+    });
 
-    // Convert to 12-hour format
-    hour = hour % 12 || 12;
+    document.getElementById("startMinute").addEventListener("change", function() {
+        updateEndTime();
+    });
 
-    // Get the nearest minute
-    if (minute >= 0 && minute < 15) {
-        minute = 0;
-    } else if (minute >= 15 && minute < 30) {
-        minute = 15;
-    } else if (minute >= 30 && minute < 45) {
-        minute = 30;
-    } else {
-        minute = 45;
-    }
+    document.getElementById("startAmpm").addEventListener("change", function() {
+        updateEndTime();
+    });
 
-    // Set start time fields with current time
-    document.getElementById("startHour").value = hour.toString();
-    document.getElementById("startMinute").value = minute < 10 ? "0" + minute.toString() : minute.toString();
-    document.getElementById("startAmpm").value = ampm;
+    // Add event listeners for end time
+    document.getElementById("endHour").addEventListener("change", function() {
+        updateTime("endHour", "endMinute", "endAmpm", "selectedEndTime");
+    });
 
-    // Update end time accordingly
-    updateEndTime();
+    document.getElementById("endMinute").addEventListener("change", function() {
+        updateTime("endHour", "endMinute", "endAmpm", "selectedEndTime");
+    });
 
-    // Update start time field with current time
-    updateTime("startHour", "startMinute", "startAmpm", "selectedStartTime");
-}
-
-// Call getCurrentTime function to set initial start time
-getCurrentTime();
-
-// Update start time every minute
-setInterval(getCurrentTime, 60000);
-
-// Add event listeners for start time
-document.getElementById("startHour").addEventListener("change", function() {
-    updateEndTime();
-});
-
-document.getElementById("startMinute").addEventListener("change", function() {
-    updateEndTime();
-});
-
-document.getElementById("startAmpm").addEventListener("change", function() {
-    updateEndTime();
-});
-
-// Add event listeners for end time
-document.getElementById("endHour").addEventListener("change", function() {
-    updateTime("endHour", "endMinute", "endAmpm", "selectedEndTime");
-});
-
-document.getElementById("endMinute").addEventListener("change", function() {
-    updateTime("endHour", "endMinute", "endAmpm", "selectedEndTime");
-});
-
-document.getElementById("endAmpm").addEventListener("change", function() {
-    updateTime("endHour", "endMinute", "endAmpm", "selectedEndTime");
-});
+    document.getElementById("endAmpm").addEventListener("change", function() {
+        updateTime("endHour", "endMinute", "endAmpm", "selectedEndTime");
+    });
 </script>
 @endsection

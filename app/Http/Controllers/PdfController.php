@@ -10,9 +10,9 @@ use App\Models\CareNeedPartOne;
 use App\Repositories\UserRepository;
 use App\Repositories\StudentRepository;
 use Illuminate\Support\Facades\Session;
-use App\Repositories\CareNeedPartOneRepository;
-use App\Http\Requests\StoreCareNeedPartOneRequest;
-use App\Http\Requests\UpdateCareNeedPartOneRequest;
+use App\Repositories\CareNeeds\CareNeedPartOneRepository;
+use App\Http\Requests\CareNeeds\StoreCareNeedPartOneRequest;
+use App\Http\Requests\CareNeeds\UpdateCareNeedPartOneRequest;
 use App\Services\CareNeedPartOneServices;
 use App\Utility\ProjectConstants;
 

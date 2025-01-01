@@ -6,7 +6,7 @@ use App\Models\Student;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Http\Livewire\Traits\CommonListElements;
-use App\Repositories\AppointmentRepository;
+use App\Repositories\Appointments\AppointmentRepository;
 
 class Appointment extends Component
 {

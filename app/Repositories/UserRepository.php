@@ -15,12 +15,14 @@ class UserRepository extends BaseRepository
 
     public function getAllUser()
     {
-        $users = $this->model::all();
+        $users = $this->model::where('status', 1)->get();
 
         $userData = $users->map(function ($user) {
             return [
                 "id"            => $user->id,
-                "name"          => $user->user_id.'-'.$user->name.' ('.($user->designation->name ?? 'Not Found').')'
+                "name"          => $user->user_id.'-'.$user->name.' ('.($user->designation->name ?? 'Not Found').')',
+                "department_id" => $user->department_id,
+                "designation_id" => $user->designation_id,
             ];
         });
 

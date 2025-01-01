@@ -10,16 +10,21 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 
+use App\Repositories\Events\EventCalendarRepository;
+
 class HomeController extends Controller
 {
+    private EventCalendarRepository $eventCalendarRepository;
+
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(EventCalendarRepository $eventCalendarRepository)
     {
         $this->middleware('auth');
+        $this->eventCalendarRepository = $eventCalendarRepository;
     }
 
     /**
@@ -29,15 +34,37 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // dd('404 Page');
+        $interviewEvents = json_decode($this->eventCalendarRepository->getAllEventCalendarList(1), true);
+        $assessmentEvents = json_decode($this->eventCalendarRepository->getAllEventCalendarList(2), true);
+        $observationEvents = json_decode($this->eventCalendarRepository->getAllEventCalendarList(3), true);
+        // dd($interviewEvents, $assessmentEvents);
+        $data = [
+            'interviewEvents' => $interviewEvents,
+            'assessmentEvents' => $assessmentEvents,
+            'observationEvents' => $observationEvents,
+        ];
+
         if (view()->exists($request->path())) {
-            return view($request->path());
+            // dd($request->path(),  $data);
+            return view($request->path(), $data);
         }
         return abort(404);
     }
 
     public function root()
     {
-        return view('index');
+        $interviewEvents = json_decode($this->eventCalendarRepository->getAllEventCalendarList(1), true);
+        $assessmentEvents = json_decode($this->eventCalendarRepository->getAllEventCalendarList(2), true);
+        $observationEvents = json_decode($this->eventCalendarRepository->getAllEventCalendarList(3), true);
+        // dd($interviewEvents, $assessmentEvents);
+        $data = [
+            'interviewEvents' => $interviewEvents,
+            'assessmentEvents' => $assessmentEvents,
+            'observationEvents' => $observationEvents,
+        ];
+        // dd("Dashboard");
+        return view('dashboard', $data);
     }
 
     public function journal()

@@ -3,12 +3,10 @@
         {{$multiple}} {{$wireModel}} {{ $disabled }} {{$onChange ? "onchange=$onChange" : '' }}>
         <option selected disabled>--{{$firstLabel}}--</option>
         @foreach($records as $key => $record)
-        @php($val = $record['id'] ?? $key)
-        <option value="{{$val}}" {{ old($name) ? (old($name)==$val ? 'selected' : '' ) : ($isSelected($val) ? 'selected'
-            : '' )}}>
-            {{$targetColumn ? $record->$targetColumn : ($record['name'] ?? $record)}} {{$additional ? '(' .
-            $record->{$additional} . ')' : ''}}
-        </option>
+            @php($val = is_array($record) ? $record['id'] : $record->id)
+            <option value="{{$val}}" {{ old($name) ? (old($name) == $val ? 'selected' : '' ) : ($isSelected($val) ? 'selected' : '' )}}>
+                {{$targetColumn ? (is_array($record) ? $record[$targetColumn] : $record->$targetColumn) : ($record['name'] ?? $record)}} {{$additional ? '(' . (is_array($record) ? $record[$additional] : $record->$additional) . ')' : ''}}
+            </option>
         @endforeach
     </select>
     {{-- @error($name)<span style="color: red">{{$message}}</span>@enderror --}}

@@ -9,6 +9,8 @@ class EditTableOfContentComponent extends Component
     public $contentId;
     public $title;
     public $link_code;
+    public $task_type;
+
     public $parent_id;
     public $selectedSection = null;
     public $selectedSubSection = null;
@@ -79,6 +81,7 @@ class EditTableOfContentComponent extends Component
         $this->validate([
             'title' => 'required|string|max:255',
             'link_code' => 'required|string|max:255',
+            'task_type' => 'nullable',
         ]);
 
         $tableOfContent = TableOfContent::find($this->contentId); 
@@ -87,6 +90,7 @@ class EditTableOfContentComponent extends Component
             'title' => $this->title,
             'parent_id' => $this->selectedTask ?? $this->selectedActivity ?? $this->selectedArea ?? $this->selectedSubSection ?? $this->selectedSection ?? $tableOfContent->parent_id,
             'link_code' => $this->link_code,
+            'task_type' => $this->task_type ?? null,
             'created_by' => auth()->id(),
         ];
 

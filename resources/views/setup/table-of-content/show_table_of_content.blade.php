@@ -34,34 +34,38 @@
                                 </tr>
                             </thead>
                             <tbody id="tableBody">
-                            @php
-    $serial = 1;
+                                @php
+                                    $serial = 1;
 
-    if (!function_exists('renderTree')) {
-        function renderTree($items, &$serial, $padding = 0) {
-            foreach ($items as $item) {
-                echo '<tr style="border: 1px solid #dee2e6;">';
-                echo '<td class="text-center serial-number">' . $serial++ . '</td>';
-                echo '<td class="text-start" style="padding-left: ' . $padding . 'px; font-weight: ' . ($padding > 0 ? 'normal' : 'bold') . ';">' . $item->title . '</td>';
-                echo '<td class="text-start" style="font-weight: bold;">' . $item->link_code . '</td>';
-                echo '<td class="text-center">';
-                echo '<a href="' . route('edit-item-setup-table-of-content', $item->id) . '" class="btn btn-warning btn-sm">Edit</a> ';
-                echo '<form action="' . route('disable-item-in-table-of-content', $item->id) . '" method="POST" style="display:inline;">';
-                echo csrf_field();
-                echo '<button type="submit" class="btn btn-sm ' . ($item->status ? 'btn-success' : 'btn-danger') . '" onclick="return confirm(\'Are you sure you want to ' . ($item->status ? 'disable' : 'enable') . ' this item?\')">';
-                echo $item->status ? 'Disable' : 'Enable';
-                echo '</button>';
-                echo '</form>';
-                echo '</td>';
-                echo '</tr>';
+                                    if (!function_exists('renderTree')) {
+                                        function renderTree($items, &$serial, $padding = 0) {
+                                            foreach ($items as $item) {
+                                                echo '<tr style="border: 1px solid #dee2e6;">';
+                                                echo '<td class="text-center serial-number">' . $serial++ . '</td>';
+                                                
+                                                // Display task_type as "Vocational" or "Pre-Vocational"
+                                                $taskType = $item->task_type ? '(' . ($item->task_type == "1" ? 'Vocational' : 'Pre-Vocational') . ')' : '';
+                                                echo '<td class="text-start" style="padding-left: ' . $padding . 'px; font-weight: ' . ($padding > 0 ? 'normal' : 'bold') . ';">' . htmlspecialchars($item->title) . ' ' . $taskType . '</td>';
+                                                
+                                                echo '<td class="text-start" style="font-weight: bold;">' . htmlspecialchars($item->link_code) . '</td>';
+                                                echo '<td class="text-center">';
+                                                echo '<a href="' . route('edit-item-setup-table-of-content', $item->id) . '" class="btn btn-warning btn-sm">Edit</a> ';
+                                                echo '<form action="' . route('disable-item-in-table-of-content', $item->id) . '" method="POST" style="display:inline;">';
+                                                echo csrf_field();
+                                                echo '<button type="submit" class="btn btn-sm ' . ($item->status ? 'btn-success' : 'btn-danger') . '" onclick="return confirm(\'Are you sure you want to ' . ($item->status ? 'disable' : 'enable') . ' this item?\')">';
+                                                echo $item->status ? 'Disable' : 'Enable';
+                                                echo '</button>';
+                                                echo '</form>';
+                                                echo '</td>';
+                                                echo '</tr>';
 
-                if (!empty($item->children)) {
-                    renderTree($item->children, $serial, $padding + 20);
-                }
-            }
-        }
-    }
-@endphp
+                                                if (!empty($item->children)) {
+                                                    renderTree($item->children, $serial, $padding + 20);
+                                                }
+                                            }
+                                        }
+                                    }
+                                @endphp
 
                                 @foreach ($tableContents as $section)
                                     @php renderTree([$section], $serial) @endphp
@@ -84,7 +88,7 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    const rowsPerPage = 5;  // Set items per page to 5
+    const rowsPerPage = 15;  // Set items per page to 5
     const tableBody = document.getElementById('tableBody');
     const rows = Array.from(tableBody.querySelectorAll('tr'));
     const pagination = document.getElementById('pagination');

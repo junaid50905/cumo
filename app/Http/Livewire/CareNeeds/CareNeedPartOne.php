@@ -85,7 +85,7 @@ class CareNeedPartOne extends Component
             $mainTeacherId = $this->formData['introduction']['main_teacher_id'];
             $assistantTeacherId = $this->formData['introduction']['assistant_teacher_id'];
             $eventType = 1;
-            $eventStatus = 2;
+            $eventStatus = 2; 
 
             $data = $this->formData['introduction'];
             $this->updatedAppointment($appointmentId, $data);
@@ -189,12 +189,14 @@ class CareNeedPartOne extends Component
                 $yesPercentage = ($totalCount > 0) ? ($yesCount / $totalCount) * 100 : 0;
                 
                 if($collectionName === 'specialities'){
-                    if (count($specialities_reports) >= 2) {
+                    if (count($specialities_reports) > 2) {
                         $report['specialities'] = implode(', ', $specialities_reports) . ' and multiple diseases';
-                    } elseif (count($specialities_reports) < 2 && $yesPercentage > 50){
-                        $report['specialities'] = implode(', ', $specialities_reports) . ' and multiple diseases';
-                    }else {
-                        $report['specialities'] = implode(', ', $specialities_reports);
+                    } elseif (count($specialities_reports) <= 2 && $yesPercentage > 50){
+                        $report['specialities'] = implode(', ', $specialities_reports) . ' and Not so Good';
+                    } elseif (count($specialities_reports) < 2 && ($yesPercentage > 20 && $yesPercentage < 50)){
+                        $report['specialities'] = implode(', ', $specialities_reports) . ' and Mild';
+                    } else {
+                        $report['specialities'] = implode(', ', $specialities_reports). ' and Good';
                     }
                     $this->formData['specialities']['specialities_report'] = $report['specialities'];
                 } elseif ($yesPercentage > 80) {
@@ -216,7 +218,7 @@ class CareNeedPartOne extends Component
             }
         }
 
-        // dd($this->formData, $report);
+        dd($this->formData, $report);
 
         //Create every part report end
 
@@ -376,16 +378,35 @@ class CareNeedPartOne extends Component
                 'is_adhd' => ['Yes' => ['D4.b', 'D4.c']],
                 'is_bipolar_disorder' => ['Yes' => ['D3.b', 'D4.a', 'D4.c']],
                 'is_speech_disorder' => ['Yes' => ['D2.b.3', 'D4.a', 'D4.c']],
+                'is_language_disorder' => ['Yes' => ['D2.b.3', 'D4.a', 'D4.c']],
+                'is_ocd' => ['Yes' => ['D4.a', 'D4.b']],
+                'is_multiple_personality' => ['Yes' => ['D3.a']],
+                'is_sluttering' => ['Yes' => ['D2.b.3']],
+                'is_depression' => ['Yes' => ['D4.a']],
+                'is_writing_disorder' => ['Yes' => ['D2.b.2']],
+                'is_reading_disorder' => ['Yes' => ['D2.b.2']],
+                'is_match_disorder' => ['Yes' => ['D2.b.2']],
+                'is_attachment_disorder' => ['Yes' => ['D4.a', 'D4.c']],
+                'is_separation_anxiety' => ['Yes' => ['D4.a', 'D4.c']],
             ],
             3 => [
                 'social_communication_checklist' => ['Yes' => ['SCC','D1.a.3','D3.b','D3.c','D4.a','D4.b']],
                 'sensory_checklist' => ['Yes' => ['Sens','D1.a.2','D1.a.3','D1.a.4','D2.a','D3.b','D3.c','D4.a']],
-                'occupational_assessment' => ['Yes' => ['OT.A','D1.a','D1.a.2','D1.a.2','D1.a.4','D3.b','D3.c','D4.a','D4.b']],
+                'occupational_assessment' => ['Yes' => ['OT.A','D1.a','D1.a.2','D1.a.4','D3.b','D3.c','D4.a','D4.b']],
+                'speech_language_assessment' => ['Yes' => ['D1.a.4','D2.b.3','D3.c','D4.a','D4.b']],
+                'physiotherapy_assessment' => ['Yes' => ['Phy.A','SLT.A','D1.a','D3.c','D4.a','D4.b']],
+                'fundamental_movement_skills' => ['Yes' => ['BMS','D1.a','D3.c','D4.a','D4.b']],
+                'fundamental_evaluation' => ['Yes' => ['CAR','Ind.a','D1.a','D1.a.2','D1.a.3','D1.a.4','D2.a','D2.b.1','D3.a','D3.b','D3.c','D4.a','D4.b']],
+                'psychological_assessment' => ['Yes' => ['Psy.A','D3.c']],
+                'academic_assessment' => ['Yes' => ['FACTs','D1.a.2','D1.a.3','D2.b.2']],
             ],
             4 => [
-                'social_communication_checklist' => ['Yes' => ['SCC','D1.a.3','D3.b','D3.c','D4.a','D4.b']],
-                'sensory_checklist' => ['Yes' => ['Sens','D1.a.2','D1.a.3','D1.a.4','D2.a','D3.b','D3.c','D4.a']],
-                'occupational_assessment' => ['Yes' => ['OT.A','D1.a','D1.a.2','D1.a.2','D1.a.4','D3.b','D3.c','D4.a','D4.b']],
+                'separate_room' => ['No' => ['D3.c']],
+                'separate_bed' => ['No' => ['D3.c']],
+                'sleep_alone' => ['No' => ['D3.c']],
+                'separate_cupboard' => ['No' => ['D3.c']],
+                'separate_toilet' => ['No' => ['D3.c']],
+                'own_equipment' => ['No' => ['D3.c']],
             ],
             5 => [
                 'speaking_capacity' => ['Yes' => ['D2.b.3.15']],
@@ -394,6 +415,22 @@ class CareNeedPartOne extends Component
                 'writing_capacity' => ['No' => ['D2.b.2.07']],
                 'counting_capacity' => ['No' => ['D2.b.2.08']],
                 'money_concept' => ['No' => ['D2.b.2.09']],
+            ],
+            6 => [
+                'happy_at_home' => ['No' => ['D3']],
+                'lonely' => ['No' => ['D3']],
+                'protective' => ['No' => ['D3.c.1']],
+                'well_protective' => ['No' => ['D3.c.1']],
+                'withdrawal' => ['No' => ['D3']],
+                'confident' => ['No' => ['D3.a']],
+                'communicate' => ['Yes' => ['D2.b.3']],
+                'follow_instructions' => ['No' => ['D2.b.3']],
+                'sitting_habit' => ['No' => ['D4.a.2']],
+                'hyperness' => ['Yes' => ['D3.b.01']],
+                'tantrum' => ['Yes' => ['D3.b.01']],
+                'self_injury' => ['Yes' => ['D3.b.01']],
+                'specific_life_style' => ['No' => ['D3.c']],
+                'temper' => ['Yes' => ['D3.b.01']],
             ],
         ];
         

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('table_of_contents')->onDelete('cascade');
             $table->string("link_code")->unique();
+            $table->tinyInteger('task_type')->nullable()->comment('1=Vocational,2=Pre-Vocational');
 
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->tinyInteger('status')->default(1)->comment('1=Active,0=Inactive');

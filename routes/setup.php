@@ -148,6 +148,44 @@ Route::group(['prefix' => 'setup', 'middleware' => ['auth']], function () {
     //Assessment Start
     // Event Calendar end
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
     // Setup ->> Store Management Route
     // Route::get('warehouse-setup.create', [SetupController::class, 'warehouseSetup'])->name('warehouse.setup.create');
     // Route::get('measure-unit-setup.create', [SetupController::class, 'measureUnitSetup'])->name('measure.unit.setup.create');

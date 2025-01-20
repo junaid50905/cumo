@@ -1,4 +1,13 @@
 <div class="row">
+    <style>
+        .tabContent .card__data__box#card__data__box {
+            margin-top: 0px;
+        }
+
+        .tabContent .card__data__box#card__data__box .field__label span{
+            font-size: 12px;
+        }
+    </style>
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
@@ -556,12 +565,14 @@
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_language_disorder"
                                                                 label="Is S/he has Language disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow" 
+                                                                data-link-codes-yes="D2.b.3,D4.a,D4.c"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.specialities.is_ocd"
                                                                 label="Is S/he has OCD"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow" 
+                                                                data-link-codes-yes="D4.a,D4.b"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_eating_disorder"
@@ -576,7 +587,8 @@
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.specialities.is_multiple_personality"
                                                                 label="Is S/he has Multiple Personality Disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D3.a"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_tic_disorder"
@@ -586,37 +598,44 @@
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_sluttering"
                                                                 label="Is S/he has Sluttering"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"   
+                                                                data-link-codes-yes="D2.b.3"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_depression"
                                                                 label="Is S/he has Depression"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"   
+                                                                data-link-codes-yes="D4.a"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_writing_disorder"
                                                                 label="Is S/he has Writing disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D2.b.2"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_reading_disorder"
                                                                 label="Is S/he has Reading disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D2.b.2"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_match_disorder"
                                                                 label="Is S/he has Match Disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D2.b.2"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_attachment_disorder"
                                                                 label="Is S/he has Attachment Disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D4.a,D4.c"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.specialities.is_separation_anxiety"
                                                                 label="Is S/he has Separation Anxiety Disorder"
-                                                                :records="$projectConstants::$yesNoDontknow" />
+                                                                :records="$projectConstants::$yesNoDontknow"  
+                                                                data-link-codes-yes="D4.a,D4.c"/>
                                                             <!-- row end -->
                                                             <x-input-radio-or-check  
                                                                 wireModel="formData.specialities.is_sleep_disorder"
@@ -662,37 +681,43 @@
                                                                 wireModel="formData.assessment_infos.occupational_assessment"
                                                                 label="Is Occupational Assessment has completed?"
                                                                 :records="$projectConstants::$yesNoWantdo" 
-                                                                data-link-codes-yes="OT.A,D1.a,D1.a.2,D1.a.2,D1.a.4,D3.b,D3.c,D4.a,D4.b" />
+                                                                data-link-codes-yes="OT.A,D1.a,D1.a.2,D1.a.4,D3.b,D3.c,D4.a,D4.b" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.speech_language_assessment"
                                                                 label="Is Speech and Language Assessment has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo" 
+                                                                data-link-codes-yes="D1.a.4,D2.b.3,D3.c,D4.a,D4.b" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.physiotherapy_assessment"
                                                                 label="Is Physiotherapy assessment has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo" 
+                                                                data-link-codes-yes="Phy.A,SLT.A,D1.a,D3.c,D4.a,D4.b" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.fundamental_movement_skills"
                                                                 label="Is Fundamental Movement Skills has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo"
+                                                                data-link-codes-yes="BMS,D1.a,D3.c,D4.a,D4.b" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.fundamental_evaluation"
                                                                 label="Is Functional evaluation has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo"
+                                                                data-link-codes-yes="CAR,Ind.a,D1.a,D1.a.2,D1.a.3,D1.a.4,D2.a,D2.b.1,D3.a,D3.b,D3.c,D4.a,D4.b" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.psychological_assessment"
                                                                 label="Is Psychological assessment has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo"
+                                                                data-link-codes-yes="Psy.A,D3.c" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.assessment_infos.academic_assessment"
                                                                 label="Is Academic Assessment has completed?"
-                                                                :records="$projectConstants::$yesNoWantdo" />
+                                                                :records="$projectConstants::$yesNoWantdo"
+                                                                data-link-codes-yes="FACTs,D1.a.2,D1.a.3,D2.b.2" />
                                                             <!-- end row -->
                                                         </section>
                                                     </form>
@@ -881,37 +906,44 @@
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.child_conditions.happy_at_home"
                                                                 label="Is S/he Happy at home? "
-                                                                :records="$projectConstants::$yesMidNo" />
+                                                                :records="$projectConstants::$yesMidNo" 
+                                                                data-link-codes-no="D3" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.lonely"
                                                                 label="Is S/he Lonely?"
-                                                                :records="$projectConstants::$yesMidNo" />
+                                                                :records="$projectConstants::$yesMidNo"
+                                                                data-link-codes-no="D3" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.protective"
                                                                 label="Is S/he Protective?"
-                                                                :records="$projectConstants::$yesMidNo" />
+                                                                :records="$projectConstants::$yesMidNo"
+                                                                data-link-codes-no="D3.c.1" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.well_protective"
                                                                 label="Is S/he Well protective?"
-                                                                :records="$projectConstants::$yesMidNo" />
+                                                                :records="$projectConstants::$yesMidNo"
+                                                                data-link-codes-no="D3.c.1" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.withdrawal"
                                                                 label="Is S/he Withdrawal?"
-                                                                :records="$projectConstants::$yesMidNo" />
+                                                                :records="$projectConstants::$yesMidNo"
+                                                                data-link-codes-no="D3" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.confident"
                                                                 label="Is S/he Confident?"
-                                                                :records="$projectConstants::$yesMidNo" />
+                                                                :records="$projectConstants::$yesMidNo"
+                                                                data-link-codes-no="D3.a" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.communicate"
                                                                 label="Is S/he Communicate?"
-                                                                :records="$projectConstants::$communicate" />
+                                                                :records="$projectConstants::$communicate"
+                                                                data-link-codes-yes="D2.b.3" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.child_conditions.knowledge_daily_life_requirement"
@@ -924,11 +956,26 @@
                                                                 selectedValue="{{ $formData['child_conditions']['knowledge_daily_life_requirement'] }}"
                                                                 multipleCheckBoxName="checkboxChildCondition"
                                                             />
+                                                            <!-- <div class="card__data__box" id="card__data__box">
+                                                                <div class="field__data mt-2">
+                                                                    <div class="field__label">
+                                                                        <span>Knowledge on Daily life requirement. (Please select (tick) only those items s/he has knowledge)</span>
+                                                                    </div>
+                                                                    <div class="input__field_data mt-2">
+                                                                        <x-input-radio-or-check 
+                                                                            wireModel="formData.child_conditions.knowledge_daily_life_requirement_food"
+                                                                            label="Is s/he has knowledge of Food?"
+                                                                            :records="$projectConstants::$yesNoEn"
+                                                                            data-link-codes-no="D3.c" />
+                                                                    </div>
+                                                                </div>
+                                                            </div> -->
                                                             <!-- row end -->
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.follow_instructions"
                                                                 label="Is S/he Follow instructions?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                data-link-codes-no="D2.b.3" />
                                                                <!-- end row --> 
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.child_conditions.how_can_follow_instructions"
@@ -938,7 +985,8 @@
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.sitting_habit"
                                                                 label="Is S/he has Sitting habit?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"
+                                                                data-link-codes-no="D4.a.2" />
                                                             <!-- end row -->
                                                             <div class="row border-top py-2">
                                                                 <div class="col-xl-12 col-sm-12">
@@ -961,7 +1009,7 @@
                                                                 wireModel="formData.child_conditions.hyperness"
                                                                 label="Is S/he has Hyperness?"
                                                                 :records="$projectConstants::$yesNoEn" 
-                                                            />
+                                                                data-link-codes-yes="D3.b.01" />
                                                             <div class="row border-top py-2">
                                                                 <div class="col-xl-12 col-sm-12">
                                                                     <div class="m-0">
@@ -993,7 +1041,7 @@
                                                                 wireModel="formData.child_conditions.tantrum"
                                                                 label="Is S/he do Tantrum ?"
                                                                 :records="$projectConstants::$yesNoEn" 
-                                                            />
+                                                                data-link-codes-yes="D3.b.01" />
                                                             <div class="row border-top py-2">
                                                                 <div class="col-xl-12 col-sm-12">
                                                                     <div class="m-0">
@@ -1025,8 +1073,8 @@
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.child_conditions.self_injury"
                                                                 label="Is S/he Do Self injury?"
-                                                                :records="$projectConstants::$yesNoEn" 
-                                                            />
+                                                                :records="$projectConstants::$yesNoEn"  
+                                                                data-link-codes-yes="D3.b.01" />
                                                             <div class="row border-top py-2">
                                                                 <div class="col-xl-12 col-sm-12">
                                                                     <div class="m-0">
@@ -1057,7 +1105,8 @@
                                                             <x-input-radio-or-check 
                                                                 wireModel="formData.child_conditions.specific_life_style"
                                                                 label="Follow any specific life style?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"  
+                                                                data-link-codes-no="D3.c" />
                                                             <!-- end row -->
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.child_conditions.communication_way"
@@ -1074,7 +1123,8 @@
                                                             <x-input-radio-or-check
                                                                 wireModel="formData.child_conditions.temper"
                                                                 label="Is s/he do Temper?"
-                                                                :records="$projectConstants::$yesNoEn" />
+                                                                :records="$projectConstants::$yesNoEn"  
+                                                                data-link-codes-yes="D3.b.01" />
                                                             <!-- end row -->
 
 

@@ -429,7 +429,7 @@ public static array $department = [
 
     public static array $dailyLife = [
         self::FOOD => 'Food',
-        self::NFOOD => 'Non',
+        self::NFOOD => 'Non-Food',
         self::CLOTHING => 'Clothing',
         self::EXPRESS => 'Express',
         self::DEMANDING => 'Demanding',

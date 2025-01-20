@@ -11,6 +11,7 @@ class TableOfContentComponent extends Component
 {
     public $title;
     public $link_code;
+    public $task_type;
 
     public $sections;
     public $sub_sections = [];
@@ -66,14 +67,18 @@ class TableOfContentComponent extends Component
         $this->validate([
             'title' => 'required|string|max:255',
             'link_code' => 'required|string|max:255',
+            'task_type' => 'nullable',
         ]);
 
         $tableContentData = [
             'title' => $this->title,
             'parent_id' => $this->selectedTask ?? $this->selectedActivity ?? $this->selectedArea ?? $this->selectedSubSection ?? $this->selectedSection,
             'link_code' => $this->link_code,
+            'task_type' => $this->task_type ?? null,
             'created_by' => auth()->id(),
         ];
+
+        // dd($tableContentData);
 
         try {
             TableOfContent::create($tableContentData);

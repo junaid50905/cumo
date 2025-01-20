@@ -99,6 +99,18 @@
                                     @if (!is_null($selectedActivity))
                                         <div class="col-12 pb-3">
                                             <div class="row">
+                                                <label for="task_type" class="col-md-2 col-form-label">Is it task?:</label>
+                                                <div class="col-md-10">
+                                                    <select class="form-control" wire:model="task_type" id="task_type">
+                                                        <option value="">-- Select Task Type --</option>
+                                                        <option value="1">Vocational</option>
+                                                        <option value="2">Pre-Vocational</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 pb-3">
+                                            <div class="row">
                                                 <label for="task" class="col-md-2 col-form-label">Select Task:</label>
                                                 <div class="col-md-10">
                                                     <select class="form-control" wire:model="selectedTask" id="task">

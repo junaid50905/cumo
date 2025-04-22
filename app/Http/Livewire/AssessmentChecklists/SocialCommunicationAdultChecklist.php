@@ -88,7 +88,18 @@ class SocialCommunicationAdultChecklist extends Component
                 ['id' => 17, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 17, 'question' => 'Aggressive tendencies', 'options' => $this->options, 'link_codes' => ['Ind.a.1']],
                 ['id' => 18, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 18, 'question' => 'Responsiveness', 'options' => $this->options, 'link_codes' => ['Ind', 'D2.c']],
                 ['id' => 19, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 19, 'question' => 'Ability to handle being “left out”', 'options' => $this->options, 'link_codes' => ['D2.b.3.08']],
+            ],
+            'Personal' => [
+                ['id' => 20, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 20, 'question' => 'Expresses feelings', 'options' => $this->options, 'link_codes' => ['D2.b.3.13']],
+                ['id' => 21, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 21, 'question' => 'Identifies feelings (I’m happy.)', 'options' => $this->options, 'link_codes' => ['D2.b.3.13']],
+                ['id' => 22, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 22, 'question' => 'Explains feelings (I’m happy because it’s my birthday)', 'options' => $this->options, 'link_codes' => ['D2.b.3.13']],
+                ['id' => 23, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 23, 'question' => 'Provides excuses or reasons', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D2']],
+                ['id' => 24, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 24, 'question' => 'Offers an opinion with support', 'options' => $this->options, 'link_codes' => ['D2.b.1.09', 'D2.b.3.02', 'D2.b2.3.13']],
+                ['id' => 25, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 25, 'question' => 'Complains', 'options' => $this->options, 'link_codes' => ['D2.b.3']],
+                ['id' => 26, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 26, 'question' => 'Blames others', 'options' => $this->options, 'link_codes' => ['D2.b.3.06']],
+                ['id' => 27, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 27, 'question' => 'Provides pertinent information on request (2 or 3 of the following: name, address, phone, birthdate)', 'options' => $this->options, 'link_codes' => ['D2.b.3.18', 'D2.b.3.19']],
             ]
+
         ];
 
         // // Load previously answered questions

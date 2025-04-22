@@ -107,7 +107,16 @@ class SocialCommunicationAdultChecklist extends Component
                 ['id' => 32, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 32, 'question' => 'Relevancy of information', 'options' => $this->options, 'link_codes' => ['D2.b.3.08']],
                 ['id' => 33, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 33, 'question' => 'Ability to interrupt appropriately', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D2.b.3.08']],
                 ['id' => 34, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 34, 'question' => 'Ability to terminate the conversation', 'options' => $this->options, 'link_codes' => ['D2.b.1.09']],
+            ],
+            'Conversational Structure' => [
+                ['id' => 35, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 35, 'question' => 'Ability to initiate a conversation', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.1.09']],
+                ['id' => 36, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 36, 'question' => 'Ability to establish a conversation outside of interest area', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D4.c.3']],
+                ['id' => 37, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 37, 'question' => 'Ability to acknowledge others in conversation', 'options' => $this->options, 'link_codes' => ['D4.c.8']],
+                ['id' => 38, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 38, 'question' => 'Ability to delete redundant information appropriately', 'options' => $this->options, 'link_codes' => ['D4.c.3', 'D4.c.4']],
+                ['id' => 39, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 39, 'question' => 'Ability to order information appropriately (new info follows old)', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.02']],
+                ['id' => 40, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 40, 'question' => 'Use of pedantic speech', 'options' => $this->options, 'link_codes' => ['D2.b.3.23']],
             ]
+
 
 
         ];

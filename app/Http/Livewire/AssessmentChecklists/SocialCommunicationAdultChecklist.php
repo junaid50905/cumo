@@ -98,7 +98,17 @@ class SocialCommunicationAdultChecklist extends Component
                 ['id' => 25, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 25, 'question' => 'Complains', 'options' => $this->options, 'link_codes' => ['D2.b.3']],
                 ['id' => 26, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 26, 'question' => 'Blames others', 'options' => $this->options, 'link_codes' => ['D2.b.3.06']],
                 ['id' => 27, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 27, 'question' => 'Provides pertinent information on request (2 or 3 of the following: name, address, phone, birthdate)', 'options' => $this->options, 'link_codes' => ['D2.b.3.18', 'D2.b.3.19']],
+            ],
+            'Topic Maintenance' => [
+                ['id' => 28, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 28, 'question' => 'Ability to establish a topic', 'options' => $this->options, 'link_codes' => ['D2.b.3.19']],
+                ['id' => 29, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 29, 'question' => 'Ability to maintain topic relevancy', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.19']],
+                ['id' => 30, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 30, 'question' => 'Ability to change a topic using signals', 'options' => $this->options, 'link_codes' => ['D2', 'D2.b.1.09']],
+                ['id' => 31, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 31, 'question' => 'Ability to change a topic using verbal means', 'options' => $this->options, 'link_codes' => ['D2.b.3.08']],
+                ['id' => 32, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 32, 'question' => 'Relevancy of information', 'options' => $this->options, 'link_codes' => ['D2.b.3.08']],
+                ['id' => 33, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 33, 'question' => 'Ability to interrupt appropriately', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D2.b.3.08']],
+                ['id' => 34, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 34, 'question' => 'Ability to terminate the conversation', 'options' => $this->options, 'link_codes' => ['D2.b.1.09']],
             ]
+
 
         ];
 

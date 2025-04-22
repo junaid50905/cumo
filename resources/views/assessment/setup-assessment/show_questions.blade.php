@@ -40,31 +40,9 @@
                                 @foreach($questions as $question)
                                 <tr>
                                     <td>{{ $question->category->name }}</td>
-                                    <td>{{ $question->sub_category->name }}</td>
+                                    <td>{{ $question->subCategory->name }}</td>
                                     <td>{{ $question->name }}</td>
                                     <td class="d-flex align-items-center justify-content-end">
-                                        <a href="{{ route('pre-admission-income.edit', $student->id) }}" wire:navigate
-                                            rel="noopener noreferrer"
-                                            class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1">
-                                            <i class="fas fa-credit-card"></i>
-                                        </a>
-                                        <a href="{{ route('pre-admission-income-invoice.invoice', $student->id) }}" wire:navigate
-                                            rel="noopener noreferrer"
-                                            class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1">
-                                            <i class="fas fa-file-invoice"></i>
-                                        </a>
-                                        <a href="{{ route('appointment.edit', $student->id) }}" target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1"
-                                            title="Setup">
-                                            <i class="mdi mdi-cog"></i>
-                                        </a>
-                                        <a href="{{ route('appointment.edit', $student->id) }}" target="_blank"
-                                            rel="noopener noreferrer"
-                                            class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 me-1"
-                                            title="Edit">
-                                            <i class="mdi mdi-pencil"></i>
-                                        </a>
                                         <button type="button" wire:click="confirmDelete({{1}})"
                                             class="btn btn-sm btn-danger btn-rounded waves-effect waves-light mb-2 me-1"
                                             title="delete">

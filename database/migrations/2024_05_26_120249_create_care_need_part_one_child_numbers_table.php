@@ -32,7 +32,6 @@ return new class extends Migration
             $table->string('family_economical_condition')->nullable();
             $table->string('net_earning_of_year')->nullable();
             $table->string('other_relevant_family_info')->nullable();
-            $table->string('child_numbers_report')->nullable();
             
             $table->unsignedBigInteger('appointment_id')->nullable();
             $table->unsignedBigInteger('main_teacher_id')->nullable();

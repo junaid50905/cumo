@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\LinkCodeCount\LinkCodeCount;
 use App\Models\Payments\AppointmentPayment;
+use App\Models\Assessments\AssessmentCategory;
+use App\Models\Events\EventCalendar;
 
 use App\Models\CareNeeds\CareNeedPartOneGeneralInfo;
 use App\Models\CareNeeds\CareNeedPartOneSpeciality;
@@ -91,5 +93,17 @@ class Appointment extends Model
     public function link_code_count()
     {
         return $this->hasMany(LinkCodeCount::class, 'appointment_id');
+    }
+
+    public function assessmentCategories()
+    {
+        return $this->belongsToMany(AssessmentCategory::class, 'appointment_assessment_category')
+                    ->withPivot('status')
+                    ->withTimestamps();
+    }
+
+    public function assessment_checklist_question_answer()
+    {
+        return $this->hasMany(AssessmentChecklistQuesAns::class, 'appointment_id');
     }
 }

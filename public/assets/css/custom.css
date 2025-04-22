@@ -8,3 +8,8 @@
 .removeRow:first-child .removeBtn {
     display: none;
 }
+
+ul#sidebarTabs {
+    height: 560px;
+    overflow-y: auto;
+}

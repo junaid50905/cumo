@@ -173,4 +173,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(AssessmentToolQuesAns::class, 'assistant_teacher_id');
     }
+
+    public function main_teacher_checklist_question_answer()
+    {
+        return $this->hasMany(AssessmentChecklistQuesAns::class, 'main_teacher_id');
+    }
+
+    public function assisstant_teacher_checklist_question_answer()
+    {
+        return $this->hasMany(AssessmentChecklistQuesAns::class, 'assistant_teacher_id');
+    }
 }

@@ -15,22 +15,22 @@ class SetupQuestionController extends Controller
 {
     use DynamicAssessmentTableCreateTrait;
 
-    private SetupQuestionRepository $assessmentRepository;
+    private SetupQuestionRepository $setupQuestionRepository;
 
-    public function __construct(SetupQuestionRepository $assessmentRepository) {
-        $this->assessmentRepository = $assessmentRepository;
+    public function __construct(SetupQuestionRepository $setupQuestionRepository) {
+        $this->setupQuestionRepository = $setupQuestionRepository;
     }
 
     public function index(){
         $perPage = 10;
-        $questions = $this->assessmentRepository->getAllData($perPage);
-        dd($questions);
+        $questions = $this->setupQuestionRepository->getAllData($perPage);
+        // dd($questions);
         return view('assessment.setup-assessment.show_questions', compact('questions'));
     }
 
     public function create(){
-        $categories = $this->assessmentRepository->getCategories();
-        $subCategories = $this->assessmentRepository->getSubCategories();
+        $categories = $this->setupQuestionRepository->getCategories();
+        $subCategories = $this->setupQuestionRepository->getSubCategories();
 
         // dd($categories, $subCategories);
         return view('assessment.setup-assessment.add_question', compact('categories', 'subCategories'));
@@ -44,13 +44,9 @@ class SetupQuestionController extends Controller
 
             // dd($validatedData);
 
-            // Update dynamic tables
-            // $categoryId = 1;
-            // $prefix = "AssessmentTool";
-            // $folder = "Assessments";
-            // $this->updateDynamicTables($folder, $prefix, $categoryId);
-            
-            $message = $this->assessmentRepository->create($validatedData);
+            $message = $this->setupQuestionRepository->create($validatedData);
+
+            // dd($message);
         
             return redirect()->back()->with('success', $message);
 

@@ -16,7 +16,7 @@
                     <div class="card__data__box">
                         <div class="field__data mt-2">
                             <div class="field__label">
-                                <span>The Personality Inventory for DSM-5 (PID-5) Child Age 11-17</span>
+                                <span>{{ $title }}</span>
                             </div>
                             <div class="input__field_data mt-2">
                                 <div class="sidebar" id="sidebar">

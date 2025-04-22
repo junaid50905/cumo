@@ -11,6 +11,8 @@ use App\Utility\ProjectConstants;
 use App\Repositories\UserRepository;
 use App\Repositories\DepartmentRepository;
 use App\Repositories\Appointments\AppointmentRepository;
+use App\Repositories\Events\EventCalendarRepository;
+
 use App\Repositories\Assessments\AssessmentPIDChildRepository;
 use Carbon\Carbon;
 use App\Models\Assessments\AssessmentToolQuesAns;
@@ -31,13 +33,15 @@ class AssessmentPIDChild extends Component
     protected $userRepository;
     protected $departmentRepository;
     protected $appointmentRepository;
+    protected $eventCalendarRepository;
     protected $assPIDChildRepository;
 
-    public function boot(UserRepository $userRepository, DepartmentRepository $departmentRepository, AppointmentRepository $appointmentRepository, AssessmentPIDChildRepository $assPIDChildRepository)
+    public function boot(UserRepository $userRepository, DepartmentRepository $departmentRepository, AppointmentRepository $appointmentRepository, EventCalendarRepository $eventCalendarRepository, AssessmentPIDChildRepository $assPIDChildRepository)
     {
         $this->userRepository = $userRepository;
         $this->departmentRepository = $departmentRepository;
         $this->appointmentRepository = $appointmentRepository;
+        $this->eventCalendarRepository = $eventCalendarRepository;
         $this->assPIDChildRepository = $assPIDChildRepository;
     }
 
@@ -45,7 +49,7 @@ class AssessmentPIDChild extends Component
     {
         try {
             $this->searchData = $searchData;
-            $categoryId = 1;
+            $categoryId = 1; // 1 = Child Age 11-17
 
             $this->departments = $this->departmentRepository->getAllDepartment();
             $this->all_user = $this->userRepository->getAllUser();
@@ -115,6 +119,28 @@ class AssessmentPIDChild extends Component
         try {
             $this->extractAndSaveFormData();
 
+            $appointmentId = $this->formData['introduction']['appointment_id'];
+            $categoryId = $this->formData['introduction']['category_id'];
+            $mainTeacherId = $this->formData['introduction']['main_teacher_id'];
+            $assistantTeacherId = $this->formData['introduction']['assistant_teacher_id'];
+
+            $eventType = 2; //2 = Assessment 
+            $eventStatus = 2; // 2 = Processing
+            $updateData = [
+                "assessment_status" => "Processing",
+            ];
+    
+            $this->appointmentRepository->updatedAppointmentData($appointmentId, $updateData);
+            $this->eventCalendarRepository->statusUpdated($appointmentId, $mainTeacherId, $assistantTeacherId, $eventType, $eventStatus);
+
+            DB::table('appointment_assessment_category')
+                    ->where('appointment_id', (int) $appointmentId ) 
+                    ->where('assessment_category_id', (int) $categoryId) 
+                    ->update([
+                        'status' => 'Processing', 
+                        'updated_at' => now(),
+                    ]); 
+
             if ($this->currentTabLiveware < count($this->questions)) {
                 $this->currentTabLiveware++;
             }
@@ -139,7 +165,26 @@ class AssessmentPIDChild extends Component
             
             $this->extractAndSaveFormData();
             $appointmentId = $this->formData['introduction']['appointment_id'];
+            $categoryId = $this->formData['introduction']['category_id'];
             // dd($appointmentId);
+            $mainTeacherId = $this->formData['introduction']['main_teacher_id'];
+            $assistantTeacherId = $this->formData['introduction']['assistant_teacher_id'];
+            $eventType = 2; // 2 = Assessment
+            $eventStatus = 4; // 4 = Completed
+            $updateData = [
+                "assessment_status" => "Completed" ?? "Processing",
+            ];
+
+            $this->appointmentRepository->updatedAppointmentData($appointmentId, $updateData);
+            $this->eventCalendarRepository->statusUpdated($appointmentId, $mainTeacherId, $assistantTeacherId, $eventType, $eventStatus);
+
+            DB::table('appointment_assessment_category')
+                ->where('appointment_id', (int) $appointmentId ) 
+                ->where('assessment_category_id', (int) $categoryId) 
+                ->update([
+                    'status' => 'Completed', 
+                    'updated_at' => now(),
+                ]); 
 
             // dd($this->formData);
             Session::flash('alert', ['type' => 'success', 'title' => 'Success! ', 'message' => 'Data save successfully!']);
@@ -207,6 +252,7 @@ class AssessmentPIDChild extends Component
             foreach ($value as $questionKey => $answer) {
                 list($subCategoryId, $questionId) = explode('_', substr($questionKey, strpos($questionKey, '_') + 1));
                 
+                // Prepare data for insertion or update
                 $formData = [
                     'appointment_id' => $this->formData['introduction']['appointment_id'],
                     'category_id' => $this->formData['introduction']['category_id'],
@@ -217,8 +263,9 @@ class AssessmentPIDChild extends Component
                     'answer' => $answer,
                     'main_teacher_id' => $this->formData['introduction']['main_teacher_id'],
                     'assistant_teacher_id' => $this->formData['introduction']['assistant_teacher_id'],
+                    'updated_at' => now(), // Update only updated_at during an update
                 ];
-               
+
                 // Check for existing record
                 $existingRecord = DB::table('assessment_tool_ques_ans')
                     ->where('appointment_id', $formData['appointment_id'])
@@ -227,16 +274,20 @@ class AssessmentPIDChild extends Component
                     ->where('question_id', $formData['question_id'])
                     ->first();
 
-                // Update or insert data based on existence of record
+                // Update or insert data based on the existence of the record
                 if ($existingRecord) {
+                    // Update only the updated_at field (don't touch created_at)
                     DB::table('assessment_tool_ques_ans')
                         ->where('appointment_id', $formData['appointment_id'])
                         ->where('category_id', $formData['category_id'])
                         ->where('sub_category_id', $formData['sub_category_id'])
                         ->where('question_id', $formData['question_id'])
-                        ->update($formData);
+                        ->update($formData); // Only update the existing fields
                 } else {
-                    DB::table('assessment_tool_ques_ans')->insert($formData);
+                    // Insert new record with both created_at and updated_at
+                    DB::table('assessment_tool_ques_ans')->insert(array_merge($formData, [
+                        'created_at' => now(), // Set created_at for first insert
+                    ]));
                 }
             }
         }
@@ -246,6 +297,7 @@ class AssessmentPIDChild extends Component
     public function render()
     {
         $data = [
+            'title' => 'The Personality Inventory for DSM-5 (PID-5) Child Age 11-17',
             'gender' => $this->genders,
             'learnAbout' => $this->learnAbout,
             'eduClass' => $this->eduClass,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Store;
+namespace App\Http\Requests\Setup;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,18 +24,11 @@ class StoreQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            "appointment_id"                        => 'required',
-            "event_type"                            => 'required',
-            "main_teacher_department"               => 'required',
-            "main_teacher_id"                       => 'required',
-            "assistant_teacher_department"          => 'required',
-            "assistant_teacher_id"                  => 'required',
-            "event_title"                           => 'required',
-            "assessment_category_id"                => 'nullable',
-            "event_medium_type"                     => 'required',
-            "event_date"                            => 'required',
-            "event_start_time"                      => 'required',
-            "event_end_time"                        => 'required',
+            "category_id"        => 'required',
+            "sub_category_id"    => 'required',
+            "name"               => 'required',
+            "question_no"        => 'required',
+            "is_reverse"         => 'nullable',
         ];
     }
 }

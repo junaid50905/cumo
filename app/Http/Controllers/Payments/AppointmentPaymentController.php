@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use App\Utility\ProjectConstants;
 
 use App\Http\Requests\Payments\StoreAppointmentPaymentRequest;
@@ -14,6 +15,7 @@ use App\Http\Requests\Payments\UpdateAppointmentPaymentRequest;
 use App\Repositories\Appointments\AppointmentRepository;
 use App\Repositories\Payments\AppointmentPaymentRepository;
 use App\Models\Appointments\Appointment;
+use App\Models\Assessments\AssessmentCategory;
 
 class AppointmentPaymentController extends Controller
 {
@@ -162,7 +164,7 @@ class AppointmentPaymentController extends Controller
         $validatedData['created_by'] = $userId;
         $payment_status = $validatedData['payment_status'];
         $appointmentId = $validatedData['appointment_id'];
-        // dd($validatedData);
+        // dd($validatedData['income_type']);
         $message = $this->appointmentPaymentRepository->updateOrCreate($validatedData);
         if($message && $payment_status == '5'){
             $data = [
@@ -174,6 +176,40 @@ class AppointmentPaymentController extends Controller
                 'is_first_payment' => false
             ];
             $this->appointmentRepository->updatedAppointmentData($appointmentId, $data);
+        }
+
+        // Handle Assessment Category Attachment
+        // dd($validatedData);
+        if ($validatedData['income_type'] === "2" && $validatedData['payment_status'] === "5") { // 2=Assessment 5=Completed
+            $appointment = Appointment::find($appointmentId);
+        
+            // Ensure the appointment exists
+            if (!$appointment) {
+                throw new \Exception('Appointment not found.');
+            }
+        
+            // Fetch the latest data for the given appointment_id
+            $latestRecord = DB::table('appointment_assessment_category')
+                ->where('appointment_id', $appointmentId)
+                ->latest('id')
+                ->first();
+        
+            if ($latestRecord) {
+                // If data exists, increment assessment_category_id
+                $newCategoryId = $latestRecord->assessment_category_id + 1;
+            } else {
+                // If no data exists, set assessment_category_id to 1
+                $newCategoryId = 1;
+            }
+        
+            // Insert the new record into the pivot table
+            DB::table('appointment_assessment_category')->insert([
+                'appointment_id' => $appointmentId,
+                'assessment_category_id' => $newCategoryId,
+                'status' => 'Pending',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
         }
 
         return $message;

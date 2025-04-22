@@ -205,74 +205,521 @@ button.btn.btn-success.w-100 {
 
                 </ul>
             </li>
-            <li class="{{ request()->routeIs('assessment-pid-child.*') ? 'mm-active' : '' }}">
+            <li class="{{ request()->routeIs('assessment-tools.*') ? 'mm-active' : '' }}">
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-share-alt"></i>
-                    <span>Assessment</span>
+                    <span>Assessment Tools</span>
                 </a>
                 <ul class="sub-menu" aria-expanded="true">
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">(PID-5)Age_11-17</a>
                         <ul class="sub-menu">
-                            <li class="{{ request()->routeIs('assessment-pid-child.create') || request()->routeIs('assessment-pid-child-search.search') ? 'mm-active' : '' }}">
-                                <a href="{{ route('assessment-pid-child.create') }}">Add PID-5 Child</a>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.create') && request('tool_id') == 1) ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 1)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 1]) }}">Add New</a>
                             </li>
-                            <li class="{{ request()->routeIs('assessment-pid-child.index') || request()->routeIs('assessment-pid-child.show') ? 'mm-active' : '' }}">
-                                <a href="{{ route('assessment-pid-child.index') }}">List PID-5 Child</a>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 1 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 1]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 1) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 1)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 1]) }}">All List</a>
                             </li>
                         </ul>
                     </li>
+
                     <li>
                         <a href="javascript: void(0);" class="has-arrow">(PID-5) Adult</a>
                         <ul class="sub-menu">
-                            <li><a href="{{ route('sensory-checklist-child.create') }}">Sensory checklist for Child</a>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.create') && request('tool_id') == 2) ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 2)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 2]) }}">Add New</a>
                             </li>
-                            <li><a href="{{ route('social-communication.create') }}">Social Communication</a></li>
-                            <li><a href="{{ route('occupational-therapy.create') }}">Occupational Therapy</a></li>
-                            <li><a href="{{ route('physiotherapy.create') }}">Physiotherapy</a></li>
-                            <li><a href="{{ route('functional-communication.create') }}">Functional Communication
-                                    Assessment</a></li>
-                            <li><a href="{{ route('functional-movement-skill.create') }}">Fundamental Movement
-                                    Skills</a></li>
-                            <li><a href="{{ route('executive-function.create') }}">Executive Function test</a></li>
-                            <li><a href="{{ route('autisum-behaviour.create') }}">Autism Behavior Checklist (ABC)</a>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 2 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 2]) }}">Pending List</a>
                             </li>
-                            <li><a href="{{ route('sensory-checklist-adult.create') }}">Sensory checklist for Young
-                                    Adult</a>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 2) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 2)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 2]) }}">All List</a>
                             </li>
-                            <li><a href="{{ route('individual-risk.create') }}">Individual risk assessment form</a>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">(EDHB) Guardian</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.create') && request('tool_id') == 3) ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 3)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 3]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 3 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 3]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 3) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 3)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 3]) }}">All List</a>
                             </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript: void(0);" class="has-arrow">(EDHB) Guardian</a>
+                        <a href="javascript: void(0);" class="has-arrow">Level 2-Anger—Child</a>
                         <ul class="sub-menu">
-                            <li><a href="{{ route('sensory-checklist-child.create') }}">Sensory checklist for Child</a>
+                            <li class="{{ request()->routeIs('assessment-tools.create') && request('tool_id') == 4 ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 4)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 4]) }}">Add New</a>
                             </li>
-                            <li><a href="{{ route('social-communication.create') }}">Social Communication</a></li>
-                            <li><a href="{{ route('occupational-therapy.create') }}">Occupational Therapy</a></li>
-                            <li><a href="{{ route('physiotherapy.create') }}">Physiotherapy</a></li>
-                            <li><a href="{{ route('functional-communication.create') }}">Functional Communication
-                                    Assessment</a></li>
-                            <li><a href="{{ route('functional-movement-skill.create') }}">Fundamental Movement
-                                    Skills</a></li>
-                            <li><a href="{{ route('executive-function.create') }}">Executive Function test</a></li>
-                            <li><a href="{{ route('autisum-behaviour.create') }}">Autism Behavior Checklist (ABC)</a>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 4 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 4]) }}">Pending List</a>
                             </li>
-                            <li><a href="{{ route('sensory-checklist-adult.create') }}">Sensory checklist for Young
-                                    Adult</a>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 4) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 4)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 4]) }}">All List</a>
                             </li>
-                            <li><a href="{{ route('individual-risk.create') }}">Individual risk assessment form</a>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Level 2—Anxiety—Child</a>
+                        <ul class="sub-menu">
+                            <li class="{{ request()->routeIs('assessment-tools.create') && request('tool_id') == 5 ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 5)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 5]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 5 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 5]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 5) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 5)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 5]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Level 2—Depression—Child</a>
+                        <ul class="sub-menu">
+                            <li class="{{ request()->routeIs('assessment-tools.create') && request('tool_id') == 6 ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 6)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 6]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 6 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 6]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 6) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 6)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 6]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Level 2—Irritability—Child</a>
+                        <ul class="sub-menu">
+                            <li class="{{ request()->routeIs('assessment-tools.create') && request('tool_id') == 7 ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 7)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 7]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 7 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 7]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 7) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 7)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 7]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Level 2—Repetitive & Behaviors Child</a>
+                        <ul class="sub-menu">
+                            <li class="{{ request()->routeIs('assessment-tools.create') && request('tool_id') == 8 ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 8)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 8]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 8 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 8]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 8) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 8)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 8]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Level 2—Sleep Disturbance Child</a>
+                        <ul class="sub-menu">
+                            <li class="{{ request()->routeIs('assessment-tools.create') && request('tool_id') == 9 ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 9)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 9]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 9 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 9]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 9) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 9)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 9]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Level 2—Somatic Symptom Child</a>
+                        <ul class="sub-menu">
+                            <li class="{{ request()->routeIs('assessment-tools.create') && request('tool_id') == 10 ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 10)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 10]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 10 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 10]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 10) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 10)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 10]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">WHODAS 2.0</a>
+                        <ul class="sub-menu">
+                            <li class="{{ request()->routeIs('assessment-tools.create') && request('tool_id') == 11 ||
+                                (request()->routeIs('assessment-tools.search') && request()->query('tool_id') == 11)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.create', ['tool_id' => 11]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-pending-list') && request('tool_id') == 11 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-pending-list', ['tool_id' => 11]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-tools.index') && request()->query('tool_id') == 11) ||
+                                (request()->routeIs('assessment-tools.show') && request()->query('tool_id') == 11)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-tools.index', ['tool_id' => 11]) }}">All List</a>
                             </li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li>
-                <a href="{{ route('admission.addStudent') }}" class="waves-effect">
+            <li class="{{ request()->routeIs('assessments.*') ? 'mm-active' : '' }}">
+                <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-share-alt"></i>
-                    <span>Admission</span>
+                    <span>Assessment Checklists</span>
                 </a>
+                <ul class="sub-menu" aria-expanded="true">
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Functional Communication</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 1) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 1)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 1]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 1 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 1]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 1) ||
+                                (request()->routeIs('assessment-checklists.show') && request()->query('checklist_id') == 1)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 1]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">ABC Autism Behavior Checklist</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 2) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 2)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 2]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 2 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 2]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 2) ||
+                                (request()->routeIs('assessment-checklists.show') && request()->query('checklist_id') == 2)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 2]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Balancing Mobility and Stability</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 3) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 3)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 3]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 3 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 3]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 3) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 3]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 3]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Executive Function</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 4) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 4)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 4]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 4 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 4]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 4) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 4]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 4]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Computer Training OT Observation</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 5) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 5)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 5]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 5 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 5]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 5) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 5]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 5]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Sensory Checklist for Child</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 6) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 6)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 6]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 5 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 6]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 6) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 6]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 6]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Tactile Sensory Checklist</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 7) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 7)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 7]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 7 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 7]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 7) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 7]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 7]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Psychological Assessment</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 8) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 8)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 8]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 8 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 8]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 8) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 8]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 8]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Reviewed Case History</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 9) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 9)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 9]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 9 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 9]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 9) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 9]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 9]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Home Visit Checklist</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 10) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 10)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 10]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 10 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 10]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 10) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 10]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 10]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Psychological Assessment Report</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 11) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 11)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 11]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 11 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 11]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 11) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 11]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 11]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript: void(0);" class="has-arrow">Social Communication Adult Checklist</a>
+                        <ul class="sub-menu">
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.create') && request('checklist_id') == 12) ||
+                                (request()->routeIs('assessment-checklist.search') && request()->query('checklist_id') == 12)
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.create', ['checklist_id' => 12]) }}">Add New</a>
+                            </li>
+                            <li class="{{ request()->routeIs('assessment-checklists.pending-list') && request('checklist_id') == 12 ? 'mm-active' : '' }}">
+                                <a href="{{ route('assessment-checklists.pending-list', ['checklist_id' => 12]) }}">Pending List</a>
+                            </li>
+                            <li class="{{
+                                (request()->routeIs('assessment-checklists.index') && request('checklist_id') == 12) ||
+                                (request()->routeIs('assessment-checklists.show', ['checklist_id' => 12]))
+                                    ? 'mm-active'
+                                    : '' }}">
+                                <a href="{{ route('assessment-checklists.index', ['checklist_id' => 12]) }}">All List</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </li>
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -429,7 +876,7 @@ button.btn.btn-success.w-100 {
                     </li>
                 </ul>
             </li>
-            
+
             <li>
                 <a href="javascript: void(0);" class="has-arrow waves-effect">
                     <i class="bx bx-share-alt"></i>

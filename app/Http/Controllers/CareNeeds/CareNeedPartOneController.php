@@ -26,6 +26,11 @@ use App\Models\LinkCodeCount\LinkCodeCount;
 use App\Models\Appointments\Appointment;
 use App\Models\Setup\TableOfContent;
 use App\Models\CareNeeds\CareNeedPartoneSuggestion;
+use App\Models\CareNeeds\CareNeedPartOneSpeciality;
+use App\Models\CareNeeds\CareNeedPartOneAssessmentInfo;
+use App\Models\CareNeeds\CareNeedPartOneHomeInfo;
+use App\Models\CareNeeds\CareNeedPartOneEducationalInfo;
+use App\Models\CareNeeds\CareNeedPartOneChildCondition;
 
 
 class CareNeedPartOneController extends Controller
@@ -163,46 +168,64 @@ class CareNeedPartOneController extends Controller
 
     public function summaryCareNeedPartOne()
     {
-        $linkCodeCounts = LinkCodeCount::select('link_code', 'appointment_id', \DB::raw('SUM(count) as total_count'))
-            ->groupBy('link_code', 'appointment_id') 
-            ->orderBy('total_count', 'DESC') 
-            ->get();
-  
-        $linkCodes = $linkCodeCounts->pluck('link_code');
-        $titles = TableOfContent::whereIn('link_code', $linkCodes)
-            ->pluck('title', 'link_code');
-        
-        $appointmentNames = Appointment::whereIn('id', $linkCodeCounts->pluck('appointment_id'))
+        // Get all reports data from each table that contains a 'reports' column and 'appointment_id'
+        $specialityReports = CareNeedPartOneSpeciality::with('appointment')
+            ->whereNotNull('specialities_report')
+            ->select('specialities_report', 'appointment_id')
             ->get()
-            ->mapWithKeys(function ($appointment) {
-                return [$appointment->id => "({$appointment->student_id}) {$appointment->name}"];
+            ->map(function ($report) {
+                $report->table = 'specialities'; // Add the table name as a custom attribute
+                return $report;
             });
-        // dd($appointmentNames);
 
-        // Group link code counts by appointment_id
-        $groupedByAppointmentId = $linkCodeCounts->groupBy('appointment_id');
+        // dd($specialityReports);
 
-        // Map the grouped data to create a new array structure with max 5 link_codes per appointment_id
-        $linkCodeTitlesGrouped = $groupedByAppointmentId->map(function ($items, $appointmentId) use ($titles, $appointmentNames) {
-            $appointmentName = $appointmentNames->get($appointmentId, 'Unknown Appointment'); 
-            
-            $data = $items->sortByDesc('total_count') 
-                ->take(3) 
-                ->map(function ($item) use ($titles) {
-                    $title = $titles->get($item->link_code, 'No Title'); 
-                    return [
-                        'title' => $title,
-                        'total_count' => $item->total_count,
-                    ];
-                });
-            return [
-                'appointment_id' => $appointmentId,
-                'appointment_name' => $appointmentName,
-                'link_codes' => $data
-            ];
-        });
-        // dd($linkCodeTitlesGrouped);
-        return view('pre_admission.care-need-part-one.summary_list', compact('linkCodeTitlesGrouped'));
+        $assessmentReports = CareNeedPartOneAssessmentInfo::with('appointment')
+            ->whereNotNull('assessment_infos_report')
+            ->select('assessment_infos_report', 'appointment_id')
+            ->get()
+            ->map(function ($report) {
+                $report->table = 'assessment_infos';
+                return $report;
+            });
+
+        $homeInfoReports = CareNeedPartOneHomeInfo::with('appointment')
+            ->whereNotNull('home_infos_report')
+            ->select('home_infos_report', 'appointment_id')
+            ->get()
+            ->map(function ($report) {
+                $report->table = 'home_infos';
+                return $report;
+            });
+
+        $educationalReports = CareNeedPartOneEducationalInfo::with('appointment')
+            ->whereNotNull('educational_infos_report')
+            ->select('educational_infos_report', 'appointment_id')
+            ->get()
+            ->map(function ($report) {
+                $report->table = 'educational_infos';
+                return $report;
+            });
+
+        $childConditionReports = CareNeedPartOneChildCondition::with('appointment')
+            ->whereNotNull('child_conditions_report')
+            ->select('child_conditions_report', 'appointment_id')
+            ->get()
+            ->map(function ($report) {
+                $report->table = 'child_conditions';
+                return $report;
+            });
+
+        // Merge all reports
+        $allReports = $specialityReports->concat($assessmentReports)
+                                        ->concat($homeInfoReports)
+                                        ->concat($educationalReports);
+
+        // Group by appointment_id
+        $groupedReports = $allReports->groupBy('appointment_id');
+        
+        // dd($groupedReports);
+        return view('pre_admission.care-need-part-one.summary_list', compact('groupedReports'));
     }
 
     public function reportCareNeedPartOne($appointment_id)
@@ -228,50 +251,10 @@ class CareNeedPartOneController extends Controller
             'condition_at_home_information' => $appointment->care_need_part_one_home_infos->home_infos_report,
             'educational_information' => $appointment->care_need_part_one_educational_infos->educational_infos_report,
             'child_condition_at_his_family' => $appointment->care_need_part_one_child_conditions->child_conditions_report,
-            'schoolings' => $appointment->care_need_part_one_schoolings->schoolings_report,
         ];
         // dd($data);
 
         return view('pre_admission.care-need-part-one.report', ['data' => $data, 'appointment' => $appointment, 'cocurricularActivities' => $cocurricularActivities,'therapies' => $therapies,'suggestionData' => $suggestionData]);
-
-        // $linkCodeCounts = LinkCodeCount::select('link_code', \DB::raw('SUM(count) as total_count'))
-        //     ->where('appointment_id', $appointment_id)
-        //     ->groupBy('link_code', 'appointment_id')
-        //     ->orderBy('total_count', 'DESC')
-        //     ->get();
-
-        // $linkCodes = $linkCodeCounts->pluck('link_code');
-        
-        // $tableOfContents = TableOfContent::whereIn('link_code', $linkCodes)
-        //     ->with('parent')
-        //     ->get();
-
-        // //Build full title path function
-        // function buildFullTitlePath($item)
-        // {
-        //     if ($item->parent) {
-        //         return buildFullTitlePath($item->parent) . '->' . $item->title;
-        //     }
-        //     return $item->title;
-        // }
-
-        // $linkCodeTitles = $linkCodeCounts->map(function ($item) use ($tableOfContents) {
-        //     $tocItem = $tableOfContents->firstWhere('link_code', $item->link_code);
-        //     if ($tocItem) {
-        //         $fullTitle = buildFullTitlePath($tocItem);
-        //     } else {
-        //         $fullTitle = 'no title';
-        //     }
-
-        //     return [
-        //         'link_code' => $item->link_code,
-        //         'total_count' => $item->total_count,
-        //         'title' => $fullTitle
-        //     ];
-        // });
-
-        // dd($appointment, $linkCodeCounts, $linkCodeTitles);
-        // return view('pre_admission.care-need-part-one.report', compact('appointment', 'linkCodeTitles','cocurricularActivities','therapies', 'suggestionData'));
     }
 
     public function suggestionCareNeedPartOne(Request $request)
@@ -347,4 +330,90 @@ class CareNeedPartOneController extends Controller
 
         return view('pre_admission.care-need-part-one.details', ['id' => $introduction->id]);
     }
+
+
+    // count total link function
+    // public function countTotalLinkCode()
+    // {
+    //     $linkCodeCounts = LinkCodeCount::select('link_code', 'appointment_id', \DB::raw('SUM(count) as total_count'))
+    //         ->groupBy('link_code', 'appointment_id') 
+    //         ->orderBy('total_count', 'DESC') 
+    //         ->get();
+  
+    //     $linkCodes = $linkCodeCounts->pluck('link_code');
+    //     $titles = TableOfContent::whereIn('link_code', $linkCodes)
+    //         ->pluck('title', 'link_code');
+        
+    //     $appointmentNames = Appointment::whereIn('id', $linkCodeCounts->pluck('appointment_id'))
+    //         ->get()
+    //         ->mapWithKeys(function ($appointment) {
+    //             return [$appointment->id => "({$appointment->student_id}) {$appointment->name}"];
+    //         });
+    //     // dd($appointmentNames);
+
+    //     // Group link code counts by appointment_id
+    //     $groupedByAppointmentId = $linkCodeCounts->groupBy('appointment_id');
+
+    //     // Map the grouped data to create a new array structure with max 5 link_codes per appointment_id
+    //     $linkCodeTitlesGrouped = $groupedByAppointmentId->map(function ($items, $appointmentId) use ($titles, $appointmentNames) {
+    //         $appointmentName = $appointmentNames->get($appointmentId, 'Unknown Appointment'); 
+            
+    //         $data = $items->sortByDesc('total_count') 
+    //             ->take(3) 
+    //             ->map(function ($item) use ($titles) {
+    //                 $title = $titles->get($item->link_code, 'No Title'); 
+    //                 return [
+    //                     'title' => $title,
+    //                     'total_count' => $item->total_count,
+    //                 ];
+    //             });
+    //         return [
+    //             'appointment_id' => $appointmentId,
+    //             'appointment_name' => $appointmentName,
+    //             'link_codes' => $data
+    //         ];
+    //     });
+    //     dd($linkCodeTitlesGrouped);
+
+    // Another ways
+    // $linkCodeCounts = LinkCodeCount::select('link_code', \DB::raw('SUM(count) as total_count'))
+    //     ->where('appointment_id', $appointment_id)
+    //     ->groupBy('link_code', 'appointment_id')
+    //     ->orderBy('total_count', 'DESC')
+    //     ->get();
+
+    // $linkCodes = $linkCodeCounts->pluck('link_code');
+    
+    // $tableOfContents = TableOfContent::whereIn('link_code', $linkCodes)
+    //     ->with('parent')
+    //     ->get();
+
+    // //Build full title path function
+    // function buildFullTitlePath($item)
+    // {
+    //     if ($item->parent) {
+    //         return buildFullTitlePath($item->parent) . '->' . $item->title;
+    //     }
+    //     return $item->title;
+    // }
+
+    // $linkCodeTitles = $linkCodeCounts->map(function ($item) use ($tableOfContents) {
+    //     $tocItem = $tableOfContents->firstWhere('link_code', $item->link_code);
+    //     if ($tocItem) {
+    //         $fullTitle = buildFullTitlePath($tocItem);
+    //     } else {
+    //         $fullTitle = 'no title';
+    //     }
+
+    //     return [
+    //         'link_code' => $item->link_code,
+    //         'total_count' => $item->total_count,
+    //         'title' => $fullTitle
+    //     ];
+    // });
+
+    // dd($appointment, $linkCodeCounts, $linkCodeTitles);
+
+    //     return view('pre_admission.care-need-part-one.summary_list', compact('linkCodeTitlesGrouped'));
+    // }
 }

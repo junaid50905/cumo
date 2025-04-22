@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 use App\Http\Requests\Events\StoreEventScheduleRequest;
 use App\Models\Appointment;
@@ -194,12 +195,48 @@ class EventCalendarController extends Controller
             // Fetch the appointment ID from the validated data
             $appointmentId = $validatedData['appointment_id'];
             $eventType = $validatedData['event_type'];
+
+            // dd((int) $appointmentId, (int)$validatedData['category_id']);
           
             if($eventType === "1"){
                 Session::flash('alert', ['type' => 'success', 'title'=>'Success! ', 'message' => 'Interview Schedule Setup Successfully!']);
-                // return redirect()->route('appointment.edit', $appointmentId);
                 return redirect()->route('event_schedule_list', ['event_type' => $eventType]);
             }else if($eventType === "2"){
+                // DB::table('appointment_assessment_category')
+                //     ->where('appointment_id', (int) $appointmentId ) 
+                //     ->where('assessment_category_id', (int) $validatedData['category_id']) 
+                //     ->update([
+                //         'status' => 'Schedule', 
+                //         'updated_at' => now(),
+                //     ]);
+
+                // Check if the record exists first
+                $existingRecord = DB::table('appointment_assessment_category')
+                ->where('appointment_id', (int) $appointmentId)
+                ->where('assessment_category_id', (int) $validatedData['category_id'])
+                ->first();  // Get the first matching record
+
+                if ($existingRecord) {
+                // If the record exists, update it
+                DB::table('appointment_assessment_category')
+                    ->where('appointment_id', (int) $appointmentId)
+                    ->where('assessment_category_id', (int) $validatedData['category_id'])
+                    ->update([
+                        'status' => 'Schedule',
+                        'updated_at' => now(),
+                    ]);
+                } else {
+                // If the record doesn't exist, insert a new one
+                DB::table('appointment_assessment_category')
+                    ->insert([
+                        'appointment_id' => (int) $appointmentId,
+                        'assessment_category_id' => (int) $validatedData['category_id'],
+                        'status' => 'Schedule',
+                        'created_at' => now(),
+                        'updated_at' => now(),
+                    ]);
+                }
+
                 Session::flash('alert', ['type' => 'success', 'title'=>'Success! ', 'message' => 'Assessment Schedule Setup Successfully!']);
                 return redirect()->route('event_schedule_list', ['event_type' => $eventType]);
             }else {
@@ -427,7 +464,7 @@ class EventCalendarController extends Controller
 
             return view('setup.event_schedule.assessment_create', $data);
         }
-        dd('Ok');
+        // dd('Ok');
     }
 
     private function appointmentDetails($appointmentId, $incomeType, $dataType = null){

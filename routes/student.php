@@ -8,6 +8,9 @@ use App\Http\Livewire\AppointmentList;
 use App\Http\Controllers\Appointments\AppointmentController;
 use App\Http\Controllers\CareNeeds\CareNeedPartOneController;
 use App\Http\Controllers\Assessments\AssessmentPIDChildController;
+use App\Http\Controllers\Assessments\AssessmentPIDAdultController;
+use App\Http\Controllers\Assessments\AssessmentToolsController;
+use App\Http\Controllers\Assessments\AssessmentChecklistsController;
 
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\CaseHistoryController;
@@ -48,19 +51,23 @@ use App\Http\Controllers\PdfController;
 
 Route::group(['prefix' => 'student', 'middleware' => ['auth']], function () {
     Route::resources([
+        'appointment' => AppointmentController::class,
+        'interview' => InterviewController::class,
+        'care-need-part-one' => CareNeedPartOneController::class,
+        'assessment-tools' => AssessmentToolsController::class,
+        'assessment-checklists' => AssessmentChecklistsController::class,
+        
         'student' => StudentController::class,
         'social-communication' => SocialController::class,
         'medicine-admin' => MedicineAdminController::class,
         'incident-record' => IncidentRecordController::class,
         'ot-assessment' => OtAssessmentController::class,
         'trip' => TripController::class,
-        'appointment' => AppointmentController::class,
-        'interview' => InterviewController::class,
-        'care-need-part-one' => CareNeedPartOneController::class,
         'care-need' => CareNeedController::class,
         'case-history' => CaseHistoryController::class,
         'referral' => ReferralController::class,
-        'assessment-pid-child' => AssessmentPIDChildController::class,
+        // 'assessment-pid-child' => AssessmentPIDChildController::class,
+        // 'assessment-pid-adult' => AssessmentPIDAdultController::class,
         'autisum-behaviour' => AutisumBhehaviourController::class,
         'executive-function' => ExecutiveFunctionController::class,
         'sensory-checklist-adult' => SensoryAdultController::class,
@@ -96,8 +103,18 @@ Route::group(['prefix' => 'student', 'middleware' => ['auth']], function () {
     // Care Need part one end
 
     //Assessment Start
-    Route::match(['get', 'post'], 'assessment-pid-child-search', [AssessmentPIDChildController::class, 'search'])->name('assessment-pid-child-search.search');
-    Route::match(['get', 'post'], 'assessment-pid-child-report-search', [AssessmentPIDChildController::class, 'searchReport'])->name('assessment-pid-child-report-search.search');
+    // Route::get('/assessment-pending-list/{tool_id}', [AssessmentPIDChildController::class, 'pendingList'])->name('assessment-pending-list');
+    // Route::match(['get', 'post'], 'assessment-pid-child-search', [AssessmentPIDChildController::class, 'search'])->name('assessment-pid-child-search.search');
+    // Route::match(['get', 'post'], 'assessment-pid-child-report-search', [AssessmentPIDChildController::class, 'searchReport'])->name('assessment-pid-child-report-search.search');
+    // Route::get('/assessment-pending-list-adult/{tool_id}', [AssessmentPIDAdultController::class, 'pendingList'])->name('assessment-pending-list-adult');
+    // Route::match(['get', 'post'], 'assessment-pid-adult-search', [AssessmentPIDAdultController::class, 'search'])->name('assessment-pid-adult-search.search');
+    // Route::match(['get', 'post'], 'assessment-pid-adult-report-search', [AssessmentPIDAdultController::class, 'searchReport'])->name('assessment-pid-adult-report-search.search');
+    
+    Route::get('/assessment-pending-list/{tool_id}', [AssessmentToolsController::class, 'pendingList'])->name('assessment-pending-list');
+    Route::match(['get', 'post'], 'assessment-tools-search', [AssessmentToolsController::class, 'search'])->name('assessment-tools.search');
+
+    Route::get('/assessment-checklists/pending-list/{checklist_id}', [AssessmentChecklistsController::class, 'pendingList'])->name('assessment-checklists.pending-list');
+    Route::match(['get', 'post'], '/assessment-checklists/search', [AssessmentChecklistsController::class, 'search'])->name('assessment-checklist.search');
     //Assessment End
 
     // Student Profile Route Start

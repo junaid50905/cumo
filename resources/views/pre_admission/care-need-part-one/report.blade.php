@@ -60,12 +60,32 @@
                                     @php $loopIndex = 1; @endphp  
 
                                     @forelse ($data as $index => $result)
-                                        <tr>
-                                            <th scope="row">{{ $loopIndex }}</th>
-                                            <td>{{ ucfirst(str_replace('_', ' ', $index)) }}</td> 
-                                            <td>{{ $result }}</td>  
-                                        </tr>
-                                        @php $loopIndex++; @endphp 
+                                        @php
+                                            // Check if $result is a valid JSON string
+                                            $isJson = is_string($result) && is_array(json_decode($result, true)) && (json_last_error() === JSON_ERROR_NONE);
+                                        @endphp
+
+                                        @if ($isJson)
+                                            @php
+                                                $parsedJson = json_decode($result, true);
+                                            @endphp
+
+                                            @foreach ($parsedJson as $key => $value)
+                                                <tr>
+                                                    <th scope="row">{{ $loopIndex }}</th>
+                                                    <td>{{ ucfirst(str_replace('_', ' ', $key)) }}</td> 
+                                                    <td>{{ $value }}</td>  
+                                                </tr>
+                                                @php $loopIndex++; @endphp 
+                                            @endforeach
+                                        @else
+                                            <tr>
+                                                <th scope="row">{{ $loopIndex }}</th>
+                                                <td>{{ ucfirst(str_replace('_', ' ', $index)) }}</td> 
+                                                <td>{{ $result }}</td>  
+                                            </tr>
+                                            @php $loopIndex++; @endphp 
+                                        @endif
                                     @empty
                                         <tr>
                                             <td colspan="3" class="text-center">No data available</td>

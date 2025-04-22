@@ -20,7 +20,7 @@ class SetupQuestionRepository extends BaseRepository
 
     public function getAllData($perPage)
     {
-        return $this->model::latest()->paginate($perPage);
+        return $this->model::with('category','subCategory')->latest()->paginate($perPage);
     }
 
     public function getCategories()
@@ -37,7 +37,11 @@ class SetupQuestionRepository extends BaseRepository
     public function create(array $data): string
     {
         try {
-            $this->model::create($data);
+            // dd($data);
+            $this->model::updateOrCreate(
+                ['category_id' => (int) $data['category_id'], (int)$data['sub_category_id'], 'question_no' => (int) $data['question_no']],
+                $data
+            );
             return 'Assessment question created successfully.';
         } catch (\Throwable $th) {
             return 'Failed to create assessment question: ' . $th->getMessage();

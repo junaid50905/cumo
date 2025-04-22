@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Collection;
-use App\Models\Appointment;
+use Illuminate\Support\Facades\DB;
+
+use App\Models\Appointments\Appointment;
+use App\Models\Assessments\AssessmentCategory;
 use App\Models\Assessments\AssessmentToolQuesAns;
 use App\Utility\ProjectConstants;
 use App\Repositories\UserRepository;
@@ -35,6 +38,7 @@ class AssessmentPIDChildController extends Controller
     public function index()
     {
         $userData = AssessmentToolQuesAns::with(['appointment', 'mainTeacher', 'assistantTeacher'])
+                    ->where('category_id', 1)
                     ->orderBy('assessment_date', 'desc')
                     ->get();
 
@@ -50,7 +54,7 @@ class AssessmentPIDChildController extends Controller
                 'total_sum_of_answers' => $items->sum('answer'),
                 'assessment_date' => $items->first()->assessment_date,
                 'appointment_id' => $items->first()->appointment->id,
-                'appointment_name' => $items->first()->appointment->name,
+                'appointment_name' => '('.$items->first()->appointment->student_id.')'.$items->first()->appointment->name,
                 'main_teacher_name' => $items->first()->mainTeacher->name,
                 'assistant_teacher_name' => $items->first()->assistantTeacher->name
             ];
@@ -58,7 +62,7 @@ class AssessmentPIDChildController extends Controller
 
         // dd($collections);
 
-        return view('assessment.pid-five-child.show', compact('collections'));
+        return view('assessment.pid-five-child.list', compact('collections'));
     }
 
     /**
@@ -309,5 +313,39 @@ class AssessmentPIDChildController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+
+    public function pendingList($tool_id)
+    {
+        // $appointments = Appointment::whereHas('assessmentCategories', function ($query) use ($tool_id) {
+        //     $query->where('assessment_category_id', $tool_id)
+        //         ->where('appointment_assessment_category.status', 'Schedule'); 
+        // })->with(['assessmentCategories' => function ($query) use ($tool_id) {
+        //     $query->where('assessment_category_id', $tool_id)
+        //         ->where('appointment_assessment_category.status', 'Schedule');
+        // }])->get();
+
+        $appointments = Appointment::whereHas('assessmentCategories', function ($query) use ($tool_id) {
+            $query->where('assessment_category_id', $tool_id)
+                    ->whereIn('appointment_assessment_category.status', ['Schedule', 'Processing']);
+        })->whereHas('event_calendars', function ($query) use ($tool_id){
+            $query->where('category_id', $tool_id)
+                  ->where('event_type', 2);
+        })->with([
+            'assessmentCategories' => function ($query) use ($tool_id) {
+                $query->where('assessment_category_id', $tool_id)
+                        ->whereIn('appointment_assessment_category.status', ['Schedule', 'Processing']);
+            },
+            'event_calendars' => function ($query) use ($tool_id){
+                $query->where('category_id', $tool_id)
+                      ->where('event_type', 2)
+                      ->with(['main_teacher', 'assistant_teacher']);
+            },
+        ])->paginate(10);
+
+        // dd($appointments);
+
+        return view('assessment.pid-five-child.pending_list', compact('appointments'));
     }
 }

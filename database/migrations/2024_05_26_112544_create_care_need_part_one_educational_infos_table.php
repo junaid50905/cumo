@@ -16,10 +16,6 @@ return new class extends Migration
     {
         Schema::create('care_need_part_one_educational_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('going_to_school')->nullable();
-            $table->string('going_school_if_yes_when')->nullable();
-            $table->string('going_school_if_other_name')->nullable();
-            $table->string('going_school_name_of_school')->nullable();
             $table->string('speaking_capacity')->nullable();
             $table->string('listening_capacity')->nullable();
             $table->string('reading_capacity')->nullable();

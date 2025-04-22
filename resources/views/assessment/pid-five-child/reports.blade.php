@@ -22,7 +22,7 @@
                         </form>
                     </div>
                 </div>
-                <h4>Reports of DSM-5 (PID-5)_Child Age 11-17</h4>
+                <h4>{{ $toolTitle }}</h4>
                 <div class="card__data__box">
                     <div class="field__data mt-2">
                         <table class="table table-striped table-hover table-bordered border-info table-sm">

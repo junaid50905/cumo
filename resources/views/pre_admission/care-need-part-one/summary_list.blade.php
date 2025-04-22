@@ -2,6 +2,7 @@
 @section('title')
 @lang('translation.Tabs_&_Accordions')
 @endsection
+
 @section('content')
 <div class="row">
     <div class="col-xl-12">
@@ -34,42 +35,80 @@
                                                     <i class="dripicons-arrow-thin-up"></i>
                                                 </span>
                                             </th>
-                                            @for ($i = 1; $i <= 3; $i++)
-                                                <th>Title{{ $i }}</th>
-                                                <th>Count {{ $i }}</th>
-                                            @endfor
+                                            <th>Speciality Reports</th>
+                                            <th>Assessment Reports</th>
+                                            <th>Home Info Reports</th>
+                                            <th>Educational Reports</th>
+                                            <!-- <th>Child Condition Reports</th> -->
                                             <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($linkCodeTitlesGrouped as $appointmentId => $appointmentData)
-                                            <tr>
-                                                <!-- Appointment Name -->
-                                                <td>{{ $appointmentData['appointment_name'] }}</td>
+                                        @foreach ($groupedReports as $appointmentId => $reports)
+                                        @php
+                                        // Get the appointment details (assuming only one appointment per group)
+                                        $appointment = $reports->first()->appointment;
+                                        @endphp
 
-                                                <!-- Link Code Details (up to 5) -->
-                                                @foreach ($appointmentData['link_codes'] as $linkCodeData)
-                                                    <td>{{ $linkCodeData['title'] }}</td>
-                                                    <td>{{ $linkCodeData['total_count'] }}</td>
+                                        <tr>
+                                            <td>{{ $appointment->student_id }} - {{ $appointment->name }}</td>
+
+                                            <!-- Speciality Reports -->
+                                            <td>
+                                                @foreach ($reports->where('table', 'specialities') as $report)
+                                                {{ $report->specialities_report }}<br>
                                                 @endforeach
-                                                <td class="d-flex align-items-center justify-content-end">
-                                                    <a href="{{ route('care-need-part-one.show', $appointmentData['appointment_id']) }}"
-                                                        rel="noopener noreferrer"
-                                                        class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1"
-                                                        title="Start Interview">
-                                                        <i class="mdi mdi-cog"></i>
-                                                    </a>
-                                                    <a href="{{ route('care-need-part-one-report.report', $appointmentData['appointment_id']) }}"
-                                                        rel="noopener noreferrer"
-                                                        class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 me-1"
-                                                        title="Edit">
-                                                        <i class="mdi mdi-eye"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                            </td>
+
+                                            <!-- Assessment Reports -->
+                                            <td>
+                                                @foreach ($reports->where('table', 'assessment_infos') as $report)
+                                                {{ $report->assessment_infos_report }}<br>
+                                                @endforeach
+                                            </td>
+
+                                            <!-- Home Info Reports -->
+                                            <td>
+                                                @foreach ($reports->where('table', 'home_infos') as $report)
+                                                {{ $report->home_infos_report }}<br>
+                                                @endforeach
+                                            </td>
+
+                                            <!-- Educational Reports -->
+                                            <td>
+                                                @foreach ($reports->where('table', 'educational_infos') as $report)
+                                                {{ $report->educational_infos_report }}<br>
+                                                @endforeach
+                                            </td>
+
+                                            <!-- Child Condition Reports -->
+                                            <!-- <td>
+                                                @foreach ($reports->where('table', 'child_conditions') as $report)
+                                                    {{ $report->child_conditions_report }}<br>
+                                                @endforeach
+                                            </td> -->
+
+                                            <!-- Action Column -->
+                                            <td class="d-flex align-items-center justify-content-end">
+                                                <a href="{{ route('care-need-part-one.show', $appointment->id) }}"
+                                                    rel="noopener noreferrer"
+                                                    class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1"
+                                                    title="Start Interview">
+                                                    <i class="mdi mdi-cog"></i>
+                                                </a>
+                                                <a href="{{ route('care-need-part-one-report.report', $appointment->id) }}"
+                                                    rel="noopener noreferrer"
+                                                    class="btn btn-sm btn-success btn-rounded waves-effect waves-light mb-2 me-1"
+                                                    title="Edit">
+                                                    <i class="mdi mdi-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                <!-- Pagination -->
                                 <div>
                                     <nav aria-label="Page navigation example">
                                         <ul class="pagination justify-content-end">

@@ -39,7 +39,6 @@
                                             <th>Payment</th>
                                             <th>Interview</th>
                                             <th>Assessment</th>
-                                            <th>Schedule</th>
                                             <th class="text-end">Action</th>
                                         </tr>
                                     </thead>
@@ -52,7 +51,6 @@
                                             <td>{{ $item['payment_status_updated'] }}</td>
                                             <td>{{ $item['interview_status'] }}</td>
                                             <td>{{ $item['assessment_status'] }}</td>
-                                            <td>Pending</td>
                                             <td class="d-flex align-items-center justify-content-end">
                                                 <a href="{{ route('setup_event_schedule', [$item['appointment_id'], $item['income_type']]) }}"
                                                     class="btn btn-sm btn-primary btn-rounded waves-effect waves-light mb-2 me-1" title="Setup Schedule">

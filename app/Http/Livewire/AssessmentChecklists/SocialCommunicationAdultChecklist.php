@@ -128,7 +128,13 @@ class SocialCommunicationAdultChecklist extends Component
                 ['id' => 47, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 47, 'question' => 'Truthfulness of information (grandiosity)', 'options' => $this->options, 'link_codes' => ['D4.a.1']],
                 ['id' => 48, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 48, 'question' => 'Ability to establish joint activity', 'options' => $this->options, 'link_codes' => ['D4.a.2.07', 'D4.c.1']],
                 ['id' => 49, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 49, 'question' => 'Tendency to present personal opinions as factual', 'options' => $this->options, 'link_codes' => ['D4.c.2', 'D4.c.4']],
-            ]
+            ],
+            'Repair Structures' => [
+                ['id' => 50, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 50, 'question' => 'Requests clarification as needed', 'options' => $this->options, 'link_codes' => ['D4.c.8']],
+                ['id' => 51, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 51, 'question' => 'Spontaneously provides additional information', 'options' => $this->options, 'link_codes' => ['D4.c.8']],
+                ['id' => 52, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 52, 'question' => 'Requests repetition of information for clarification purposes', 'options' => $this->options, 'link_codes' => ['D2.b.3.19', 'D2', 'D2.b.3.14']],
+            ],
+
 
 
 

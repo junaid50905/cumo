@@ -121,7 +121,15 @@ class SocialCommunicationAdultChecklist extends Component
                 ['id' => 42, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 42, 'question' => 'Pronoun use', 'options' => $this->options, 'link_codes' => ['D4.c.6']],
                 ['id' => 43, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 43, 'question' => 'Use of word referents', 'options' => $this->options, 'link_codes' => ['D2.b.3.04']],
                 ['id' => 44, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 44, 'question' => 'Ability to employ Theory of Mind (presupposition)', 'options' => $this->options, 'link_codes' => ['D2.b.3.23']],
+            ],
+            'Manner/Effectiveness' => [
+                ['id' => 45, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 45, 'question' => 'Lie, ambiguous, confusing information share', 'options' => $this->options, 'link_codes' => ['D4.a.1']],
+                ['id' => 46, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 46, 'question' => 'Provides relevant information', 'options' => $this->options, 'link_codes' => ['D2.b.3.13', 'D4.c.1']],
+                ['id' => 47, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 47, 'question' => 'Truthfulness of information (grandiosity)', 'options' => $this->options, 'link_codes' => ['D4.a.1']],
+                ['id' => 48, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 48, 'question' => 'Ability to establish joint activity', 'options' => $this->options, 'link_codes' => ['D4.a.2.07', 'D4.c.1']],
+                ['id' => 49, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 49, 'question' => 'Tendency to present personal opinions as factual', 'options' => $this->options, 'link_codes' => ['D4.c.2', 'D4.c.4']],
             ]
+
 
 
 

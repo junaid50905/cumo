@@ -31,8 +31,11 @@ class SocialCommunicationAdultChecklist extends Component
     public $noOptions = [];
 
     public $options = [
-        'Yes' => 'Yes',
-        'No' => 'No',
+        '1' => 'Not Present',
+        '2' => 'Uses NO Words (Gestures - Preverbal)',
+        '3' => 'Uses 1-3 Words / sentenses',
+        '4' => 'Able to communicate/ express opinion',
+        '5' => 'Uses Complex Language',
     ];
 
 
@@ -65,6 +68,27 @@ class SocialCommunicationAdultChecklist extends Component
 
         // Load questions
         $this->questions = [
+            'Social Interaction' => [
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 1, 'question' => 'Interaction with adults', 'options' => $this->options, 'link_codes' => ['D4.c.1']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 2, 'question' => 'Interaction with age-appropriate peers', 'options' => $this->options, 'link_codes' => ['D4.c.1']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 3, 'question' => 'Interaction with younger children', 'options' => $this->options, 'link_codes' => ['D4.c.1']],
+                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 4, 'question' => 'Waiting for a response from peers.', 'options' => $this->options, 'link_codes' => ['Ind.a.1', 'Ind.a.7', 'D4.c.1']],
+                ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 5, 'question' => 'Negotiating deals', 'options' => $this->options, 'link_codes' => ['Ind.a.2']],
+                ['id' => 6, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 6, 'question' => 'Taking turns', 'options' => $this->options, 'link_codes' => ['Ind.a.2']],
+                ['id' => 7, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 7, 'question' => 'Ability to interact with many individuals simultaneously', 'options' => $this->options, 'link_codes' => ['Ind.a.2', 'D4.c.1']],
+                ['id' => 8, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 8, 'question' => 'Ability to establish multiple friendships', 'options' => $this->options, 'link_codes' => ['Ind.a.7']],
+                ['id' => 9, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 9, 'question' => 'Knowing when to persist or let go of an idea', 'options' => $this->options, 'link_codes' => ['D2']],
+                ['id' => 10, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 10, 'question' => 'Interpreting facial expressions and voices', 'options' => $this->options, 'link_codes' => ['D2.b.3.23']],
+                ['id' => 11, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 11, 'question' => 'Understanding the rules of the game', 'options' => $this->options, 'link_codes' => ['D4.c.1']],
+                ['id' => 12, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 12, 'question' => 'Expressing various appropriate expressions', 'options' => $this->options, 'link_codes' => ['D2.b.3.13']],
+                ['id' => 13, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 13, 'question' => 'Receiving and giving gifts', 'options' => $this->options, 'link_codes' => ['D4.c.1']],
+                ['id' => 14, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 14, 'question' => 'Understanding sharing and the concept of give and take', 'options' => $this->options, 'link_codes' => ['D4.c']],
+                ['id' => 15, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 15, 'question' => 'Participation in group activities', 'options' => $this->options, 'link_codes' => ['D4.a.2']],
+                ['id' => 16, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 16, 'question' => 'Passive tendencies', 'options' => $this->options, 'link_codes' => ['D4.c.6']],
+                ['id' => 17, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 17, 'question' => 'Aggressive tendencies', 'options' => $this->options, 'link_codes' => ['Ind.a.1']],
+                ['id' => 18, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 18, 'question' => 'Responsiveness', 'options' => $this->options, 'link_codes' => ['Ind', 'D2.c']],
+                ['id' => 19, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 19, 'question' => 'Ability to handle being “left out”', 'options' => $this->options, 'link_codes' => ['D2.b.3.08']],
+            ]
         ];
 
         // // Load previously answered questions

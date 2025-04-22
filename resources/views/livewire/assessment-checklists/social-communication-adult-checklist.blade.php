@@ -185,7 +185,7 @@
 
                                                                 @foreach($questionGroup as $question)
                                                                     <x-radio-options-with-code
-                                                                        :inputType="$question['input_type'] ?? 'radio'"
+                                                                        :inputType="$question['input_type'] ?? 'checkbox'"
                                                                         :wireModel="'formData.answers.' . $question['category_id'] . '' . $question['sub_category_id'] . '' . $question['question_id']"
                                                                         :label="$question['question']"
                                                                         :name="'question_' . $question['question_id']"

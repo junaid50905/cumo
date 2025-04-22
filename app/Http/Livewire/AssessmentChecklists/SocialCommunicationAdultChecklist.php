@@ -109,13 +109,20 @@ class SocialCommunicationAdultChecklist extends Component
                 ['id' => 34, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 34, 'question' => 'Ability to terminate the conversation', 'options' => $this->options, 'link_codes' => ['D2.b.1.09']],
             ],
             'Conversational Structure' => [
-                ['id' => 35, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 35, 'question' => 'Ability to initiate a conversation', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.1.09']],
-                ['id' => 36, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 36, 'question' => 'Ability to establish a conversation outside of interest area', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D4.c.3']],
-                ['id' => 37, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 37, 'question' => 'Ability to acknowledge others in conversation', 'options' => $this->options, 'link_codes' => ['D4.c.8']],
-                ['id' => 38, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 38, 'question' => 'Ability to delete redundant information appropriately', 'options' => $this->options, 'link_codes' => ['D4.c.3', 'D4.c.4']],
-                ['id' => 39, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 39, 'question' => 'Ability to order information appropriately (new info follows old)', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.02']],
-                ['id' => 40, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 40, 'question' => 'Use of pedantic speech', 'options' => $this->options, 'link_codes' => ['D2.b.3.23']],
+                ['id' => 35, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 35, 'question' => 'Ability to initiate a conversation', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.1.09']],
+                ['id' => 36, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 36, 'question' => 'Ability to establish a conversation outside of interest area', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D4.c.3']],
+                ['id' => 37, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 37, 'question' => 'Ability to acknowledge others in conversation', 'options' => $this->options, 'link_codes' => ['D4.c.8']],
+                ['id' => 38, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 38, 'question' => 'Ability to delete redundant information appropriately', 'options' => $this->options, 'link_codes' => ['D4.c.3', 'D4.c.4']],
+                ['id' => 39, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 39, 'question' => 'Ability to order information appropriately (new info follows old)', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.02']],
+                ['id' => 40, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 40, 'question' => 'Use of pedantic speech', 'options' => $this->options, 'link_codes' => ['D2.b.3.23']],
+            ],
+            'Word Structure' => [
+                ['id' => 41, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 41, 'question' => 'Ability to use generals/specifics', 'options' => $this->options, 'link_codes' => ['D2.b.1.11']],
+                ['id' => 42, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 42, 'question' => 'Pronoun use', 'options' => $this->options, 'link_codes' => ['D4.c.6']],
+                ['id' => 43, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 43, 'question' => 'Use of word referents', 'options' => $this->options, 'link_codes' => ['D2.b.3.04']],
+                ['id' => 44, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 44, 'question' => 'Ability to employ Theory of Mind (presupposition)', 'options' => $this->options, 'link_codes' => ['D2.b.3.23']],
             ]
+
 
 
 

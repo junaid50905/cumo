@@ -139,12 +139,116 @@ class SocialCommunicationAdultChecklist extends Component
                 ['id' => 54, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 1, 'question' => 'Looks at speaker when called', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.09']],
                 ['id' => 55, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 2, 'question' => 'Delay of response', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.09']],
                 ['id' => 56, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 3, 'question' => 'Ability to label information appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.10']],
+                ['id' => 57, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 4, 'question' => 'Ability to describe objects appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.06', 'D2.b.3.17', 'D2.b.3.19', 'D2']],
+                ['id' => 58, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 5, 'question' => 'Ability to describe events appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.06', 'D2.b.3.17', 'D2.b.3.19', 'D2']],
+                ['id' => 59, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 6, 'question' => 'Ability to state facts appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.06', 'D2.b.3.17', 'D2.b.3.19', 'D2']],
+                ['id' => 60, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 7, 'question' => 'Ability to provide clarification appropriately', 'options' => $this->options, 'link_codes' => ['D2', 'D2.b.3.08',  'D2.b.3.17',  'D2.b.3.19']],
+
+                ['id' => 61, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'B. INSTRUMENTAL – States needs (I want….)', 'title' => true, 'link_codes' => []],
+                ['id' => 62, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 8, 'question' => 'Makes polite requests', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D2.b.3.17', 'D2.b.3.19']],
+                ['id' => 63, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 9, 'question' => 'Makes choices', 'options' => $this->options, 'link_codes' => ['D2', 'D2.b.3.07', 'D2.b.1.11', 'D3.a.06']],
+                ['id' => 64, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 10, 'question' => 'Gives description of an object wanted', 'options' => $this->options, 'link_codes' => ['D2', 'D2.b.3.06']],
+                ['id' => 65, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 11, 'question' => 'Expresses a specific personal need', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D2.b.3.13']],
+                ['id' => 66, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 12, 'question' => 'Requests help', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D2.b.3.13']],
+
+                ['id' => 67, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'C. Requesting', 'title' => true, 'link_codes' => []],
+                ['id' => 68, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 13, 'question' => 'Ability to request information appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D2.b.3.15', 'D2.b.3.17']],
+                ['id' => 69, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 14, 'question' => 'Ability to request permission appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D4.a.2.08']],
+                ['id' => 70, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 15, 'question' => 'Ability to request yes-no responses appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.02', 'D2.b.3.14', 'D2.b.3.22']],
+                ['id' => 71, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 16, 'question' => 'Ability to use Wh-Questions appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.22', 'D2.b.3.08', 'D2.b.3.19']],
+                ['id' => 72, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 17, 'question' => 'Ability to request an action of another appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D4.a.2.08']],
+                ['id' => 73, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 18, 'question' => 'Ability to request clarification appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D4.a.2.08']],
+                ['id' => 74, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 19, 'question' => 'Ability to request attention appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D4.a.2.08']],
+                ['id' => 75, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 20, 'question' => 'Ability to request help appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.14', 'D4.a.2.08']],
+
+                ['id' => 76, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'D. Prosody', 'title' => true, 'link_codes' => []],
+                ['id' => 77, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 21, 'question' => 'Ability to use appropriate rate of speech', 'options' => $this->options, 'link_codes' => ['D2.b.3.17', 'D2.b.3.15', 'D2.b.3.04']],
+                ['id' => 78, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 22, 'question' => 'Ability to use appropriate tone of voice', 'options' => $this->options, 'link_codes' => ['D2.b.3.17', 'D2.b.3.15', 'D2.b.3.19']],
+                ['id' => 79, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 23, 'question' => 'Ability to use appropriate pitch', 'options' => $this->options, 'link_codes' => ['D2.b.3']],
+                ['id' => 80, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 24, 'question' => 'Ability to use appropriate loudness', 'options' => $this->options, 'link_codes' => ['D2.b.3.17', 'D2.b.3.15', 'D2.b.3.19']],
+                ['id' => 81, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 25, 'question' => 'Ability to comprehend implied meanings via tone of voice', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.09', 'D2.b.3.10', 'D2.b.3.07']],
+                ['id' => 82, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 26, 'question' => 'Ability to comprehend implied meanings via inflectional cues', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.09', 'D2.b.3.10', 'D2.b.3.07']],
+
+                ['id' => 83, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'E. Protests', 'title' => true, 'link_codes' => []],
+                ['id' => 84, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 27, 'question' => 'Ability to state his opinion using appropriate means', 'options' => $this->options, 'link_codes' => ['D2.b.3.17', 'D2.b.3.04', 'D2', 'D2.b.3.13']],
+                ['id' => 85, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 28, 'question' => 'Ability to disagree', 'options' => $this->options, 'link_codes' => ['D3.a.01', 'D3.a.02']],
+
+                ['id' => 86, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'F. Style of Conversation', 'title' => true, 'link_codes' => []],
+                ['id' => 87, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 29, 'question' => 'Ability to shift the style of conversation according to person', 'options' => $this->options, 'link_codes' => ['D2.b.3.19', 'D4.c.4', 'D4.c.3']],
+                ['id' => 88, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 30, 'question' => 'Ability to shift the style of conversation according to the setting', 'options' => $this->options, 'link_codes' => ['D2.b.3.19', 'D4.c.4', 'D4.c.3']],
+                ['id' => 89, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 31, 'question' => 'Ability to shift the style of conversation according to humor', 'options' => $this->options, 'link_codes' => ['D2.b.3.19', 'D4.c.4', 'D4.c.3', 'D3.a']],
+                ['id' => 90, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 32, 'question' => 'Ability to engage a listener appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.03', 'D2.b.3.10', 'D2.b.3.11', 'D2.b.3.12']],
+                ['id' => 91, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 33, 'question' => 'Ability to use politeness', 'options' => $this->options, 'link_codes' => ['D3.a.04', 'D3.a.03', 'D4.a.1.01']],
+                ['id' => 92, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 34, 'question' => 'Appropriateness to the situation', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D4.c.4', 'D4.c.3', 'D2.b.1.09']],
+                ['id' => 93, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 35, 'question' => 'Ability to recognize other’s moods', 'options' => $this->options, 'link_codes' => ['D2', 'Ind.a.07', 'D4.a.1.01', 'D3.a.06']],
+                ['id' => 94, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 36, 'question' => 'Ability to differentiate requests from demands', 'options' => $this->options, 'link_codes' => ['D2.b.1.10', 'D2.b.1.09', 'D2.b.1.06']],
+
+                ['id' => 95, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'G. Humor', 'title' => true, 'link_codes' => []],
+                ['id' => 96, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 37, 'question' => 'Comprehends humor', 'options' => $this->options, 'link_codes' => ['D2', 'D2.b.1.09', 'D2.b.1.11', 'D3.a.01', 'D3.a']],
+                ['id' => 97, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 38, 'question' => 'Uses humor appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.1.10', 'D2.b.1.09', 'D4.a.1.01', 'D4.c.3', 'D4.a.1.01']],
+
+                ['id' => 98, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'H. Greetings/Acknowledgements ', 'title' => true, 'link_codes' => []],
+                ['id' => 99, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 39, 'question' => 'Provides greetings', 'options' => $this->options, 'link_codes' => ['D3.c.1.07', 'D2.b.3.13', 'D2.b.3.02', 'D4.c.1', 'Ind.a.2']],
+                ['id' => 100, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 40, 'question' => 'Uses greetings', 'options' => $this->options, 'link_codes' => ['D2.b.3.01', 'D2.b.3.02', 'D2.b.3.13', 'D4.c.1', 'Ind.a.1']],
+                ['id' => 101, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 41, 'question' => 'Ability to acknowledge the presence of another individual', 'options' => $this->options, 'link_codes' => ['D4.a.1']],
+
+                ['id' => 102, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'I. Problem Solving ', 'title' => true, 'link_codes' => []],
+                ['id' => 103, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 42, 'question' => 'Ability to solve problems affecting himself', 'options' => $this->options, 'link_codes' => ['D3.a', 'D3.a.01', 'D3.a.02']],
+                ['id' => 104, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 43, 'question' => 'Ability to solve problems affecting others', 'options' => $this->options, 'link_codes' => ['D3.a.02', 'D2.b.1.09', 'D4.a.3', 'Ind.b.1']],
+                ['id' => 105, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 44, 'question' => 'Ability to recognize problems affecting others', 'options' => $this->options, 'link_codes' => ['D4.a.1.01']],
+                ['id' => 106, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 45, 'question' => 'Ability to recognize problems affecting himself', 'options' => $this->options, 'link_codes' => ['D2.b.1.09', 'D3.a', 'D3.a.01']],
+                ['id' => 107, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 46, 'question' => 'Ability to establish cause-effect', 'options' => $this->options, 'link_codes' => ['D2.b.1.09', 'D2.b.1.11', 'D3.c.1.07']],
+                ['id' => 108, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 47, 'question' => 'Ability to use conflict-resolution', 'options' => $this->options, 'link_codes' => ['D3.a.05', 'D3.a.02', 'D2.b.1.11']],
+
+                ['id' => 109, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 0, 'question' => 'J. Deceit ', 'title' => true, 'link_codes' => []],
+                ['id' => 110, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 48, 'question' => 'Uses language to deceive', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.13', 'D3.b.01', 'D2.b.1.11']],
+                ['id' => 111, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 49, 'question' => 'Lies', 'options' => $this->options, 'link_codes' => ['D3.b.02', 'D3.b.01', 'D2.b.1.11', 'D4.d.1']],
+
+            ],
+            'Academic Communication' => [
+                ['id' => 112, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 1, 'question' => 'Ability to respond appropriately to teacher requests', 'options' => $this->options, 'link_codes' => ['D2.b.3.07', 'D2.b.02', 'D2.b.3.09']],
+                ['id' => 113, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 2, 'question' => 'Ability to reorient to academic agenda appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3']],
+                ['id' => 114, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 3, 'question' => 'Ability to obtain teacher’s attention appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.13', 'D4.c.1']],
+                ['id' => 115, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 4, 'question' => 'Ability to request clarification from teacher', 'options' => $this->options, 'link_codes' => ['D3.a.02', 'D2.b.3.14']],
+                ['id' => 116, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 5, 'question' => 'Ability to participate in classroom discussions', 'options' => $this->options, 'link_codes' => ['D3.a.06', 'D3.a.07']],
+                ['id' => 117, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 6, 'question' => 'Ability to interact with classroom peers', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D3.a.06']],
+                ['id' => 118, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 7, 'question' => 'Ability to paraphrase text', 'options' => $this->options, 'link_codes' => ['D2']],
+                ['id' => 119, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 8, 'question' => 'Ability to summarize a story providing key information', 'options' => $this->options, 'link_codes' => ['D2', 'D2.b.1.11']],
+                ['id' => 120, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 9, 'question' => 'Ability to respond to questions requiring inferential reasoning', 'options' => $this->options, 'link_codes' => ['D2.b.3.02', 'D2.b.3.22', 'D2.b.3.23']],
+            ],
+            'Nonverbal Communication' => [
+                ['id' => 121, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 1, 'question' => 'Ability to recognize “personal space” boundaries', 'options' => $this->options, 'link_codes' => ['D3.a.02', 'D3.a.03']],
+                ['id' => 122, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 2, 'question' => 'Ability to touch appropriately', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D2.b.3.14']],
+                ['id' => 123, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 3, 'question' => 'Comprehends facial expression', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D2.b.3.08', 'D3.a.09']],
+                ['id' => 124, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 4, 'question' => 'Comprehends eye gaze', 'options' => $this->options, 'link_codes' => ['D2.b.3.08', 'D3.a.09']],
+                ['id' => 125, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 5, 'question' => 'Comprehends gestures', 'options' => $this->options, 'link_codes' => ['D2.b.3.08']],
+                ['id' => 126, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 6, 'question' => 'Comprehends body language', 'options' => $this->options, 'link_codes' => ['D4.c.1']],
+                ['id' => 127, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 7, 'question' => 'Ability to use facial expression', 'options' => $this->options, 'link_codes' => ['D3.a.09']],
+                ['id' => 128, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 8, 'question' => 'Ability to use eye gaze', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D3.a.09']],
+                ['id' => 129, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 9, 'question' => 'Ability to use gestures', 'options' => $this->options, 'link_codes' => ['D4.c.1']],
+                ['id' => 130, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 10, 'question' => 'Ability to use body language', 'options' => $this->options, 'link_codes' => ['D4.c.1']],
+                ['id' => 131, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 11, 'question' => 'Ability to use eye contact', 'options' => $this->options, 'link_codes' => ['D4.c.1', 'D3.a.09']],
+            ],
+            'Perspective Taking' => [
+                ['id' => 132, 'category_id' => $this->categoryId, 'sub_category_id' => 10, 'question_id' => 1, 'question' => 'Ability to recognize another’s viewpoints', 'options' => $this->options, 'link_codes' => ['D4.a.1.01']],
+                ['id' => 133, 'category_id' => $this->categoryId, 'sub_category_id' => 10, 'question_id' => 2, 'question' => 'Ability to recognize another’s interests', 'options' => $this->options, 'link_codes' => ['D4.a.1.01']],
+                ['id' => 134, 'category_id' => $this->categoryId, 'sub_category_id' => 10, 'question_id' => 3, 'question' => 'Ability to recognize another’s feelings', 'options' => $this->options, 'link_codes' => ['D4.a.1.01']],
+                ['id' => 135, 'category_id' => $this->categoryId, 'sub_category_id' => 10, 'question_id' => 4, 'question' => 'Ability to demonstrate concern for another’s problems', 'options' => $this->options, 'link_codes' => ['D4.a.1.01']],
+            ],
+            'REGULATORY - Gives commands (Do as I tell you…)' => [
+                ['id' => 136, 'category_id' => $this->categoryId, 'sub_category_id' => 11, 'question_id' => 5, 'question' => 'Gives directions to play a game', 'options' => $this->options, 'link_codes' => ['D4.b.1', 'D4.a.3', 'D3.a.08']],
+                ['id' => 137, 'category_id' => $this->categoryId, 'sub_category_id' => 11, 'question_id' => 6, 'question' => 'Gives directions to make something', 'options' => $this->options, 'link_codes' => ['D4.b.1', 'D4.a.3', 'D3.a.08']],
+                ['id' => 138, 'category_id' => $this->categoryId, 'sub_category_id' => 11, 'question_id' => 7, 'question' => 'Changes the style of commands or requests depending on who the child is speaking to and what the child wants', 'options' => $this->options, 'link_codes' => ['D4.b.1', 'D4.a.3', 'D3.a.08']],
+            ],
+            'Social-Emotional' => [
+                ['id' => 139, 'category_id' => $this->categoryId, 'sub_category_id' => 12, 'question_id' => 1, 'question' => 'Ability to recognize personal emotional states', 'options' => $this->options, 'link_codes' => ['D4.a.1.02']],
+                ['id' => 140, 'category_id' => $this->categoryId, 'sub_category_id' => 12, 'question_id' => 2, 'question' => 'Ability to recognize emotional states in others', 'options' => $this->options, 'link_codes' => ['D4.a.1.02', 'D4.a.1.01']],
+                ['id' => 141, 'category_id' => $this->categoryId, 'sub_category_id' => 12, 'question_id' => 3, 'question' => 'Ability to express personal emotional state', 'options' => $this->options, 'link_codes' => ['D4.a.1.02']],
+                ['id' => 142, 'category_id' => $this->categoryId, 'sub_category_id' => 12, 'question_id' => 4, 'question' => 'Ability to use appropriate self-control', 'options' => $this->options, 'link_codes' => ['D3.a.04', 'D3.a.05']],
+                ['id' => 143, 'category_id' => $this->categoryId, 'sub_category_id' => 12, 'question_id' => 5, 'question' => 'Ability to lose a game graciously', 'options' => $this->options, 'link_codes' => ['D3.a.04', 'D3.a.05']],
+                ['id' => 144, 'category_id' => $this->categoryId, 'sub_category_id' => 12, 'question_id' => 6, 'question' => 'Perfectionist quality', 'options' => $this->options, 'link_codes' => ['D3.a.03']],
+                ['id' => 145, 'category_id' => $this->categoryId, 'sub_category_id' => 12, 'question_id' => 7, 'question' => 'Degree of anxiety in social settings', 'options' => $this->options, 'link_codes' => ['D3']],
             ]
-
-
-
-
-
 
         ];
 

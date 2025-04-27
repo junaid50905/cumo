@@ -69,113 +69,113 @@ class ComputerTrainingOTObservation extends Component
                     'Partially maintain' => 'Partially maintain',
                     'Cannot maintain' => 'Cannot maintain',
                     'Can maintain with support' => 'Can maintain with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.1']],
 
                 ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 2, 'question' => 'Joint mobility shoulder:', 'options' => [
                     'Can full range maintain' => 'Can full range maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Cannot maintain' => 'Cannot maintain',
                     'Can maintain with support' => 'Can maintain with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.1.14']],
 
                 ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 2.1, 'question' => 'Joint mobility shoulder - Elbow:', 'options' => [
                     'Can full range maintain' => 'Can full range maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Cannot maintain' => 'Cannot maintain',
                     'Can maintain with support' => 'Can maintain with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.1.14']],
 
                 ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 2.2, 'question' => 'Joint mobility shoulder - Wrist:', 'options' => [
                     'Can full range maintain' => 'Can full range maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Cannot maintain' => 'Cannot maintain',
                     'Can maintain with support' => 'Can maintain with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.1.14']],
 
                 ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 2.3, 'question' => 'Joint mobility shoulder - Finger:', 'options' => [
                     'Can full range maintain' => 'Can full range maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Cannot maintain' => 'Cannot maintain',
                     'Can maintain with support' => 'Can maintain with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.2']],
 
                 ['id' => 6, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 3, 'question' => 'Body flexibility (Trunk):', 'options' => [
                     'Can full range maintain' => 'Can full range maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Cannot maintain' => 'Cannot maintain',
                     'Can maintain with support' => 'Can maintain with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.1.14']],
 
                 ['id' => 7, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 4, 'question' => 'Dynamic balance maintain:', 'options' => [
                     'Can maintain' => 'Can maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Cannot maintain' => 'Cannot maintain',
                     'Can maintain with support' => 'Can maintain with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.1.03']],
                 ['id' => 8, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 5, 'question' => 'Eye hand co ordination to press the key board button:', 'options' => [
                     'Can maintain' => 'Can maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Cannot maintain' => 'Cannot maintain',
                     'Can maintain with support' => 'Can maintain with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.2.06', 'D1.a.2.11']],
 
                 ['id' => 9, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 6, 'question' => 'Eye hand co ordination to press the key board button:', 'options' => [
                     'Normal' => 'Normal',
                     'Less strength' => 'Less strength',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.2', 'D1.a.3']],
 
                 ['id' => 10, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 7.1, 'question' => 'Hand function - Grasp:', 'options' => [
                     'Able' => 'Able',
                     'Partially' => 'Partially',
                     'Unable' => 'Unable',
                     'Able with support' => 'Able with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.1.13']],
 
                 ['id' => 11, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 7.2, 'question' => 'Hand function - Manipulation:', 'options' => [
                     'Able' => 'Able',
                     'Partially' => 'Partially',
                     'Unable' => 'Unable',
                     'Able with support' => 'Able with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.2.11']],
 
                 ['id' => 12, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 7.3, 'question' => 'Hand function - Opposition:', 'options' => [
                     'Able' => 'Able',
                     'Partially' => 'Partially',
                     'Unable' => 'Unable',
                     'Able with support' => 'Able with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.2.11']],
 
                 ['id' => 13, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 7.4, 'question' => 'Hand function - Transfer:', 'options' => [
                     'Able' => 'Able',
                     'Partially' => 'Partially',
                     'Unable' => 'Unable',
                     'Able with support' => 'Able with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.2.11']],
 
                 ['id' => 14, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 7.5, 'question' => 'Hand function - Weight carry:', 'options' => [
                     'Able' => 'Able',
                     'Partially' => 'Partially',
                     'Unable' => 'Unable',
                     'Able with support' => 'Able with support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D1.a.2.11']],
 
                 ['id' => 15, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 8.1, 'question' => 'Sensory - Tactile:', 'options' => [
                     'Normal' => 'Normal',
                     'Hypo' => 'Hypo',
                     'Hyper' => 'Hyper',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.a','D2.a.1.04']],
 
                 ['id' => 16, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 8.2, 'question' => 'Sensory - Visual:', 'options' => [
                     'Normal' => 'Normal',
                     'Hypo' => 'Hypo',
                     'Hyper' => 'Hyper',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.a', 'D2.a.2']],
 
                 ['id' => 17, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 8.3, 'question' => 'Sensory - Auditory:', 'options' => [
                     'Normal' => 'Normal',
                     'Hypo' => 'Hypo',
                     'Hyper' => 'Hyper',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.a', 'D2.a.1.03']],
             ],
             'Cognitive, Behavior & social Skill' => [
                 ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 1, 'question' => 'Sitting habit in specific place:', 'options' => [
@@ -185,7 +185,7 @@ class ComputerTrainingOTObservation extends Component
                     '20 min' => '20 min',
                     '30 min' => '30 min',
                     '30+ min' => '30+ min',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D3.b.05', 'D3.a.05']],
 
                 ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 2, 'question' => 'Keep attention/concentration to work:', 'options' => [
                     '5-10 min' => '5-10 min',
@@ -195,93 +195,94 @@ class ComputerTrainingOTObservation extends Component
                     '25-30 min' => '25-30 min',
                     '30-40 min' => '30-40 min',
                     '40+ min' => '40+ min',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D4.a.2.07', 'D3.a.05']],
 
                 ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 3, 'question' => 'Follow instruction:', 'options' => [
                     'Can same to follow' => 'Can same to follow',
                     'Partially perform' => 'Partially perform',
                     'Try to follow' => 'Try to follow',
                     'Can follow with help' => 'Can follow with help',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.b.3.07']],
 
                 ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 4, 'question' => 'Response skill:', 'options' => [
                     'Can response' => 'Can response',
                     'Partially response' => 'Partially response',
                     'Try to response' => 'Try to response',
                     'Help to response' => 'Help to response',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.b.3.02']],
 
                 ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 5, 'question' => 'Understand or follow the work sequence:', 'options' => [
                     'Can fully maintain' => 'Can fully maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Try to maintain' => 'Try to maintain',
                     'Need to help' => 'Need to help',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.b.3.07']],
 
                 ['id' => 6, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 6, 'question' => 'Interest of work:', 'options' => [
                     'Show interest' => 'Show interest',
                     'Cannot show interest' => 'Cannot show interest',
                     'Sometimes showing' => 'Sometimes showing',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D4.a.2.05']],
 
                 ['id' => 7, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 7, 'question' => 'Information receives ability:', 'options' => [
                     'Can receive fully' => 'Can receive fully',
                     'Partially' => 'Partially',
                     'Try to receive' => 'Try to receive',
                     'Need to support' => 'Need to support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.b.3.01', 'D2.b.3.08']],
 
                 ['id' => 8, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 8, 'question' => 'Memorizing the information:', 'options' => [
                     'Can replay' => 'Can replay',
                     'Partially replay' => 'Partially replay',
                     'Try to reply' => 'Try to reply',
                     'Need to support' => 'Need to support',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.b.3.08', 'D2.b.3.07']],
 
                 ['id' => 9, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9, 'question' => 'Awareness of Risk & hazard:', 'options' => [
                     'Can fully maintain' => 'Can fully maintain',
                     'Partially maintain' => 'Partially maintain',
                     'Try to maintain' => 'Try to maintain',
                     'Need to help' => 'Need to help',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D3.c.1.13', 'D3.c.3.01']],
 
-                ['id' => 10, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.1, 'question' => 'Awareness of Risk & hazard - Work place adjustability:', 'options' => [
+                ['id' => 10, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.1, 'question' => 'Work place adjustability:', 'options' => [
                     '' => '',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D4.a.2.05']],
 
-                ['id' => 11, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.2, 'question' => 'Awareness of Risk & hazard - Sitting chair:', 'options' => [
+                ['id' => 11, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.2, 'question' => 'Sitting chair:', 'options' => [
                     'Appropriate' => 'Appropriate',
                     'Need to adapted (height/arm rest/back support)' => 'Need to adapted (height/arm rest/back support)',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D3.b.05']],
 
-                ['id' => 12, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.3, 'question' => 'Awareness of Risk & hazard - Working table/ desk:', 'options' => [
+                ['id' => 12, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.3, 'question' => 'Working table/ desk:', 'options' => [
                     'Appropriate' => 'Appropriate',
                     'Need to adapted (height/foot clearing space/distance)' => 'Need to adapted (height/foot clearing space/distance)',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D4.a.2.05']],
 
-                ['id' => 13, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.4, 'question' => 'Awareness of Risk & hazard - Key board and mouse place:', 'options' => [
+                ['id' => 13, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.4, 'question' => 'Key board and mouse place:', 'options' => [
                     'Appropriate' => 'Appropriate',
                     'Need to adapted (height/ distance)' => 'Need to adapted (height/ distance)',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D4.a.2.05']],
 
-                ['id' => 14, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.5, 'question' => 'Awareness of Risk & hazard - Monitor place:', 'options' => [
+                ['id' => 14, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.5, 'question' => 'Monitor place:', 'options' => [
                     'Appropriate' => 'Appropriate',
                     'Need to adapted (eye level/distance)' => 'Need to adapted (eye level/distance)',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D4.a.2.05']],
 
-                ['id' => 15, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.6, 'question' => 'Awareness of Risk & hazard - CPU, Stabilizer and multi pluck place:', 'options' => [
+                ['id' => 15, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.6, 'question' => 'CPU, Stabilizer and multi pluck place:', 'options' => [
                     'Appropriate' => 'Appropriate',
                     'Need to adapted (height/distance)' => 'Need to adapted (height/distance)',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D4.a.2.05']],
 
-                ['id' => 16, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.7, 'question' => 'Awareness of Risk & hazard - Communication Style:', 'options' => [
+                ['id' => 16, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 9.7, 'question' => 'Communication Style (Verbal/Sign language/Gesture use):', 'options' => [
                     'Verbal' => 'Verbal',
                     'Sign language' => 'Sign language',
                     'Gesture use: can properly' => 'Gesture use: can properly',
                     'Unable to perform' => 'Unable to perform',
                     'Partially perform' => 'Partially perform',
-                ], 'link_codes' => []],
+                ], 'link_codes' => ['D2.b.3.18', 'D2.b.3.19']],
             ]
+
         ];
 
         // // Load previously answered questions

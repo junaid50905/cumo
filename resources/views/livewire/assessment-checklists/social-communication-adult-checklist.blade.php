@@ -201,9 +201,8 @@
                                                                         :linkCodes="$question['link_codes'] ?? []"
                                                                         :linkActive="$question['link_active'] ?? null"
                                                                     />
-
-
                                                                 @endforeach
+                                                                
                                                             </section>
                                                         </form>
                                                     </div>

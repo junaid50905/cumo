@@ -50,10 +50,10 @@ class FunctionalCommunicationChecklist extends Component
         $this->searchId = $searchId; // Student ID
         // dd((int) $this->checklistId, $this->searchId, 'Livewire');
         $this->categoryId = (int) $this->checklistId; // 1 = Child Age 11-17
-        
-        $paymentStatus = 5; 
-        $incomeType = 2; 
-        $eventType = 2; 
+
+        $paymentStatus = 5;
+        $incomeType = 2;
+        $eventType = 2;
 
         $introduction = $this->appointmentRepository->getAnAppointmentDetails(null, $incomeType, $eventType, $paymentStatus);
         $this->formData['introduction'] = $this->getIntroductionData($introduction);
@@ -97,7 +97,7 @@ class FunctionalCommunicationChecklist extends Component
                 ['id' => 9, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 9, 'question' => 'Reverses personal pronouns', 'options' => $this->options, 'link_codes' => ['D2.b.3.17', 'D4.c.6', 'D2.b.3.07']],
                 ['id' => 10, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 10, 'question' => 'Limited use of gestures and expressive language (e.g., rarely points, waves, or nods, few words, monotone speech)', 'options' => $this->options, 'link_codes' => ['D2.b.3.13', 'D2.b.3.18.38', 'D2.b.3.02', 'D2.b.3.04']]
             ],
-        
+
         ];
 
         // // Load previously answered questions
@@ -145,7 +145,7 @@ class FunctionalCommunicationChecklist extends Component
         Session::flash('alert', ['type' => 'success', 'title' => 'Success! ', 'message' => 'Data save successfully!']);
         return redirect()->route('assessment-checklists.show', ['assessment_checklist' => $categoryId, 'checklist_id' => $categoryId, 'appointmentId' => $appointmentId, 'checklistTitle' => $checklistTitle]);
     }
-    
+
 
     public function render()
     {
@@ -200,9 +200,9 @@ class FunctionalCommunicationChecklist extends Component
     private function createOrUpdateChecklist()
     {
         $linkCodeCounts = [];
-        
+
         // Define link codes to skip if the answer is "Yes"
-        $skipLinkCodes = ['1_1_2', '1_2_1']; 
+        $skipLinkCodes = ['1_1_2', '1_2_1'];
 
         // Loop through all questions
         foreach ($this->questions as $title => $questionGroup) {

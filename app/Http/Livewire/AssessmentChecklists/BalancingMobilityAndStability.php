@@ -18,7 +18,7 @@ class BalancingMobilityAndStability extends Component
     protected AppointmentRepository $appointmentRepository;
     protected EventCalendarRepository $eventCalendarRepository;
     public $checklistId;
-    public $checklistTitle;
+    public $checklistTitle = 'Balancing Mobility and Stability Checklist';
     public $searchId;
     public $categoryId;
     public $appointmentId;
@@ -57,63 +57,63 @@ class BalancingMobilityAndStability extends Component
         $incomeType = 2;
         $eventType = 2;
 
-        $introduction = $this->appointmentRepository->getAnAppointmentDetails(null, $incomeType, $eventType, $paymentStatus);
+        $introduction = $this->appointmentRepository->getAnAppointmentDetails($this->searchId, $incomeType, $eventType, $paymentStatus);
         $this->formData['introduction'] = $this->getIntroductionData($introduction);
         $this->appointmentId = $introduction->id ?? null;
 
         // Load questions
         $this->questions = [
             'Deep Squat' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 1, 'question' => "The stick is maintained vertically aligned with the feet - 1 times", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1', 'D1.a.1.03 ']],
-                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 2, 'question' => "The stick is maintained vertically aligned with the feet - 2 times", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1', 'D1.a.1.03 ']],
-                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 3, 'question' => "The stick is maintained vertically aligned with the feet - 3 times", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1', 'D1.a.1.03 ']],
-                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 4, 'question' => "The stick is maintained vertically aligned with the feet - 4 times", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1', 'D1.a.1.03 ']],
-                ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 5, 'question' => "Excessive hip rotation to clear the hurdle", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1']],
-                ['id' => 6, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 6, 'question' => "Poor control of trunk indicated by the tilting stick", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 1, 'question' => "The stick is maintained vertically aligned with the feet - 1 times", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1', 'D1.a.1.03 ']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 2, 'question' => "The stick is maintained vertically aligned with the feet - 2 times", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1', 'D1.a.1.03 ']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 3, 'question' => "The stick is maintained vertically aligned with the feet - 3 times", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1', 'D1.a.1.03 ']],
+                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 4, 'question' => "The stick is maintained vertically aligned with the feet - 4 times", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1', 'D1.a.1.03 ']],
+                ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 5, 'question' => "Excessive hip rotation to clear the hurdle", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1']],
+                ['id' => 6, 'category_id' => $this->categoryId, 'sub_category_id' => 1, 'question_id' => 6, 'question' => "Poor control of trunk indicated by the tilting stick", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1']],
             ],
             'Foot' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 1, 'question' => "To improve stability of the feet, single-leg stance exercises with bare feet are useful - diagonal leg whips on the left and rotational reaches on the right.", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.06']],
-                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 2, 'question' => "To improve stability of the feet, single-leg stance exercises with bare feet are useful - Gently grip the ground with the toes.", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.06']],
-                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 3, 'question' => "To improve stability of the feet, single-leg stance exercises with bare feet are useful - Keep a tall posture and limit trunk sway.", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.06']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 1, 'question' => "To improve stability of the feet, single-leg stance exercises with bare feet are useful - diagonal leg whips on the left and rotational reaches on the right.", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.06']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 2, 'question' => "To improve stability of the feet, single-leg stance exercises with bare feet are useful - Gently grip the ground with the toes.", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.06']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 2, 'question_id' => 3, 'question' => "To improve stability of the feet, single-leg stance exercises with bare feet are useful - Keep a tall posture and limit trunk sway.", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.06']],
             ],
             'Ankle' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 1, 'question' => "The left leg ankle flexion just before the heel rises during the walking stride - 1 times", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.09']],
-                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 2, 'question' => "The ankle flexion just before the heel rises during the walking stride - 2 times", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.09']],
-                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 3, 'question' => "The ankle flexion just before the heel rises during the walking stride - 3 times", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.09']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 1, 'question' => "The left leg ankle flexion just before the heel rises during the walking stride - 1 times", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.09']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 2, 'question' => "The ankle flexion just before the heel rises during the walking stride - 2 times", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.09']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 3, 'question_id' => 3, 'question' => "The ankle flexion just before the heel rises during the walking stride - 3 times", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.09']],
             ],
             'Knee' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 1, 'question' => "On the left, side stepping against the elastic band builds lateral hip stability and thus better control of knee motion.", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.05']],
-                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 2, 'question' => "On the right, the medial pull of the elastic band adds challenge to lunges or single-leg squats.", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.05']],
-                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 3, 'question' => "The single-leg squat with medial rotation.", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.05']],
-                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 4, 'question' => "Start with short, slow movements and gradually add range of motion and speed as proficiency improves.", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 5, 'question' => "Does using a weight help maintain posture and knee stability?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.07']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 1, 'question' => "On the left, side stepping against the elastic band builds lateral hip stability and thus better control of knee motion.", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.05']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 2, 'question' => "On the right, the medial pull of the elastic band adds challenge to lunges or single-leg squats.", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.05']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 3, 'question' => "The single-leg squat with medial rotation.", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.05']],
+                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 4, 'question' => "Start with short, slow movements and gradually add range of motion and speed as proficiency improves.", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 4, 'question_id' => 5, 'question' => "Does using a weight help maintain posture and knee stability?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.07']],
             ],
             'Hip' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 1, 'question' => "Can the single-leg squat variation challenge the hip stabilizers?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 2, 'question' => "Can the right hip extend well during the lunge position?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 3, 'question' => "Can the lunge position stretch the right hip flexors?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 4, 'question' => "Can the balance and reach drill challenge hip mobility and stability?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 5, 'question' => "Can the trunk and arms move forward for counterbalance during the drill?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 6, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 6, 'question' => "Can this drill assess side-to-side imbalances?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 1, 'question' => "Can the single-leg squat variation challenge the hip stabilizers?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 2, 'question' => "Can the right hip extend well during the lunge position?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 3, 'question' => "Can the lunge position stretch the right hip flexors?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 4, 'question' => "Can the balance and reach drill challenge hip mobility and stability?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 5, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 5, 'question' => "Can the trunk and arms move forward for counterbalance during the drill?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 6, 'category_id' => $this->categoryId, 'sub_category_id' => 5, 'question_id' => 6, 'question' => "Can this drill assess side-to-side imbalances?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
             ],
             'Low Back' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 1, 'question' => "Can walking lunges with a plate overhead challenge core control?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 2, 'question' => "Can engaging the core help reduce trunk sway during lunges?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 3, 'question' => "Can this exercise improve low back stability?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 4, 'question' => "Rotating the plate across the forward leg adds further challenge to core stability.", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 1, 'question' => "Can walking lunges with a plate overhead challenge core control?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 2, 'question' => "Can engaging the core help reduce trunk sway during lunges?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 3, 'question' => "Can this exercise improve low back stability?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 4, 'category_id' => $this->categoryId, 'sub_category_id' => 6, 'question_id' => 4, 'question' => "Rotating the plate across the forward leg adds further challenge to core stability.", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
             ],
             'Mid Back' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 1, 'question' => "Can he/she use the foam roll to mobilize thoracic joints and massage mid back muscles for 1 times?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 2, 'question' => "Can he/she use the foam roll to mobilize thoracic joints and massage mid back muscles for 2 times?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
-                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 3, 'question' => "Can he/she use the foam roll to mobilize thoracic joints and massage mid back muscles for 3 times?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.03']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 1, 'question' => "Can he/she use the foam roll to mobilize thoracic joints and massage mid back muscles for 1 times?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 2, 'question' => "Can he/she use the foam roll to mobilize thoracic joints and massage mid back muscles for 2 times?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 7, 'question_id' => 3, 'question' => "Can he/she use the foam roll to mobilize thoracic joints and massage mid back muscles for 3 times?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.03']],
             ],
             'Shoulder Blades' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 1, 'question' => "Can he/she use the foam roll to increase extensibility of the teres major and improve overhead motion?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.04']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 8, 'question_id' => 1, 'question' => "Can he/she use the foam roll to increase extensibility of the teres major and improve overhead motion?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.04']],
             ],
             'Shoulder' => [
-                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 1, 'question' => "Can he/she perform overhead squats to challenge core and shoulder stability", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.04']],
-                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 2, 'question' => "Can he/she maintain the weight vertically aligned with the feet?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.04']],
-                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 3, 'question' => "Can insufficient shoulder mobility cause the weight to shift forward?", 'options' => $this->canDoCannotDo, 'link_codes' => ['D1.a.1.04']],
+                ['id' => 1, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 1, 'question' => "Can he/she perform overhead squats to challenge core and shoulder stability", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.04']],
+                ['id' => 2, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 2, 'question' => "Can he/she maintain the weight vertically aligned with the feet?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.04']],
+                ['id' => 3, 'category_id' => $this->categoryId, 'sub_category_id' => 9, 'question_id' => 3, 'question' => "Can insufficient shoulder mobility cause the weight to shift forward?", 'options' => $this->canDoCannotDo,  'input_type' => 'radio', 'link_active' => 'no', 'link_codes' => ['D1.a.1.04']],
             ]
         ];
 
@@ -158,15 +158,16 @@ class BalancingMobilityAndStability extends Component
         $this->createOrUpdateChecklist();
         $categoryId = $this->categoryId;
         $appointmentId = $this->appointmentId;
-        $checklistTitle = 'Autism Behavior Checklist (ABC Checklist)';
         Session::flash('alert', ['type' => 'success', 'title' => 'Success! ', 'message' => 'Data save successfully!']);
-        return redirect()->route('assessment-checklists.show', ['assessment_checklist' => $categoryId, 'checklist_id' => $categoryId, 'appointmentId' => $appointmentId, 'checklistTitle' => $checklistTitle]);
+        return redirect()->route('assessment-checklists.show', ['assessment_checklist' => $categoryId, 'checklist_id' => $categoryId, 'appointmentId' => $appointmentId, 'checklistTitle' => $this->checklistTitle]);
     }
 
 
     public function render()
     {
         $data = [
+            'checklist_id' => $this->categoryId,
+            'checklistToolTitle' => $this->checklistTitle,
             'gender' => ProjectConstants::$genders,
             'learnAbout' => ProjectConstants::$learnAbout,
             'eduClass' => ProjectConstants::$class,

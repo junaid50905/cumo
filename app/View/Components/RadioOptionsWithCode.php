@@ -25,7 +25,7 @@ class RadioOptionsWithCode extends Component
     public function __construct(
         string $name,
         string $label,
-        $isVertical,
+        bool $isVertical,
         int $categoryId,
         int $subCategoryId,
         string $questionId,

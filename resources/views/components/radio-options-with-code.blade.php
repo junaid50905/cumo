@@ -17,9 +17,9 @@
 ])
 
 @php
-    $answerKey = "{$categoryId}{$subCategoryId}{$questionId}";
+    $answerKey = "{$categoryId}_{$subCategoryId}_{$questionId}";
     $selectedAnswer = data_get($formData, "answers.$answerKey", $inputType === 'checkbox' ? [] : '');
-
+    
     // Ensure checkbox answers are always arrays
     if ($inputType === 'checkbox') {
         if (is_string($selectedAnswer)) {
@@ -28,7 +28,7 @@
             $selectedAnswer = [];
         }
     }
-
+    
     $textAreaValue = data_get($formData, "notes.$answerKey", '');
 @endphp
 
@@ -38,7 +38,7 @@
 
             @if($title)
                 <h5><strong># {{ $label }}:</strong></h5>
-            @else
+            @else 
                 <h5>{{ $questionSerialNo }}. {{ $label }}</h5>
             @endif
 
@@ -56,42 +56,37 @@
 
             @if($textArea)
                 <div class="mt-3">
-                    <x-input-textarea rows="3" wireModel="formData.notes.{{ $answerKey }}" />
+                    <x-input-textarea rows="3" wireModel="formData.answers.{{ $answerKey }}" />
                 </div>
             @else
-                @if($inputType === 'radio' || $inputType === 'checkbox')
-                    @if(!empty($options))
-                        <div class="form-check {{ $isVertical }}">
-                            <div class="row">
-                                @foreach($options as $key => $option)
-                                    <div class="col-md-6 mb-2">
-                                        <div class="form-check">
-                                            <input
-                                                type="{{ $inputType }}"
-                                                class="form-check-input"
-                                                name="{{ $inputType === 'checkbox' ? $name.'[]' : $name }}"
-                                                id="{{ $categoryId }}{{ $subCategoryId }}{{ $questionId }}_{{ $key }}"
-                                                value="{{ $key }}"
-                                                wire:model="{{ $inputType === 'checkbox' ? "formData.answers.{$answerKey}" : $wireModel }}"
-                                                @if(
-                                                    ($inputType === 'checkbox' && in_array($key, $selectedAnswer)) ||
-                                                    ($inputType === 'radio' && $selectedAnswer == $key)
-                                                ) checked @endif
-                                            >
-                                            <label class="form-check-label" for="{{ $categoryId }}{{ $subCategoryId }}{{ $questionId }}_{{ $key }}">
-                                                {{ $option }}
-                                            </label>
-                                        </div>
+                @if(!empty($options))
+                    <div class="form-check {{ $isVertical }}">
+                        <div class="row">
+                            @foreach($options as $key => $option)
+                                <div class="col-md-6 mb-2">
+                                    <div class="form-check">
+                                        <input 
+                                            type="{{ $inputType }}" 
+                                            class="form-check-input" 
+                                            name="{{ $inputType === 'checkbox' ? $name.'[]' : $name }}"
+                                            id="{{ $categoryId }}_{{ $subCategoryId }}_{{ $questionId }}_{{ $key }}"
+                                            value="{{ $key }}" 
+                                            wire:model="{{ $inputType === 'checkbox' ? "formData.answers.{$answerKey}.{$key}" : $wireModel }}"
+                                            @if(
+                                                ($inputType === 'checkbox' && in_array($key, $selectedAnswer)) ||
+                                                ($inputType === 'radio' && $selectedAnswer == $key)
+                                            ) checked @endif
+                                        >
+                                        <label class="form-check-label" for="{{ $categoryId }}_{{ $subCategoryId }}_{{ $questionId }}_{{ $key }}">
+                                            {{ $option }}
+                                        </label>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
-                    @endif
-                @else
-
+                    </div>
                 @endif
             @endif
-
         </div>
     </div>
 </div>
